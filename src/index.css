@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -104,6 +104,21 @@
     content: "☪";
     @apply text-gold-400 absolute -left-6 opacity-50;
   }
+
+  .arabic-text {
+    @apply font-arabic text-right;
+    direction: rtl;
+  }
+
+  .hadith-text {
+    @apply font-arabic text-lg leading-relaxed my-4 text-right;
+    direction: rtl;
+  }
+  
+  .quran-verse {
+    @apply font-arabic text-xl leading-relaxed my-6 text-right text-dqaa-500;
+    direction: rtl;
+  }
 }
 
 .animate-fadeIn {
@@ -118,3 +133,4 @@
 .animate-fadeIn:nth-child(3) {
   animation-delay: 0.4s;
 }
+

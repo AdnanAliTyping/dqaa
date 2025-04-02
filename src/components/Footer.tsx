@@ -44,20 +44,22 @@ const Footer = () => {
               Established in 2014, DQAA blends traditional Islamic education with modern technology, emphasizing a unique quadrilingual approach.
             </p>
             <div className="flex space-x-3">
-              <a href="#" className="text-white hover:text-gold-400 transition-colors">
+              <a href="https://www.facebook.com/AEAcademy2013/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold-400 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-gold-400 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white hover:text-gold-400 transition-colors">
+              <a href="https://instagram.com/darulquranindia" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold-400 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-gold-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="https://api.whatsapp.com/send?phone=919526552211" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                  <path d="M14 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                  <path d="M9.5 13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5Z" />
+                </svg>
               </a>
-              <a href="#" className="text-white hover:text-gold-400 transition-colors">
-                <Youtube className="w-5 h-5" />
+              <a href="mailto:darulquranind@gmail.com" className="text-white hover:text-gold-400 transition-colors">
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -128,11 +130,11 @@ const Footer = () => {
               </li>
               <li className="flex">
                 <Phone className="w-5 h-5 text-gold-400 mr-3 flex-shrink-0" />
-                <span className="text-dqaa-100">+91 123 456 7890</span>
+                <a href="tel:+919526552211" className="text-dqaa-100 hover:text-gold-400 transition-colors">+91 952 655 2211</a>
               </li>
               <li className="flex">
                 <Mail className="w-5 h-5 text-gold-400 mr-3 flex-shrink-0" />
-                <span className="text-dqaa-100">info@dqaa.edu</span>
+                <a href="mailto:darulquranind@gmail.com" className="text-dqaa-100 hover:text-gold-400 transition-colors">darulquranind@gmail.com</a>
               </li>
               <li className="flex">
                 <Clock className="w-5 h-5 text-gold-400 mr-3 flex-shrink-0" />

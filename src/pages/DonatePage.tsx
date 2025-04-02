@@ -20,13 +20,85 @@ const DonatePage = () => {
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-4">
               Your Support Makes a Difference
             </h2>
-            <p className="text-gray-600">
-              Your generous donations help us maintain and enhance our educational programs, 
-              provide scholarships to deserving students, and improve our campus facilities.
-            </p>
+            
+            <div className="my-8">
+              <h3 className="text-2xl font-display text-dqaa-500 mb-2">
+                SPONSORSHIP OPPORTUNITIES AT DQAA
+              </h3>
+              <p className="text-lg font-semibold text-gold-400 mb-4">
+                📢 SPONSOR A STUDENT AT DQAA AND GET REWARDED FOR EVERY VERSE OF THE QURAN THEY LEARN!
+              </p>
+              
+              <div className="hadith-text text-lg my-4">
+                قال رسول الله ﷺ: "كُلُّ امْرِئٍ فِي ظِلِّ صَدَقَتِهِ حَتَّى يُقْضَى بَيْنَ النَّاسِ." (رواه الإمام أحمد)
+              </div>
+              
+              <p className="italic text-dqaa-600">
+                The Messenger of Allah ﷺ said: "Every person will be in the shade of their charity until judgment is rendered among the people." (Narrated by Imam Ahmad)
+              </p>
+            </div>
+            
+            <div className="my-8">
+              <h3 className="text-2xl font-display text-dqaa-500 mb-4">WHY DONATE TO DQAA?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div className="flex items-start">
+                  <div className="bg-dqaa-50 p-2 rounded-full mr-3 mt-1">
+                    <span className="text-dqaa-500 text-lg">📖</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dqaa-500">Impactful Education</h4>
+                    <p className="text-gray-600">
+                      Your donation directly impacts our students, enabling them to learn and memorize the Qur'an, attend Islamic education classes, and excel academically.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-dqaa-50 p-2 rounded-full mr-3 mt-1">
+                    <span className="text-dqaa-500 text-lg">💡</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dqaa-500">Empowering Futures</h4>
+                    <p className="text-gray-600">
+                      Sponsor a student and empower them to break the cycle of poverty, achieve their dreams, and become future leaders.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-dqaa-50 p-2 rounded-full mr-3 mt-1">
+                    <span className="text-dqaa-500 text-lg">🌍</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dqaa-500">Community Development</h4>
+                    <p className="text-gray-600">
+                      Your contribution fosters social cohesion, compassion, and service, contributing to the development of a stronger, more prosperous society.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-dqaa-50 p-2 rounded-full mr-3 mt-1">
+                    <span className="text-dqaa-500 text-lg">📜</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dqaa-500">Tax Exemption</h4>
+                    <p className="text-gray-600">
+                      Donations to Darul Quran Abdulla Academy are tax-deductible under Section 80-G of the Income Tax Act, allowing you to deduct a portion of your donation amount from your taxable income.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-8 max-w-md mx-auto">
+              <form>
+                <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+              </form>
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-12">
             <Card className="border-none shadow-md overflow-hidden">
               <div className="bg-dqaa-500 text-white p-6 text-center">
                 <h3 className="text-2xl font-semibold mb-1">One-Time</h3>
@@ -53,9 +125,9 @@ const DonatePage = () => {
                     <span className="text-gray-600 text-sm">Help with facility maintenance</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-dqaa-500 hover:bg-dqaa-600 text-white">
-                  Donate Now
-                </Button>
+                <form>
+                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+                </form>
               </CardContent>
             </Card>
             
@@ -90,9 +162,9 @@ const DonatePage = () => {
                     <span className="text-gray-600 text-sm">Help fund technology upgrades</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-gold-400 hover:bg-gold-500 text-white">
-                  Become a Monthly Donor
-                </Button>
+                <form>
+                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+                </form>
               </CardContent>
             </Card>
             
@@ -122,9 +194,9 @@ const DonatePage = () => {
                     <span className="text-gray-600 text-sm">Recognition in annual report</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-navy-500 hover:bg-blue-800 text-white">
-                  Sponsor a Student
-                </Button>
+                <form>
+                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+                </form>
               </CardContent>
             </Card>
           </div>
@@ -197,8 +269,7 @@ const DonatePage = () => {
               <div className="bg-white rounded-lg p-6 shadow-md border-l-4 border-dqaa-500">
                 <h3 className="font-semibold text-lg mb-2">Tax Benefits</h3>
                 <p className="text-gray-600">
-                  All donations to Darul Quran Abdulla Academy are tax-deductible as we are a 
-                  registered charitable organization. You will receive a receipt for your contribution.
+                  All donations to Darul Quran Abdulla Academy are tax-deductible under Section 80-G of the Income Tax Act. You will receive a receipt for your contribution.
                 </p>
               </div>
               
@@ -217,48 +288,6 @@ const DonatePage = () => {
                   will benefit generations of students to come.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6">
-              Other Ways to Support
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Beyond financial contributions, there are many ways you can support our mission:
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-lg mb-2">Volunteer</h3>
-                <p className="text-gray-600 text-sm">
-                  Share your time and skills to help with various academy activities and events.
-                </p>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-lg mb-2">In-Kind Donations</h3>
-                <p className="text-gray-600 text-sm">
-                  Donate books, supplies, technology equipment, or other needed items.
-                </p>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-lg mb-2">Spread the Word</h3>
-                <p className="text-gray-600 text-sm">
-                  Help promote our academy and its mission within your community and networks.
-                </p>
-              </div>
-            </div>
-            
-            <div className="mt-12">
-              <Button size="lg" className="bg-dqaa-500 hover:bg-dqaa-600 text-white">
-                Contact Us to Discuss Support Options
-              </Button>
             </div>
           </div>
         </div>

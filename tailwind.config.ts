@@ -86,7 +86,7 @@ export default {
       },
       fontFamily: {
         sans: ["Noto Sans", "sans-serif"],
-        display: ["Playfair Display", "serif"],
+        display: ["Amiri", "serif"],
         arabic: ["Noto Sans Arabic", "sans-serif"],
         malayalam: ["Noto Sans Malayalam", "sans-serif"],
       },
