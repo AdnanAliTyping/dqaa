@@ -10,9 +10,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-dqaa-500 text-white rounded-full flex items-center justify-center mr-3">
-                <span className="text-lg font-bold">DQAA</span>
-              </div>
+              <img 
+                src="/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png" 
+                alt="DQAA Logo" 
+                className="w-12 h-12 object-contain mr-3"
+              />
               <span className="font-display text-lg font-bold text-dqaa-500">
                 Darul Quran Abdulla Academy
               </span>

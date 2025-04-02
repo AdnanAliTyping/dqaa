@@ -98,9 +98,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-dqaa-500 text-white rounded-full flex items-center justify-center">
-            <span className="text-base md:text-lg font-bold">DQAA</span>
-          </div>
+          <img 
+            src="/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png" 
+            alt="DQAA Logo" 
+            className="w-10 h-10 md:w-12 md:h-12 object-contain"
+          />
           <span className={cn(
             "font-display text-base md:text-lg lg:text-xl font-bold transition-colors",
             isScrolled ? "text-dqaa-500" : "text-dqaa-500"

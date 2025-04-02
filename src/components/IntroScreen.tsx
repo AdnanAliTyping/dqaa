@@ -28,10 +28,12 @@ const IntroScreen = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center"
           >
-            <div className="w-32 h-32 bg-dqaa-500 text-white rounded-full flex items-center justify-center mb-4">
-              <span className="text-3xl font-bold">DQAA</span>
-            </div>
-            <h1 className="text-2xl font-display font-bold text-dqaa-500">
+            <img 
+              src="/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png" 
+              alt="DQAA Logo" 
+              className="w-32 h-32 mb-4"
+            />
+            <h1 className="text-2xl font-display font-bold text-dqaa-500 text-center">
               Darul Quran Abdulla Academy
             </h1>
           </motion.div>
