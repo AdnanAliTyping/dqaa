@@ -1,51 +1,288 @@
-import { Menu } from "lucide-react";
+
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown, Search, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "./ui/sheet";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+
+const navigation = [
+  { name: "Home", href: "/" },
+  { 
+    name: "About", 
+    href: "/about",
+    submenu: [
+      { name: "Mission & Vision", href: "/about#mission" },
+      { name: "Educational Philosophy", href: "/about#philosophy" },
+      { name: "Core Values", href: "/about#values" },
+      { name: "History", href: "/about#history" },
+      { name: "Leadership", href: "/about#leadership" },
+      { name: "Faculty & Staff", href: "/about#faculty" },
+    ]
+  },
+  { 
+    name: "Admissions", 
+    href: "/admissions",
+    submenu: [
+      { name: "Application Process", href: "/admissions#process" },
+      { name: "Requirements", href: "/admissions#requirements" },
+      { name: "Tuition & Fees", href: "/admissions#tuition" },
+      { name: "Financial Aid", href: "/admissions#aid" },
+      { name: "FAQs", href: "/admissions#faqs" },
+    ]
+  },
+  { 
+    name: "Academic Programs", 
+    href: "/academic-programs",
+    submenu: [
+      { name: "Hifz Program", href: "/academic-programs#hifz" },
+      { name: "Bayanul Quran", href: "/academic-programs#bayanul" },
+      { name: "Islamic Studies", href: "/academic-programs#islamic" },
+      { name: "Academic Subjects", href: "/academic-programs#academic" },
+      { name: "Additional Courses", href: "/academic-programs#additional" },
+    ]
+  },
+  { name: "Student Life", href: "/student-life" },
+  { name: "Campus", href: "/campus" },
+  { name: "Technology", href: "/technology" },
+  { name: "Parents", href: "/parents" },
+  { name: "News & Events", href: "/news" },
+  { name: "Contact", href: "/contact" },
+];
 
 const Navbar = () => {
-  return (
-    <nav className="absolute w-full z-50">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex items-center justify-between h-20">
-          <a href="/" className="text-2xl font-display text-white">Elite Real Estate</a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#properties" className="text-white hover:text-white/80 transition-colors">Properties</a>
-            <a href="#about" className="text-white hover:text-white/80 transition-colors">About</a>
-            <a href="#testimonials" className="text-white hover:text-white/80 transition-colors">Testimonials</a>
-            <a href="#contact" className="text-white hover:text-white/80 transition-colors">Contact</a>
-            <Button variant="outline" className="text-black border-white bg-white hover:bg-white/90">
-              Get Started
-            </Button>
-          </div>
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <div className="flex flex-col space-y-4 mt-8">
-                  <a href="#properties" className="text-lg">Properties</a>
-                  <a href="#about" className="text-lg">About</a>
-                  <a href="#testimonials" className="text-lg">Testimonials</a>
-                  <a href="#contact" className="text-lg">Contact</a>
-                  <Button className="w-full text-black bg-white hover:bg-white/90">Get Started</Button>
-                </div>
-              </SheetContent>
-            </Sheet>
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+    console.log("Search term:", searchTerm);
+    setSearchOpen(false);
+    setSearchTerm("");
+  };
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 w-full z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-md py-2"
+          : "bg-transparent py-4"
+      )}
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <Link to="/" className="flex items-center gap-2">
+          <div className="w-12 h-12 bg-dqaa-500 text-white rounded-full flex items-center justify-center">
+            <span className="text-lg font-bold">DQAA</span>
           </div>
+          <span className={cn(
+            "font-display text-lg md:text-xl font-bold transition-colors",
+            isScrolled ? "text-dqaa-500" : "text-dqaa-500"
+          )}>
+            Darul Quran Abdulla Academy
+          </span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-1">
+          {navigation.map((item) => (
+            item.submenu ? (
+              <DropdownMenu key={item.name}>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className={cn(
+                      "flex items-center text-sm font-medium py-2 px-3 rounded transition-colors",
+                      location.pathname === item.href ? "text-dqaa-500 bg-dqaa-50" : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
+                    )}
+                  >
+                    {item.name}
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-56 bg-white">
+                  {item.submenu.map((subItem) => (
+                    <DropdownMenuItem key={subItem.name} asChild>
+                      <Link 
+                        to={subItem.href} 
+                        className="w-full px-3 py-2 text-sm hover:text-dqaa-500 hover:bg-dqaa-50"
+                      >
+                        {subItem.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "text-sm font-medium py-2 px-3 rounded transition-colors",
+                  location.pathname === item.href ? "text-dqaa-500 bg-dqaa-50" : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
+                )}
+              >
+                {item.name}
+              </Link>
+            )
+          ))}
+        </nav>
+
+        <div className="hidden lg:flex items-center space-x-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setSearchOpen(!searchOpen)}
+            className="text-gray-700 hover:text-dqaa-500"
+          >
+            <Search className="h-5 w-5" />
+          </Button>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-gray-700 hover:text-dqaa-500"
+              >
+                <Globe className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>English</DropdownMenuItem>
+              <DropdownMenuItem>العربية</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Link to="/donate">
+            <Button className="bg-gold-400 hover:bg-gold-500 text-white">Donate</Button>
+          </Link>
+        </div>
+
+        {/* Mobile Navigation Button */}
+        <div className="flex lg:hidden items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setSearchOpen(!searchOpen)}
+            className="text-gray-700 mr-2"
+          >
+            <Search className="h-5 w-5" />
+          </Button>
+          
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-md text-gray-700"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
-    </nav>
+
+      {/* Mobile Navigation Menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-white border-t">
+          <div className="container mx-auto py-4 px-4">
+            <nav className="space-y-1">
+              {navigation.map((item) => (
+                <div key={item.name}>
+                  <Link
+                    to={item.href}
+                    className={cn(
+                      "block py-2 px-3 rounded-md text-base font-medium transition-colors",
+                      location.pathname === item.href
+                        ? "text-dqaa-500 bg-dqaa-50"
+                        : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                  {item.submenu && (
+                    <div className="pl-6 space-y-1 mt-1">
+                      {item.submenu.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          to={subItem.href}
+                          className="block py-2 px-3 text-sm text-gray-600 hover:text-dqaa-500 hover:bg-dqaa-50/50 rounded-md"
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+            <div className="mt-4 flex items-center">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="mr-2 border-gray-300"
+                  >
+                    <Globe className="h-4 w-4 mr-2" />
+                    Language
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>English</DropdownMenuItem>
+                  <DropdownMenuItem>العربية</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <Link to="/donate" className="w-full">
+                <Button className="bg-gold-400 hover:bg-gold-500 text-white w-full">Donate</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Search Overlay */}
+      {searchOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4">
+          <form onSubmit={handleSearchSubmit} className="flex">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-dqaa-500 focus:border-dqaa-500"
+            />
+            <Button type="submit" className="rounded-l-none">
+              Search
+            </Button>
+          </form>
+        </div>
+      )}
+    </header>
   );
 };
 

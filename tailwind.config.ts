@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,21 +53,41 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        estate: {
-          100: "#F7F7F7",
-          200: "#E5E5E5",
-          300: "#D4D4D4",
-          400: "#A3A3A3",
-          500: "#737373",
-          600: "#525252",
-          700: "#404040",
-          800: "#262626",
-          900: "#171717",
+        dqaa: {
+          50: "#f0f9f6",
+          100: "#d0eee4",
+          200: "#a6e0cf",
+          300: "#73c9b3",
+          400: "#43ac92",
+          500: "#0B5345", // primary green
+          600: "#0a4a3d",
+          700: "#083f34",
+          800: "#05332b",
+          900: "#032a23",
+        },
+        gold: {
+          50: "#fdf9e7",
+          100: "#fbefc4",
+          200: "#f7e08c",
+          300: "#f2ca4b",
+          400: "#D4AC0D", // primary gold
+          500: "#b3900a",
+          600: "#8c7008",
+          700: "#6b5506",
+          800: "#574503",
+          900: "#473802",
+        },
+        navy: {
+          500: "#1A5276", // accent navy
+        },
+        beige: {
+          100: "#F5EEF8", // accent beige
         }
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Noto Sans", "sans-serif"],
         display: ["Playfair Display", "serif"],
+        arabic: ["Noto Sans Arabic", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -91,6 +112,9 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         fadeIn: "fadeIn 0.5s ease-out forwards",
+      },
+      backgroundImage: {
+        "islamic-pattern": "url('/patterns/islamic-pattern.svg')",
       },
     },
   },
