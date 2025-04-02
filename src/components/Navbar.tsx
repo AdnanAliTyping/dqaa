@@ -90,7 +90,7 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
+        "fixed top-0 w-full z-40 transition-all duration-300",
         isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
@@ -98,14 +98,15 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-12 h-12 bg-dqaa-500 text-white rounded-full flex items-center justify-center">
-            <span className="text-lg font-bold">DQAA</span>
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-dqaa-500 text-white rounded-full flex items-center justify-center">
+            <span className="text-base md:text-lg font-bold">DQAA</span>
           </div>
           <span className={cn(
-            "font-display text-lg md:text-xl font-bold transition-colors",
+            "font-display text-base md:text-lg lg:text-xl font-bold transition-colors",
             isScrolled ? "text-dqaa-500" : "text-dqaa-500"
           )}>
-            Darul Quran Abdulla Academy
+            <span className="hidden sm:inline">Darul Quran Abdulla Academy</span>
+            <span className="inline sm:hidden">DQAA</span>
           </span>
         </Link>
 
@@ -118,7 +119,7 @@ const Navbar = () => {
                   <Button 
                     variant="ghost" 
                     className={cn(
-                      "flex items-center text-sm font-medium py-2 px-3 rounded transition-colors",
+                      "flex items-center text-sm font-medium py-2 px-2 md:px-3 rounded transition-colors",
                       location.pathname === item.href ? "text-dqaa-500 bg-dqaa-50" : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
                     )}
                   >
@@ -144,7 +145,7 @@ const Navbar = () => {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "text-sm font-medium py-2 px-3 rounded transition-colors",
+                  "text-sm font-medium py-2 px-2 md:px-3 rounded transition-colors",
                   location.pathname === item.href ? "text-dqaa-500 bg-dqaa-50" : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
                 )}
               >
@@ -181,7 +182,9 @@ const Navbar = () => {
           </DropdownMenu>
 
           <Link to="/donate">
-            <Button className="bg-gold-400 hover:bg-gold-500 text-white">Donate</Button>
+            <form>
+              <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+            </form>
           </Link>
         </div>
 
@@ -239,13 +242,13 @@ const Navbar = () => {
                 </div>
               ))}
             </nav>
-            <div className="mt-4 flex items-center">
+            <div className="mt-4 flex flex-col space-y-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="mr-2 border-gray-300"
+                    className="border-gray-300 w-full"
                   >
                     <Globe className="h-4 w-4 mr-2" />
                     Language
@@ -258,7 +261,9 @@ const Navbar = () => {
               </DropdownMenu>
 
               <Link to="/donate" className="w-full">
-                <Button className="bg-gold-400 hover:bg-gold-500 text-white w-full">Donate</Button>
+                <form className="w-full">
+                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+                </form>
               </Link>
             </div>
           </div>

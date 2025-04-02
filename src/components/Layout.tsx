@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
       {showBanner && (
         <div className="bg-gold-400 text-white py-2 px-4 text-center relative">
           <div className="flex justify-center items-center flex-wrap">
-            <span className="font-medium mr-2">Admissions Open for 2025!</span>
+            <span className="font-medium mr-2 text-sm md:text-base">Admissions Open for 2025!</span>
             <Link to="/admissions/apply">
               <Button variant="secondary" size="sm" className="text-xs sm:text-sm my-1">
                 Apply Now
@@ -41,7 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
           <button 
             onClick={closeBanner}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white hover:text-dqaa-50"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white hover:text-dqaa-50 touch-target"
             aria-label="Close banner"
           >
             <X size={18} />
@@ -49,7 +49,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
       <Navbar />
-      <main className="flex-grow pt-20">{children}</main>
+      <main className="flex-grow pt-16 md:pt-20">{children}</main>
       <Footer />
     </div>
   );

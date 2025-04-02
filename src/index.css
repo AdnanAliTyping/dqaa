@@ -84,16 +84,16 @@
   }
   
   .section-padding {
-    @apply py-16 px-4 md:px-8 lg:px-12;
+    @apply py-12 md:py-16 px-4 md:px-8 lg:px-12;
   }
   
   .page-heading {
-    @apply text-3xl md:text-4xl lg:text-5xl font-display font-bold text-dqaa-500 mb-6 relative;
+    @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold text-dqaa-500 mb-4 md:mb-6 relative;
   }
   
   .page-heading::after {
     content: "";
-    @apply block w-24 h-1 bg-gold-400 mt-4;
+    @apply block w-16 md:w-24 h-1 bg-gold-400 mt-2 md:mt-4;
   }
   
   .islamic-accent {
@@ -116,11 +116,40 @@
   }
   
   .quran-verse {
-    @apply font-arabic text-xl leading-relaxed my-6 text-right text-dqaa-500;
+    @apply font-arabic text-lg md:text-xl leading-relaxed my-6 text-right text-dqaa-500;
     direction: rtl;
+  }
+  
+  /* Responsive container classes */
+  .container-sm {
+    @apply w-full max-w-screen-sm mx-auto px-4;
+  }
+  
+  .container-md {
+    @apply w-full max-w-screen-md mx-auto px-4;
+  }
+  
+  .container-lg {
+    @apply w-full max-w-screen-lg mx-auto px-4;
+  }
+  
+  .container-xl {
+    @apply w-full max-w-screen-xl mx-auto px-4;
+  }
+  
+  /* Touch-friendly adjustments */
+  @media (max-width: 640px) {
+    button, a {
+      @apply min-h-[44px] min-w-[44px];
+    }
+    
+    .touch-target {
+      @apply p-3;
+    }
   }
 }
 
+/* Animation classes */
 .animate-fadeIn {
   opacity: 0;
   animation: fadeIn 0.5s ease-out forwards;
@@ -134,3 +163,73 @@
   animation-delay: 0.4s;
 }
 
+.animate-scale {
+  animation: scale 0.3s ease-out forwards;
+}
+
+.animate-slideUp {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile optimization helpers */
+@media (max-width: 640px) {
+  .mobile-scroll {
+    @apply overflow-x-auto pb-4 flex flex-nowrap -mx-4 px-4;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .mobile-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-card {
+    @apply min-w-[280px] flex-shrink-0 mr-4;
+  }
+  
+  .mobile-p {
+    @apply text-sm;
+  }
+  
+  .mobile-heading {
+    @apply text-xl;
+  }
+}
+
+/* For preventing content layout shift on Razorpay button load */
+.razorpay-container {
+  @apply min-h-[36px] w-full;
+}
