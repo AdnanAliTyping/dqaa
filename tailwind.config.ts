@@ -54,16 +54,16 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         dqaa: {
-          50: "#f0f9f6",
-          100: "#d0eee4",
-          200: "#a6e0cf",
-          300: "#73c9b3",
-          400: "#43ac92",
-          500: "#0B5345", // primary green
-          600: "#0a4a3d",
-          700: "#083f34",
-          800: "#05332b",
-          900: "#032a23",
+          50: "#eef4fb",
+          100: "#d5e3f7",
+          200: "#b4cef1",
+          300: "#86b1e8",
+          400: "#538ddb",
+          500: "#0A3D91", // primary blue from logo
+          600: "#0A3272",
+          700: "#0A285A",
+          800: "#061E42",
+          900: "#051534",
         },
         gold: {
           50: "#fdf9e7",
@@ -78,16 +78,17 @@ export default {
           900: "#473802",
         },
         navy: {
-          500: "#1A5276", // accent navy
+          500: "#1A3F76", // accent navy
         },
         beige: {
-          100: "#F5EEF8", // accent beige
+          100: "#F5F4F8", // accent beige
         }
       },
       fontFamily: {
         sans: ["Noto Sans", "sans-serif"],
         display: ["Playfair Display", "serif"],
         arabic: ["Noto Sans Arabic", "sans-serif"],
+        malayalam: ["Noto Sans Malayalam", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

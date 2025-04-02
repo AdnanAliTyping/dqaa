@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AdmissionsPage from "./pages/AdmissionsPage";
+import ApplicationFormPage from "./pages/ApplicationFormPage";
 import AcademicProgramsPage from "./pages/AcademicProgramsPage";
 import StudentLifePage from "./pages/StudentLifePage";
 import CampusFacilitiesPage from "./pages/CampusFacilitiesPage";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
+          <Route path="/admissions/apply" element={<ApplicationFormPage />} />
           <Route path="/academic-programs" element={<AcademicProgramsPage />} />
           <Route path="/student-life" element={<StudentLifePage />} />
           <Route path="/campus" element={<CampusFacilitiesPage />} />
