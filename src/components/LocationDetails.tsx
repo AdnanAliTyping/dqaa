@@ -1,5 +1,5 @@
 
-import { MapPin, Phone, Globe, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Globe } from "lucide-react";
 
 const LocationDetails = () => {
   return (
