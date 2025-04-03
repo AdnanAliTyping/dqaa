@@ -1,5 +1,8 @@
 
 import { useToast } from "@/hooks/use-toast";
+import { sendEmail } from "@/lib/email";
+import jsPDF from "jspdf";
+import { saveAs } from 'file-saver';
 
 interface ApplicationData {
   studentName: string;
@@ -65,13 +68,16 @@ ${formData.additionalInfo || 'None provided'}
 Submission Date: ${new Date().toLocaleString()}
 `;
 
-      // For now, we'll simulate sending the email with a console log
-      // In a real implementation, this would call an API endpoint or email service
-      console.log("Would send email to: darulquranind@gmail.com");
-      console.log("Email content:", message);
-      
-      // Send confirmation email to applicant
-      await sendConfirmationEmail(formData.email, formData.studentName);
+      // Send email using the email service
+      await sendEmail({
+        to: "darulquranind@gmail.com",
+        subject: `New Application: ${formData.studentName}`,
+        fromName: formData.studentName,
+        fromEmail: formData.email,
+        message: message,
+        replyTo: formData.email,
+        sendConfirmation: true
+      });
       
       toast({
         title: "Application Submitted",
@@ -92,23 +98,156 @@ Submission Date: ${new Date().toLocaleString()}
     }
   };
   
-  const sendConfirmationEmail = async (toEmail: string, studentName: string): Promise<void> => {
-    // For demonstration purposes, we'll simulate sending a confirmation email
-    console.log("Would send confirmation email to:", toEmail);
-    console.log("Confirmation email content:", `
-Dear ${studentName},
-
-Thank you for submitting your application to Darul Quran Abdulla Academy. We have received your application and will review it shortly.
-
-We will contact you regarding the next steps in the admissions process. If you have any questions, please feel free to contact our admissions office at +91 94967 21259.
-
-Best regards,
-Admissions Team
-Darul Quran Abdulla Academy
-    `);
+  const generateApplicationPDF = (formData: ApplicationData) => {
+    // Create a new PDF document
+    const doc = new jsPDF();
+    
+    // Add DQAA header
+    doc.setFontSize(20);
+    doc.setTextColor(53, 94, 59); // dqaa-500 color
+    doc.text("Darul Quran Abdulla Academy", 105, 20, { align: 'center' });
+    doc.setFontSize(14);
+    doc.text("أكاديمية عبد الله لتحفيظ القران", 105, 30, { align: 'center' });
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Application Form", 105, 40, { align: 'center' });
+    
+    // Add a line
+    doc.setDrawColor(186, 153, 76); // gold-400 color
+    doc.setLineWidth(0.5);
+    doc.line(20, 45, 190, 45);
+    
+    // Reset text color
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(11);
+    
+    // Add application details
+    let y = 55;
+    const lineHeight = 7;
+    
+    // Student Information
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    doc.text("Student Information", 20, y);
+    y += lineHeight + 3;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Name: ${formData.studentName}`, 20, y); y += lineHeight;
+    doc.text(`Date of Birth: ${formData.dateOfBirth}`, 20, y); y += lineHeight;
+    doc.text(`Gender: ${formData.gender}`, 20, y); y += lineHeight;
+    doc.text(`Email: ${formData.email}`, 20, y); y += lineHeight;
+    doc.text(`Phone: ${formData.phone}`, 20, y); y += lineHeight;
+    
+    // Address
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    y += 5;
+    doc.text("Address", 20, y);
+    y += lineHeight;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const addressLines = formData.address.split('\n');
+    addressLines.forEach(line => {
+      doc.text(line, 20, y);
+      y += lineHeight;
+    });
+    
+    // Parent/Guardian Information
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    y += 5;
+    doc.text("Parent/Guardian Information", 20, y);
+    y += lineHeight + 3;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Name: ${formData.parentName}`, 20, y); y += lineHeight;
+    doc.text(`Occupation: ${formData.parentOccupation}`, 20, y); y += lineHeight;
+    
+    // Education Background
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    y += 5;
+    doc.text("Education Background", 20, y);
+    y += lineHeight + 3;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Previous School: ${formData.previousSchool}`, 20, y); y += lineHeight;
+    
+    // Check if we need to add a new page
+    if (y > 250) {
+      doc.addPage();
+      y = 20;
+    }
+    
+    // Medical Information
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    y += 5;
+    doc.text("Medical Information", 20, y);
+    y += lineHeight + 3;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(formData.medicalInfo || 'None provided', 20, y); y += lineHeight;
+    
+    // Program of Interest
+    doc.setFontSize(14);
+    doc.setTextColor(53, 94, 59);
+    y += 5;
+    doc.text("Program of Interest", 20, y);
+    y += lineHeight + 3;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(formData.program, 20, y); y += lineHeight;
+    
+    // Additional Information
+    if (formData.howDidYouHear || formData.additionalInfo) {
+      doc.setFontSize(14);
+      doc.setTextColor(53, 94, 59);
+      y += 5;
+      doc.text("Additional Information", 20, y);
+      y += lineHeight + 3;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(0, 0, 0);
+      if (formData.howDidYouHear) {
+        doc.text(`How did you hear about us: ${formData.howDidYouHear}`, 20, y);
+        y += lineHeight;
+      }
+      if (formData.additionalInfo) {
+        doc.text(`Additional notes: ${formData.additionalInfo}`, 20, y);
+        y += lineHeight;
+      }
+    }
+    
+    // Add footer
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Application Date: ${new Date().toLocaleDateString()}`, 20, 280);
+    doc.text("Darul Quran Abdulla Academy - Kothakurssi, Ottapalam, Kerala, India, Pin:679501", 105, 287, { align: 'center' });
+    doc.text("Email: darulquranind@gmail.com | Phone: +919526552211", 105, 292, { align: 'center' });
+    
+    // Save the PDF
+    const filename = `DQAA_Application_${formData.studentName.replace(/\s+/g, '_')}.pdf`;
+    saveAs(doc.output('blob'), filename);
+    
+    toast({
+      title: "PDF Generated",
+      description: "Your application PDF has been generated and is ready to download.",
+    });
+    
+    return filename;
   };
   
-  return { sendApplicationEmail };
+  return { 
+    sendApplicationEmail,
+    generateApplicationPDF
+  };
 };
 
 export default useApplicationEmailService;

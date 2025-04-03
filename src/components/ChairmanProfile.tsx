@@ -46,7 +46,7 @@ const ChairmanProfile = () => {
         
         <div className="bg-dqaa-50 p-4 rounded-lg">
           <h4 className="font-semibold text-dqaa-700 mb-2">Authored Works</h4>
-          <ul className="text-sm space-y-1 text-gray-700">
+          <ul className="text-sm space-y-2 text-gray-700">
             <li>• സൃഷ്ടി അർഥരഹിതമാണോ? (Srushti Artharahithamano? – Malayalam)</li>
             <li>• هل الخلق بلا معنى؟ (Hal Al-Khalq Bila Ma'na? – Arabic)</li>
             <li>• Is the Creation Meaningless? (English)</li>
@@ -62,7 +62,7 @@ const ChairmanProfile = () => {
         <h3 className="text-2xl font-display font-bold text-dqaa-600 mb-4">A Legacy of Leadership & Scholarship</h3>
         <div className="space-y-4 text-gray-600">
           <p>
-            Dr. PT Abdul Rahman, the visionary behind Darul Quran Abdulla Academy, is a distinguished Islamic scholar, educationist, and humanitarian. His life's work has been dedicated to integrating traditional Islamic scholarship with contemporary education, ensuring the next generation is equipped with both spiritual and academic excellence.
+            Dr. PT Abdul Rahman, the visionary behind Darul Quran Abdulla Academy (أكاديمية عبد الله لتحفيظ القران), is a distinguished Islamic scholar, educationist, and humanitarian. His life's work has been dedicated to integrating traditional Islamic scholarship with contemporary education, ensuring the next generation is equipped with both spiritual and academic excellence.
           </p>
           
           <h4 className="text-xl font-semibold text-dqaa-600 mt-6 mb-2">A Journey of Service & Transformation</h4>
@@ -75,14 +75,8 @@ const ChairmanProfile = () => {
           
           <h4 className="text-xl font-semibold text-dqaa-600 mt-6 mb-2">Awards & Recognition</h4>
           <p>
-            Dr. PT Abdul Rahman's contributions to education, Islamic scholarship, and community service have been acknowledged through numerous accolades, including:
+            Dr. PT Abdul Rahman has received numerous notable recognitions for his contributions to Islamic education and scholarship, including a Golden Visa from the Dubai Government, recognition from the Dubai International Holy Quran Award, and multiple letters of appreciation and honorary certifications from prestigious organizations worldwide.
           </p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>Golden Visa from the Dubai Government for his significant contributions.</li>
-            <li>Dubai International Holy Quran Award recognition for his role as a Foreign Media Coordinator.</li>
-            <li>Letters of Appreciation from esteemed institutions and leaders for his service in education.</li>
-            <li>Honorary Certifications from prestigious organizations recognizing his impact on social welfare.</li>
-          </ul>
           
           <h4 className="text-xl font-semibold text-dqaa-600 mt-6 mb-2">Humanitarian Contributions</h4>
           <ul className="list-disc pl-5 space-y-1">

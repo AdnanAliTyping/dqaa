@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
+import RazorpayDonateButton from "../RazorpayDonateButton";
 
 const HeroSection = () => {
   return (
@@ -31,6 +32,10 @@ const HeroSection = () => {
             Excellence in <span className="text-gold-400">Islamic</span> & Modern Education
           </h1>
           
+          <div className="text-xl mb-4 text-white/90 font-arabic">
+            أكاديمية عبد الله لتحفيظ القران
+          </div>
+          
           <p className="text-lg md:text-xl text-white/80 mb-6 md:mb-8">
             Darul Quran Abdulla Academy offers a unique blend of traditional Islamic knowledge and contemporary academic excellence with a quadrilingual approach.
           </p>
@@ -44,9 +49,7 @@ const HeroSection = () => {
                 Learn More <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
-            <form className="w-full sm:w-auto">
-              <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async></script>
-            </form>
+            <RazorpayDonateButton className="w-full sm:w-auto" />
           </div>
         </div>
       </div>

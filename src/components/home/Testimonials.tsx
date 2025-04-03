@@ -8,25 +8,23 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { QuoteIcon } from "lucide-react";
+import PlaceholderAvatar from "../PlaceholderAvatar";
 
 const testimonials = [
   {
     quote: "The integration of Hifz and academic education at DQAA has been transformative for my child. They're not only memorizing the Quran but excelling in their academic subjects too.",
-    author: "Ahmed Rahman",
-    role: "Parent of a Hifz Program Student",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    author: "Ahmed R.",
+    role: "Parent of a Hifz Program Student"
   },
   {
     quote: "Becoming quadrilingual has opened up so many opportunities for me. DQAA's focus on language proficiency alongside Islamic education has been invaluable for my personal and academic growth.",
-    author: "Fatima Abdullah",
-    role: "Alumna, Class of 2021",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    author: "Fatima A.",
+    role: "Alumna, Class of 2021"
   },
   {
     quote: "The AI and technology integration at DQAA is impressive. I've gained both strong Islamic values and cutting-edge technical skills that have prepared me for the modern world.",
-    author: "Mohammed Hassan",
-    role: "Current Student, Grade 10",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    author: "Mohammed H.",
+    role: "Current Student, Grade 10"
   },
 ];
 
@@ -62,13 +60,7 @@ const Testimonials = () => {
                     <QuoteIcon className="h-8 w-8 md:h-12 md:w-12 text-gold-400/20 absolute top-4 md:top-6 left-4 md:left-6" />
                     <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
                       <div className="md:w-1/3 flex justify-center">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden">
-                          <img
-                            src={testimonial.image}
-                            alt={testimonial.author}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
+                        <PlaceholderAvatar name={testimonial.author} size="lg" />
                       </div>
                       <div className="md:w-2/3 relative">
                         <blockquote className="text-base md:text-lg text-gray-700 italic mb-3 md:mb-4 relative z-10">

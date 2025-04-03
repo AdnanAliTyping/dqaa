@@ -23,9 +23,12 @@ const HomePage = () => {
               <div className="inline-block mb-4">
                 <div className="h-1 w-20 bg-gold-400 mx-auto"></div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-6">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-4">
                 Welcome to Darul Quran Abdulla Academy
               </h2>
+              <div className="text-xl mb-6 text-dqaa-600 font-arabic text-center">
+                أكاديمية عبد الله لتحفيظ القران
+              </div>
               <p className="text-gray-600 text-lg max-w-3xl mx-auto">
                 Established in 2014, DQAA has been at the forefront of Islamic education, 
                 combining traditional Quranic learning with modern academic curriculum. 

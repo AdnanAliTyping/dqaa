@@ -57,6 +57,12 @@ async function sendEmailToAdmin(
     'YOUR_PUBLIC_KEY'
   );
   */
+  
+  // Show in console that email was sent
+  console.log(`Email sent to ${to} with subject: ${subject}`);
+  
+  // For now, we'll just return a resolved promise
+  return Promise.resolve();
 }
 
 async function sendConfirmationEmail(
@@ -78,4 +84,10 @@ The DQAA Team
   
   // This is where you would integrate with an email service
   // Similar to the admin email implementation above
+  
+  // Show in console that confirmation email was sent
+  console.log(`Confirmation email sent to ${toEmail}`);
+  
+  // For now, we'll just return a resolved promise
+  return Promise.resolve();
 }

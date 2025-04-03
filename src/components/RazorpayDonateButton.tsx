@@ -4,11 +4,13 @@ import { useEffect, useRef } from 'react';
 interface RazorpayDonateButtonProps {
   buttonId?: string;
   className?: string;
+  text?: string;
 }
 
 const RazorpayDonateButton = ({ 
   buttonId = "pl_QEBC8u1SAAat14",
-  className
+  className,
+  text
 }: RazorpayDonateButtonProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   

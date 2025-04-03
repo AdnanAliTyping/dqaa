@@ -1,9 +1,11 @@
+
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, BookOpen, Award, Heart, Users, School, Facebook, Instagram, Youtube } from "lucide-react";
+import { Check, BookOpen, Award, Heart, Users, School } from "lucide-react";
 import ChairmanProfile from "@/components/ChairmanProfile";
+import PlaceholderAvatar from "@/components/PlaceholderAvatar";
 
 const AboutPage = () => {
   return (
@@ -21,6 +23,9 @@ const AboutPage = () => {
               <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-6">
                 Our Mission & Vision
               </h2>
+              <div className="mb-4 text-lg text-dqaa-700 font-arabic text-center">
+                أكاديمية عبد الله لتحفيظ القران
+              </div>
               <p className="text-gray-600 mb-6">
                 At Darul Quran Abdulla Academy, our mission is to provide a comprehensive educational 
                 environment that nurtures intellectual growth, spiritual development, and moral 
@@ -360,17 +365,13 @@ const AboutPage = () => {
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <Card key={item} className="border-none shadow-md">
                     <CardContent className="p-6 text-center">
-                      <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4">
-                        <img 
-                          src={`https://randomuser.me/api/portraits/${item % 2 === 0 ? 'men' : 'women'}/${item + 10}.jpg`} 
-                          alt="Board Member" 
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="mx-auto mb-4 flex justify-center">
+                        <PlaceholderAvatar name={`Board Member ${item}`} size="lg" />
                       </div>
-                      <h3 className="text-lg font-semibold text-dqaa-700">Board Member Name</h3>
+                      <h3 className="text-lg font-semibold text-dqaa-700">Board Member</h3>
                       <p className="text-gray-500 text-sm mb-3">Position on Board</p>
                       <p className="text-gray-600 text-sm">
-                        Brief description of the board member's background, expertise, and contribution to DQAA.
+                        Board member's contribution to DQAA's vision and mission.
                       </p>
                     </CardContent>
                   </Card>
@@ -380,20 +381,29 @@ const AboutPage = () => {
             
             <TabsContent value="admin">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
+                <Card className="border-none shadow-md">
+                  <CardContent className="p-6 text-center">
+                    <div className="mx-auto mb-4 flex justify-center">
+                      <PlaceholderAvatar name="Mohammed Mustafa Mannani" size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-dqaa-700">Mohammed Mustafa Mannani</h3>
+                    <p className="text-gray-500 text-sm mb-3">Principal</p>
+                    <p className="text-gray-600 text-sm">
+                      Leading DQAA's academic and administrative operations with dedication.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                {[1, 2, 3, 4, 5].map((item) => (
                   <Card key={item} className="border-none shadow-md">
                     <CardContent className="p-6 text-center">
-                      <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4">
-                        <img 
-                          src={`https://randomuser.me/api/portraits/${item % 2 === 0 ? 'women' : 'men'}/${item + 20}.jpg`} 
-                          alt="Administrative Staff" 
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="mx-auto mb-4 flex justify-center">
+                        <PlaceholderAvatar name={`Admin Staff ${item}`} size="lg" />
                       </div>
-                      <h3 className="text-lg font-semibold text-dqaa-700">Administrator Name</h3>
+                      <h3 className="text-lg font-semibold text-dqaa-700">Administrator</h3>
                       <p className="text-gray-500 text-sm mb-3">Administrative Role</p>
                       <p className="text-gray-600 text-sm">
-                        Brief description of the administrator's responsibilities and experience at DQAA.
+                        Supporting DQAA's mission through dedicated administrative service.
                       </p>
                     </CardContent>
                   </Card>
@@ -419,17 +429,13 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
               <div key={item} className="text-center">
-                <div className="aspect-square rounded-lg overflow-hidden mb-4">
-                  <img 
-                    src={`https://randomuser.me/api/portraits/${item % 2 === 0 ? 'men' : 'women'}/${item + 30}.jpg`} 
-                    alt="Faculty Member" 
-                    className="w-full h-full object-cover"
-                  />
+                <div className="flex justify-center mb-4">
+                  <PlaceholderAvatar name={`Faculty ${item}`} size="xl" />
                 </div>
-                <h3 className="text-lg font-semibold text-dqaa-700">Faculty Name</h3>
+                <h3 className="text-lg font-semibold text-dqaa-700">Faculty</h3>
                 <p className="text-gray-500 text-sm mb-2">Subject / Department</p>
                 <p className="text-gray-600 text-sm">
-                  Brief qualification and specialization details.
+                  Qualification and specialization details.
                 </p>
               </div>
             ))}
