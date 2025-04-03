@@ -55,6 +55,10 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ];
 
+// Group navigation items for mobile optimization
+const primaryNavItems = navigation.slice(0, 5); // First 5 items for primary nav
+const secondaryNavItems = navigation.slice(5); // Remaining items for secondary nav
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,6 +81,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
+    setSearchOpen(false);
   }, [location.pathname]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -177,13 +182,13 @@ const Navbar = () => {
                 <Globe className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="bg-white">
               <DropdownMenuItem>English</DropdownMenuItem>
               <DropdownMenuItem>العربية</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link to="/donate">
+          <Link to="/donate" className="razorpay-container">
             <form>
               <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
             </form>
@@ -196,31 +201,34 @@ const Navbar = () => {
             variant="ghost"
             size="icon"
             onClick={() => setSearchOpen(!searchOpen)}
-            className="text-gray-700 mr-2"
+            className="text-gray-700 mr-2 touch-target"
+            aria-label="Search"
           >
             <Search className="h-5 w-5" />
           </Button>
           
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-md text-gray-700"
+            className="p-2 rounded-md text-gray-700 touch-target"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Improved for better touch interactions */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-t">
+        <div className="lg:hidden bg-white border-t shadow-lg fixed inset-x-0 top-[57px] bottom-0 z-50 overflow-y-auto">
           <div className="container mx-auto py-4 px-4">
             <nav className="space-y-1">
-              {navigation.map((item) => (
-                <div key={item.name}>
+              {/* Primary Navigation Items */}
+              {primaryNavItems.map((item) => (
+                <div key={item.name} className="border-b border-gray-100 pb-2 mb-2 last:border-0">
                   <Link
                     to={item.href}
                     className={cn(
-                      "block py-2 px-3 rounded-md text-base font-medium transition-colors",
+                      "block py-3 px-3 rounded-md text-base font-medium transition-colors",
                       location.pathname === item.href
                         ? "text-dqaa-500 bg-dqaa-50"
                         : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
@@ -234,7 +242,7 @@ const Navbar = () => {
                         <Link
                           key={subItem.name}
                           to={subItem.href}
-                          className="block py-2 px-3 text-sm text-gray-600 hover:text-dqaa-500 hover:bg-dqaa-50/50 rounded-md"
+                          className="block py-3 px-3 text-sm text-gray-600 hover:text-dqaa-500 hover:bg-dqaa-50/50 rounded-md"
                         >
                           {subItem.name}
                         </Link>
@@ -243,26 +251,59 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
+
+              {/* Secondary Navigation Items */}
+              <div className="pt-2">
+                {secondaryNavItems.map((item) => (
+                  <div key={item.name} className="border-b border-gray-100 pb-2 mb-2 last:border-0">
+                    <Link
+                      to={item.href}
+                      className={cn(
+                        "block py-3 px-3 rounded-md text-base font-medium transition-colors",
+                        location.pathname === item.href
+                          ? "text-dqaa-500 bg-dqaa-50"
+                          : "text-gray-700 hover:text-dqaa-500 hover:bg-dqaa-50/50"
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                    {item.submenu && (
+                      <div className="pl-6 space-y-1 mt-1">
+                        {item.submenu.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            className="block py-3 px-3 text-sm text-gray-600 hover:text-dqaa-500 hover:bg-dqaa-50/50 rounded-md"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </nav>
+
             <div className="mt-4 flex flex-col space-y-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="border-gray-300 w-full"
+                    className="border-gray-300 w-full py-3 h-auto"
                   >
                     <Globe className="h-4 w-4 mr-2" />
                     Language
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>English</DropdownMenuItem>
-                  <DropdownMenuItem>العربية</DropdownMenuItem>
+                <DropdownMenuContent className="w-full bg-white">
+                  <DropdownMenuItem className="py-3">English</DropdownMenuItem>
+                  <DropdownMenuItem className="py-3">العربية</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Link to="/donate" className="w-full">
+              <Link to="/donate" className="w-full razorpay-container">
                 <form className="w-full">
                   <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
                 </form>
@@ -272,18 +313,19 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Search Overlay */}
+      {/* Search Overlay - Improved for mobile */}
       {searchOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4">
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4 z-50">
           <form onSubmit={handleSearchSubmit} className="flex">
             <input
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-dqaa-500 focus:border-dqaa-500"
+              className="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-dqaa-500 focus:border-dqaa-500 h-12"
+              autoFocus
             />
-            <Button type="submit" className="rounded-l-none">
+            <Button type="submit" className="rounded-l-none h-12">
               Search
             </Button>
           </form>

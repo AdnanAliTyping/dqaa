@@ -73,27 +73,47 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overscroll-behavior-y: none;
   }
   
+  /* Base styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+  
+  p {
+    text-wrap: pretty;
+  }
+  
+  /* Patterns */
   .islamic-pattern {
     background-color: #ffffff;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230A3D91' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
+  /* Spacing classes */
   .section-padding {
     @apply py-12 md:py-16 px-4 md:px-8 lg:px-12;
   }
   
+  /* Typography styles */
   .page-heading {
     @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold text-dqaa-500 mb-4 md:mb-6 relative;
   }
   
   .page-heading::after {
     content: "";
-    @apply block w-16 md:w-24 h-1 bg-gold-400 mt-2 md:mt-4;
+    @apply block w-12 md:w-16 lg:w-24 h-1 bg-gold-400 mt-2 md:mt-4;
   }
   
   .islamic-accent {
@@ -102,21 +122,22 @@
   
   .islamic-accent::before {
     content: "☪";
-    @apply text-gold-400 absolute -left-6 opacity-50;
+    @apply text-gold-400 absolute -left-4 md:-left-6 opacity-50;
   }
 
+  /* Text direction */
   .arabic-text {
     @apply font-arabic text-right;
     direction: rtl;
   }
 
   .hadith-text {
-    @apply font-arabic text-lg leading-relaxed my-4 text-right;
+    @apply font-arabic text-base md:text-lg leading-relaxed my-4 text-right;
     direction: rtl;
   }
   
   .quran-verse {
-    @apply font-arabic text-lg md:text-xl leading-relaxed my-6 text-right text-dqaa-500;
+    @apply font-arabic text-base md:text-lg lg:text-xl leading-relaxed my-4 md:my-6 text-right text-dqaa-500;
     direction: rtl;
   }
   
@@ -141,6 +162,10 @@
   @media (max-width: 640px) {
     button, a {
       @apply min-h-[44px] min-w-[44px];
+    }
+    
+    input, select, textarea {
+      @apply text-base; /* Prevent zoom on iOS focus */
     }
     
     .touch-target {
@@ -210,6 +235,7 @@
     @apply overflow-x-auto pb-4 flex flex-nowrap -mx-4 px-4;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    scroll-snap-type: x mandatory;
   }
   
   .mobile-scroll::-webkit-scrollbar {
@@ -218,6 +244,7 @@
   
   .mobile-card {
     @apply min-w-[280px] flex-shrink-0 mr-4;
+    scroll-snap-align: start;
   }
   
   .mobile-p {
@@ -227,9 +254,33 @@
   .mobile-heading {
     @apply text-xl;
   }
+  
+  /* Improve button tap targets on mobile */
+  .mobile-btn {
+    @apply py-3 px-4;
+  }
+  
+  /* Enhanced form elements for mobile */
+  .mobile-input {
+    @apply py-3 px-4;
+  }
 }
 
 /* For preventing content layout shift on Razorpay button load */
 .razorpay-container {
-  @apply min-h-[36px] w-full;
+  @apply min-h-[36px] w-full flex justify-center;
+}
+
+/* Fixed position elements adjustments for iOS */
+@supports (-webkit-touch-callout: none) {
+  .fixed-ios {
+    @apply absolute;
+  }
+}
+
+/* Safe area insets for modern devices */
+@supports (padding: max(0px)) {
+  .safe-area-inset-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }

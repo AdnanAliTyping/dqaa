@@ -34,13 +34,13 @@ const Testimonials = () => {
   const [current, setCurrent] = useState(0);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-dqaa-500 to-dqaa-700">
+    <section className="py-12 md:py-20 bg-gradient-to-br from-dqaa-500 to-dqaa-700">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-white mb-3 md:mb-4">
             Voices of Our Community
           </h2>
-          <p className="text-white/80 max-w-2xl mx-auto">
+          <p className="text-white/80 max-w-2xl mx-auto text-sm md:text-base">
             Hear what our students, alumni, and parents have to say about their experience at DQAA
           </p>
         </div>
@@ -58,11 +58,11 @@ const Testimonials = () => {
             <CarouselContent>
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index}>
-                  <div className="bg-white rounded-lg p-8 relative">
-                    <QuoteIcon className="h-12 w-12 text-gold-400/20 absolute top-6 left-6" />
-                    <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="bg-white rounded-lg p-4 md:p-8 relative">
+                    <QuoteIcon className="h-8 w-8 md:h-12 md:w-12 text-gold-400/20 absolute top-4 md:top-6 left-4 md:left-6" />
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
                       <div className="md:w-1/3 flex justify-center">
-                        <div className="w-24 h-24 rounded-full overflow-hidden">
+                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden">
                           <img
                             src={testimonial.image}
                             alt={testimonial.author}
@@ -71,20 +71,32 @@ const Testimonials = () => {
                         </div>
                       </div>
                       <div className="md:w-2/3 relative">
-                        <blockquote className="text-lg text-gray-700 italic mb-4 relative z-10">
+                        <blockquote className="text-base md:text-lg text-gray-700 italic mb-3 md:mb-4 relative z-10">
                           "{testimonial.quote}"
                         </blockquote>
                         <div className="font-semibold text-dqaa-600">{testimonial.author}</div>
-                        <div className="text-gray-500 text-sm">{testimonial.role}</div>
+                        <div className="text-gray-500 text-xs md:text-sm">{testimonial.role}</div>
                       </div>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-6">
-              <CarouselPrevious className="relative mr-2 static bg-white/20 hover:bg-white/40 border-none text-white" />
-              <div className="flex space-x-2 items-center">
+            <div className="flex justify-center mt-4 md:mt-6">
+              <div className="flex xs:hidden items-center space-x-1 mb-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrent(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      current === index ? "bg-white w-4" : "bg-white/50"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <CarouselPrevious className="relative mr-2 hidden xs:flex static bg-white/20 hover:bg-white/40 border-none text-white" />
+              <div className="hidden xs:flex space-x-2 items-center">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
@@ -92,10 +104,11 @@ const Testimonials = () => {
                     className={`w-2 h-2 rounded-full transition-all ${
                       current === index ? "bg-white w-6" : "bg-white/50"
                     }`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
-              <CarouselNext className="relative ml-2 static bg-white/20 hover:bg-white/40 border-none text-white" />
+              <CarouselNext className="relative ml-2 hidden xs:flex static bg-white/20 hover:bg-white/40 border-none text-white" />
             </div>
           </Carousel>
         </div>

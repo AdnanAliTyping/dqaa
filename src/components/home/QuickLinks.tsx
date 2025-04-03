@@ -50,10 +50,10 @@ const links = [
 
 const QuickLinks = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-dqaa-500 mb-3 md:mb-4">
             Quick Links
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -61,7 +61,27 @@ const QuickLinks = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mobile scroll container for small screens */}
+        <div className="md:hidden mobile-scroll">
+          {links.map((link, index) => (
+            <Link to={link.href} key={index} className="mobile-card">
+              <Card className="h-full hover:shadow-lg transition-shadow border-none">
+                <CardContent className="p-4 md:p-6 flex items-start space-x-3 md:space-x-4">
+                  <div className={`p-2 md:p-3 rounded-full ${link.color}`}>
+                    <link.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">{link.title}</h3>
+                    <p className="text-gray-600 text-sm">{link.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        {/* Regular grid for larger screens */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {links.map((link, index) => (
             <Link to={link.href} key={index}>
               <Card className="h-full hover:shadow-lg transition-shadow border-none">

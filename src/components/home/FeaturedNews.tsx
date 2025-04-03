@@ -1,5 +1,5 @@
 
-import { CalendarIcon, Clock } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
@@ -30,11 +30,11 @@ const newsItems = [
 
 const FeaturedNews = () => {
   return (
-    <section className="py-16">
+    <section className="py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-10">
           <div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-2">Latest News & Events</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-dqaa-500 mb-2">Latest News & Events</h2>
             <p className="text-gray-600 max-w-2xl">Stay updated with the latest happenings at Darul Quran Abdulla Academy</p>
           </div>
           <Link to="/news" className="mt-4 md:mt-0">
@@ -44,7 +44,48 @@ const FeaturedNews = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Mobile scroll container for small screens */}
+        <div className="md:hidden mobile-scroll">
+          {newsItems.map((item) => (
+            <Card key={item.id} className="mobile-card overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow">
+              <div className="h-40 overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <CardContent className="p-4">
+                <div className="flex items-center text-sm text-gray-500 mb-2">
+                  <CalendarIcon className="h-4 w-4 mr-1" />
+                  <span>{item.date}</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-dqaa-700 line-clamp-2 hover:text-dqaa-500 transition-colors">
+                  <Link to={`/news/${item.id}`}>{item.title}</Link>
+                </h3>
+                <p className="text-gray-600 mb-3 line-clamp-2 text-sm">{item.excerpt}</p>
+                <Link 
+                  to={`/news/${item.id}`} 
+                  className="text-dqaa-500 font-medium hover:text-dqaa-600 flex items-center text-sm"
+                >
+                  Read More
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-4 w-4 ml-1" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Regular grid for larger screens */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
           {newsItems.map((item) => (
             <Card key={item.id} className="overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow">
               <div className="h-48 overflow-hidden">
