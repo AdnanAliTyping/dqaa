@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, Phone, Mail } from "lucide-react";
 import LocationDetails from "./LocationDetails";
 
 const Footer = () => {
@@ -95,15 +95,11 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4 text-dqaa-500">Connect With Us</h3>
             <div className="flex space-x-4 mb-6">
-              <a href="#" className="bg-dqaa-500 text-white p-3 rounded-full hover:bg-dqaa-600 transition-colors touch-target">
+              <a href="https://www.facebook.com/darulquranindia/" target="_blank" rel="noopener noreferrer" className="bg-dqaa-500 text-white p-3 rounded-full hover:bg-dqaa-600 transition-colors touch-target">
                 <Facebook size={18} />
                 <span className="sr-only">Facebook</span>
               </a>
-              <a href="#" className="bg-dqaa-500 text-white p-3 rounded-full hover:bg-dqaa-600 transition-colors touch-target">
-                <Twitter size={18} />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="bg-dqaa-500 text-white p-3 rounded-full hover:bg-dqaa-600 transition-colors touch-target">
+              <a href="https://instagram.com/darulquranindia" target="_blank" rel="noopener noreferrer" className="bg-dqaa-500 text-white p-3 rounded-full hover:bg-dqaa-600 transition-colors touch-target">
                 <Instagram size={18} />
                 <span className="sr-only">Instagram</span>
               </a>
@@ -113,11 +109,9 @@ const Footer = () => {
               </a>
             </div>
             <div className="razorpay-container">
-              <Link to="/donate">
-                <form>
-                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                </form>
-              </Link>
+              <form>
+                <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
+              </form>
             </div>
           </div>
         </div>

@@ -30,18 +30,18 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       {showBanner && (
-        <div className="bg-gold-400 text-white py-2 px-4 text-center relative">
-          <div className="flex justify-center items-center flex-wrap">
-            <span className="font-medium mr-2 text-sm md:text-base">Admissions Open for 2025!</span>
-            <Link to="/admissions/apply">
-              <Button variant="secondary" size="sm" className="text-xs sm:text-sm my-1">
+        <div className="bg-gold-400 text-dqaa-900 py-2 px-4 text-center relative">
+          <div className="container mx-auto flex justify-center items-center flex-wrap">
+            <Link to="/admissions/apply" className="flex items-center justify-center w-full">
+              <span className="font-medium mr-2 text-sm md:text-base">Admissions Open for 2025!</span>
+              <Button variant="secondary" size="sm" className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700">
                 Apply Now
               </Button>
             </Link>
           </div>
           <button 
             onClick={closeBanner}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white hover:text-dqaa-50 touch-target"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-dqaa-900 hover:text-dqaa-700 touch-target"
             aria-label="Close banner"
           >
             <X size={18} />

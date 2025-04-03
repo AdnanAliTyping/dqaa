@@ -5,7 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactPage = () => {
@@ -155,9 +155,8 @@ const ContactPage = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Our Address</h3>
                       <p className="text-gray-600">
-                        123 Academy Road<br />
-                        Educational District<br />
-                        Kerala, India
+                        Kothakurssi, Ottapalam, Palakkad Dt,<br />
+                        Kerala, India, Pin:679501
                       </p>
                     </div>
                   </div>
@@ -167,8 +166,8 @@ const ContactPage = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
                       <p className="text-gray-600">
-                        +91 123 456 7890<br />
-                        +91 987 654 3210
+                        <a href="tel:+919526552211" className="hover:text-dqaa-500">+91 95265 52211</a><br />
+                        <a href="tel:+919496721259" className="hover:text-dqaa-500">+91 94967 21259</a> (Admissions)
                       </p>
                     </div>
                   </div>
@@ -178,8 +177,7 @@ const ContactPage = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
                       <p className="text-gray-600">
-                        info@dqaa.edu<br />
-                        admissions@dqaa.edu
+                        <a href="mailto:darulquranind@gmail.com" className="hover:text-dqaa-500">darulquranind@gmail.com</a>
                       </p>
                     </div>
                   </div>
@@ -202,32 +200,22 @@ const ContactPage = () => {
                 <h3 className="font-semibold mb-3">Connect With Us</h3>
                 <div className="flex space-x-4">
                   <a 
-                    href="#" 
+                    href="https://www.facebook.com/darulquranindia/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="bg-gray-50 hover:bg-dqaa-50 text-dqaa-500 p-3 rounded-full transition-colors"
                     aria-label="Facebook"
                   >
                     <Facebook className="h-5 w-5" />
                   </a>
                   <a 
-                    href="#" 
-                    className="bg-gray-50 hover:bg-dqaa-50 text-dqaa-500 p-3 rounded-full transition-colors"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="#" 
+                    href="https://instagram.com/darulquranindia" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gray-50 hover:bg-dqaa-50 text-dqaa-500 p-3 rounded-full transition-colors"
                     aria-label="Instagram"
                   >
                     <Instagram className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="#" 
-                    className="bg-gray-50 hover:bg-dqaa-50 text-dqaa-500 p-3 rounded-full transition-colors"
-                    aria-label="YouTube"
-                  >
-                    <Youtube className="h-5 w-5" />
                   </a>
                 </div>
               </div>
@@ -239,10 +227,15 @@ const ContactPage = () => {
       <section className="py-8 pb-16">
         <div className="container mx-auto px-4">
           <div className="bg-gray-50 rounded-lg overflow-hidden h-96">
-            {/* This would be replaced with an actual Google Map */}
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              <p>Google Map will be embedded here</p>
-            </div>
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.5773988447527!2d76.32905085!3d10.9160916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7d0426f917b25%3A0xbf1c0c0050b40486!2sDARUL%20QURAN%20ABDULLA%20ACADEMY%2C%20Koothakunsi%2C%20Koothakunsi%20Kadavu%2C%20Kerala%20679501!5e0!3m2!1sen!2sin!4v1712148854240!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>

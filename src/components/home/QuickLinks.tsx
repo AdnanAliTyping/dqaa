@@ -50,7 +50,7 @@ const links = [
 
 const QuickLinks = () => {
   return (
-    <section className="py-12 md:py-16 bg-gray-50">
+    <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-dqaa-500 mb-3 md:mb-4">
@@ -65,7 +65,7 @@ const QuickLinks = () => {
         <div className="md:hidden mobile-scroll">
           {links.map((link, index) => (
             <Link to={link.href} key={index} className="mobile-card">
-              <Card className="h-full hover:shadow-lg transition-shadow border-none">
+              <Card className="h-full hover:shadow-md transition-shadow border-none">
                 <CardContent className="p-4 md:p-6 flex items-start space-x-3 md:space-x-4">
                   <div className={`p-2 md:p-3 rounded-full ${link.color}`}>
                     <link.icon className="h-5 w-5" />
@@ -84,7 +84,7 @@ const QuickLinks = () => {
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {links.map((link, index) => (
             <Link to={link.href} key={index}>
-              <Card className="h-full hover:shadow-lg transition-shadow border-none">
+              <Card className="h-full hover:shadow-md transition-shadow border-none">
                 <CardContent className="p-6 flex items-start space-x-4">
                   <div className={`p-3 rounded-full ${link.color}`}>
                     <link.icon className="h-6 w-6" />
