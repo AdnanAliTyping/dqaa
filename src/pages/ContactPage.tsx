@@ -1,51 +1,11 @@
 
-import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Facebook, Instagram } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
+import LocationDetails from "@/components/LocationDetails";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message Sent",
-        description: "Thank you for contacting us. We will get back to you soon.",
-        duration: 5000,
-      });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-      setIsSubmitting(false);
-    }, 1500);
-  };
-
   return (
     <Layout>
       <PageHeader 
@@ -65,83 +25,7 @@ const ContactPage = () => {
                 We welcome your inquiries and feedback. Please feel free to contact us using the form or through any of the contact methods listed below.
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Your Name *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                      Subject *
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="bg-dqaa-500 hover:bg-dqaa-600 text-white"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
+              <ContactForm />
             </div>
             
             <div>
@@ -149,51 +33,7 @@ const ContactPage = () => {
                 Contact Information
               </h2>
               <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                <div className="space-y-6">
-                  <div className="flex items-start">
-                    <MapPin className="h-6 w-6 text-dqaa-500 mr-4 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold mb-1">Our Address</h3>
-                      <p className="text-gray-600">
-                        Kothakurssi, Ottapalam, Palakkad Dt,<br />
-                        Kerala, India, Pin:679501
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Phone className="h-6 w-6 text-dqaa-500 mr-4 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-gray-600">
-                        <a href="tel:+919526552211" className="hover:text-dqaa-500">+91 95265 52211</a><br />
-                        <a href="tel:+919496721259" className="hover:text-dqaa-500">+91 94967 21259</a> (Admissions)
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Mail className="h-6 w-6 text-dqaa-500 mr-4 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-gray-600">
-                        <a href="mailto:darulquranind@gmail.com" className="hover:text-dqaa-500">darulquranind@gmail.com</a>
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Clock className="h-6 w-6 text-dqaa-500 mr-4 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold mb-1">Office Hours</h3>
-                      <p className="text-gray-600">
-                        Monday - Friday: 8:00 AM - 4:00 PM<br />
-                        Saturday: 8:00 AM - 12:00 PM<br />
-                        Closed on Sundays and Public Holidays
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <LocationDetails />
               </div>
               
               <div>

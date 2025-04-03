@@ -8,6 +8,7 @@ import ProgramsOverview from "@/components/home/ProgramsOverview";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import RazorpayDonateButton from "@/components/RazorpayDonateButton";
 
 const HomePage = () => {
   return (
@@ -148,9 +149,7 @@ const HomePage = () => {
                   Virtual Campus Tour
                 </Button>
               </Link>
-              <form className="w-full sm:w-auto">
-                <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-              </form>
+              <RazorpayDonateButton className="w-full sm:w-auto" />
             </div>
           </div>
         </div>

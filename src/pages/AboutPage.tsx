@@ -1,9 +1,9 @@
-
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, BookOpen, Award, Heart, Users, School } from "lucide-react";
+import { Check, BookOpen, Award, Heart, Users, School, Facebook, Instagram, Youtube } from "lucide-react";
+import ChairmanProfile from "@/components/ChairmanProfile";
 
 const AboutPage = () => {
   return (
@@ -352,63 +352,11 @@ const AboutPage = () => {
             </TabsList>
             
             <TabsContent value="chairman">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <div className="md:col-span-1">
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
-                      alt="Dr. PT Abdul Rahman - Chairman"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <div className="mt-4 text-center">
-                    <h3 className="text-xl font-semibold text-dqaa-700">Dr. PT Abdul Rahman</h3>
-                    <p className="text-gray-600">Chairman & Founder</p>
-                  </div>
-                </div>
-                
-                <div className="md:col-span-2">
-                  <h3 className="text-2xl font-display font-bold text-dqaa-600 mb-4">Message from the Chairman</h3>
-                  <div className="space-y-4 text-gray-600">
-                    <p>
-                      Assalamu Alaikum wa Rahmatullahi wa Barakatuhu,
-                    </p>
-                    <p>
-                      It is with great pleasure and humility that I welcome you to Darul Quran Abdulla Academy. 
-                      Since our founding in 2014, we have been committed to providing an educational environment 
-                      that nurtures both faith and intellect, preparing students to excel in this world while 
-                      strengthening their relationship with Allah (SWT).
-                    </p>
-                    <p>
-                      At DQAA, we believe that true education encompasses more than academic achievement. It involves 
-                      developing character, instilling values, and fostering a deep understanding of our faith. Our 
-                      unique approach integrates Quranic memorization and Islamic studies with a robust academic 
-                      curriculum, all enhanced by modern technology and innovative teaching methods.
-                    </p>
-                    <p>
-                      Our quadrilingual emphasis ensures that students are well-equipped to navigate an increasingly 
-                      interconnected world while maintaining strong roots in their faith and tradition. As we look to 
-                      the future, we remain committed to our founding vision: nurturing a generation of Muslims who 
-                      are hafiz of the Quran, academically accomplished, technologically literate, and ready to make 
-                      positive contributions to society.
-                    </p>
-                    <p>
-                      I invite you to explore all that DQAA has to offer and to join us on this journey of growth, 
-                      learning, and spiritual development. May Allah (SWT) bless our efforts and guide our students 
-                      toward success in this life and the next.
-                    </p>
-                    <p className="font-semibold">
-                      Dr. PT Abdul Rahman<br />
-                      Chairman, Darul Quran Abdulla Academy
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <ChairmanProfile />
             </TabsContent>
             
             <TabsContent value="board">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Sample board members */}
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <Card key={item} className="border-none shadow-md">
                     <CardContent className="p-6 text-center">
@@ -432,7 +380,6 @@ const AboutPage = () => {
             
             <TabsContent value="admin">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Sample administrative staff */}
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <Card key={item} className="border-none shadow-md">
                     <CardContent className="p-6 text-center">

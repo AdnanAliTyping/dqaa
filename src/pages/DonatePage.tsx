@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Heart } from "lucide-react";
 import LocationDetails from "@/components/LocationDetails";
+import RazorpayDonateButton from "@/components/RazorpayDonateButton";
 
 const DonatePage = () => {
   return (
@@ -107,9 +108,7 @@ const DonatePage = () => {
               </div>
               
               <div className="mt-10 text-center">
-                <form className="max-w-md mx-auto">
-                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                </form>
+                <RazorpayDonateButton className="max-w-md mx-auto" />
               </div>
             </div>
           </div>
@@ -141,9 +140,7 @@ const DonatePage = () => {
                     <span className="text-gray-600">Help with facility maintenance</span>
                   </li>
                 </ul>
-                <form>
-                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                </form>
+                <RazorpayDonateButton />
               </CardContent>
             </Card>
             
@@ -178,9 +175,7 @@ const DonatePage = () => {
                     <span className="text-gray-600">Help fund technology upgrades</span>
                   </li>
                 </ul>
-                <form>
-                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                </form>
+                <RazorpayDonateButton />
               </CardContent>
             </Card>
             
@@ -210,9 +205,7 @@ const DonatePage = () => {
                     <span className="text-gray-600">Recognition in annual report</span>
                   </li>
                 </ul>
-                <form>
-                  <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                </form>
+                <RazorpayDonateButton />
               </CardContent>
             </Card>
           </div>
@@ -295,9 +288,7 @@ const DonatePage = () => {
                 </div>
                 
                 <div className="mt-6">
-                  <form>
-                    <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
-                  </form>
+                  <RazorpayDonateButton />
                 </div>
               </div>
             </div>
