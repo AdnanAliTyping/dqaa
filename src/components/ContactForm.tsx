@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +31,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
     setIsSubmitting(true);
     
     try {
+      console.log("Submitting contact form:", formData);
+      
       await sendEmail({
         to: "darulquranind@gmail.com",
         subject: `Contact Form: ${formData.subject}`,
@@ -45,7 +48,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           ${formData.message}
         `,
         sendConfirmation: true
-      }, false);
+      });
       
       toast({
         title: "Message Sent",

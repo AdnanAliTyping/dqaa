@@ -20,12 +20,17 @@ const ADMISSION_TEMPLATE_ID = 'template_2ehzm9d';
 export async function sendEmail(params: EmailParams, isAdmissionForm: boolean = false): Promise<void> {
   const { to, subject, fromName, fromEmail, message, replyTo, sendConfirmation } = params;
   
-  // Send email to admin
-  await sendEmailToAdmin(to, subject, message, fromName, fromEmail, replyTo, isAdmissionForm);
-  
-  // Send confirmation email to user if requested
-  if (sendConfirmation) {
-    await sendConfirmationEmail(fromEmail, fromName, isAdmissionForm);
+  try {
+    // Send email to admin
+    await sendEmailToAdmin(to, subject, message, fromName, fromEmail, replyTo, isAdmissionForm);
+    
+    // Send confirmation email to user if requested
+    if (sendConfirmation) {
+      await sendConfirmationEmail(fromEmail, fromName, isAdmissionForm);
+    }
+  } catch (error) {
+    console.error('Error in sendEmail:', error);
+    throw error;
   }
 }
 
@@ -59,12 +64,14 @@ async function sendEmailToAdmin(
       reply_to: replyTo || fromEmail
     };
     
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    
     // Send email using EmailJS
     const response = await emailjs.send(
       EMAILJS_SERVICE_ID,
       isAdmissionForm ? ADMISSION_TEMPLATE_ID : CONTACT_TEMPLATE_ID,
-      templateParams,
-      EMAILJS_PUBLIC_KEY
+      templateParams
     );
     
     console.log('Email sent successfully:', response.status, response.text);
@@ -102,12 +109,14 @@ async function sendConfirmationEmail(
       academy_phone: '+919526552211'
     };
     
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    
     // Send confirmation email using EmailJS
     const response = await emailjs.send(
       EMAILJS_SERVICE_ID,
       isAdmissionForm ? ADMISSION_TEMPLATE_ID : CONTACT_TEMPLATE_ID,
-      templateParams,
-      EMAILJS_PUBLIC_KEY
+      templateParams
     );
     
     console.log('Confirmation email sent successfully:', response.status, response.text);
