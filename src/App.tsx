@@ -21,18 +21,20 @@ import NewsEventsPage from "./pages/NewsEventsPage";
 import ContactPage from "./pages/ContactPage";
 import DonatePage from "./pages/DonatePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <IntroScreen />
-      <Toaster />
-      <Sonner />
       <BrowserRouter>
+        <IntroScreen />
+        <Toaster />
+        <Sonner />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/index" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/admissions/apply" element={<ApplicationFormPage />} />
