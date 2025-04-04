@@ -1,9 +1,7 @@
-
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/lib/email";
 import jsPDF from "jspdf";
 import { saveAs } from 'file-saver';
-import emailjs from '@emailjs/browser';
 
 interface ApplicationData {
   studentName: string;
@@ -80,9 +78,11 @@ Submission Date: ${new Date().toLocaleString()}
         sendConfirmation: true
       }, true); // true indicates this is an admission form
       
+      console.log("Application email sent successfully");
+      
       toast({
         title: "Application Submitted",
-        description: "Thank you for your application. We will contact you soon.",
+        description: "Thank you for your application. We will contact you soon. Please check your email for a confirmation.",
       });
       
       return true;

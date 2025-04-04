@@ -31,7 +31,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
     setIsSubmitting(true);
     
     try {
-      console.log("Submitting contact form:", formData);
+      console.log("Submitting contact form with data:", formData);
       
       await sendEmail({
         to: "darulquranind@gmail.com",
@@ -50,12 +50,15 @@ const ContactForm = ({ className }: ContactFormProps) => {
         sendConfirmation: true
       }, false); // Explicitly passing false for isAdmissionForm
       
+      console.log("Contact form submission successful");
+      
       toast({
         title: "Message Sent",
-        description: "Thank you for contacting us. We will get back to you soon.",
+        description: "Thank you for contacting us. We will get back to you soon. Please check your email for a confirmation.",
         duration: 5000,
       });
       
+      // Clear form data after successful submission
       setFormData({
         name: "",
         email: "",
@@ -64,7 +67,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         message: "",
       });
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error("Error submitting contact form:", error);
       toast({
         title: "Error",
         description: "There was an error sending your message. Please try again later.",
