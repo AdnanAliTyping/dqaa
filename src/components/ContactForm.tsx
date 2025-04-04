@@ -48,7 +48,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           ${formData.message}
         `,
         sendConfirmation: true
-      });
+      }, false); // Explicitly passing false for isAdmissionForm
       
       toast({
         title: "Message Sent",

@@ -17,6 +17,9 @@ const EMAILJS_SERVICE_ID = 'service_rtzafui';
 const CONTACT_TEMPLATE_ID = 'template_3emjpvl';
 const ADMISSION_TEMPLATE_ID = 'template_2ehzm9d';
 
+// Initialize EmailJS immediately
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
 export async function sendEmail(params: EmailParams, isAdmissionForm: boolean = false): Promise<void> {
   const { to, subject, fromName, fromEmail, message, replyTo, sendConfirmation } = params;
   
@@ -64,9 +67,6 @@ async function sendEmailToAdmin(
       reply_to: replyTo || fromEmail
     };
     
-    // Initialize EmailJS
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-    
     // Send email using EmailJS
     const response = await emailjs.send(
       EMAILJS_SERVICE_ID,
@@ -108,9 +108,6 @@ async function sendConfirmationEmail(
       academy_email: 'darulquranind@gmail.com',
       academy_phone: '+919526552211'
     };
-    
-    // Initialize EmailJS
-    emailjs.init(EMAILJS_PUBLIC_KEY);
     
     // Send confirmation email using EmailJS
     const response = await emailjs.send(
