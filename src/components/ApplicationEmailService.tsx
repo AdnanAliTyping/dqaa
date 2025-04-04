@@ -3,6 +3,7 @@ import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/lib/email";
 import jsPDF from "jspdf";
 import { saveAs } from 'file-saver';
+import emailjs from '@emailjs/browser';
 
 interface ApplicationData {
   studentName: string;
@@ -68,7 +69,7 @@ ${formData.additionalInfo || 'None provided'}
 Submission Date: ${new Date().toLocaleString()}
 `;
 
-      // Send email using the email service
+      // Send email using the email service with isAdmissionForm set to true
       await sendEmail({
         to: "darulquranind@gmail.com",
         subject: `New Application: ${formData.studentName}`,
@@ -77,7 +78,7 @@ Submission Date: ${new Date().toLocaleString()}
         message: message,
         replyTo: formData.email,
         sendConfirmation: true
-      });
+      }, true); // true indicates this is an admission form
       
       toast({
         title: "Application Submitted",
