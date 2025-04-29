@@ -33,10 +33,7 @@ const HomePage = () => {
                 أكاديمية عبد الله لتحفيظ القران
               </div>
               <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-                Established in 2014, DQAA has been at the forefront of Islamic education, 
-                combining traditional Quranic learning with modern academic curriculum. 
-                Our holistic approach to education focuses on developing students 
-                intellectually, spiritually, and morally to meet the challenges of the contemporary world.
+                {t('home.established')}
               </p>
             </div>
             
@@ -75,7 +72,7 @@ const HomePage = () => {
               <div className="h-1 w-20 bg-gold-400 mx-auto"></div>
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-6">
-              Why Choose DQAA?
+              {t('home.whyChoose')}
             </h2>
           </div>
           
@@ -86,10 +83,10 @@ const HomePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dqaa-500"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><path d="M21 11h-6a2 2 0 0 1-2-2V3"/><path d="M9 14v1.5"/><path d="M15 14v1.5"/></svg>
                 </div>
                 <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
-                  Quranic Excellence
+                  {t('home.quranicExcellence')}
                 </h3>
                 <p className="text-gray-600">
-                  Our comprehensive Hifz program enables students to memorize the entire Quran with proper Tajweed and understanding.
+                  {t('home.quranicExcellenceText')}
                 </p>
               </CardContent>
             </Card>
@@ -100,10 +97,10 @@ const HomePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dqaa-500"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                 </div>
                 <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
-                  Academic Focus
+                  {t('home.academicFocus')}
                 </h3>
                 <p className="text-gray-600">
-                  Our curriculum integrates Islamic studies with modern subjects, ensuring students excel in both spiritual and academic domains.
+                  {t('home.academicFocusText')}
                 </p>
               </CardContent>
             </Card>
@@ -114,10 +111,10 @@ const HomePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dqaa-500"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 </div>
                 <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
-                  Character Development
+                  {t('home.characterDev')}
                 </h3>
                 <p className="text-gray-600">
-                  We prioritize the cultivation of Islamic values, ethics, and character in all our students.
+                  {t('home.characterDevText')}
                 </p>
               </CardContent>
             </Card>
@@ -137,11 +134,10 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-6">
-              Begin Your Journey with DQAA
+              {t('home.beginJourney')}
             </h2>
             <p className="text-gray-600 mb-8 text-lg">
-              Join our community of learners and embark on a path of knowledge, faith, and excellence. 
-              Applications for the upcoming academic year are now open.
+              {t('home.joinCommunity')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/admissions">

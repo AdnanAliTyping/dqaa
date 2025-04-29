@@ -13,7 +13,7 @@ const ContactPage = () => {
     <Layout>
       <PageHeader 
         title={t("nav.contact")} 
-        subtitle="Get in touch with Darul Quran Abdulla Academy"
+        subtitle={t("contact.welcome")}
         backgroundImage="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
       />
       
@@ -22,10 +22,10 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6">
-                Get in Touch
+                {t("contact.getInTouch")}
               </h2>
               <p className="text-gray-600 mb-8">
-                We welcome your inquiries and feedback. Please feel free to contact us using the form or through any of the contact methods listed below.
+                {t("contact.welcome")}
               </p>
               
               <ContactForm />
@@ -33,14 +33,14 @@ const ContactPage = () => {
             
             <div>
               <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6">
-                Contact Information
+                {t("contact.info")}
               </h2>
               <div className="bg-gray-50 rounded-lg p-6 mb-8">
                 <LocationDetails />
               </div>
               
               <div>
-                <h3 className="font-semibold mb-3">Connect With Us</h3>
+                <h3 className="font-semibold mb-3">{t("contact.connect")}</h3>
                 <div className="flex space-x-4">
                   <a 
                     href="https://www.facebook.com/darulquranindia/" 
