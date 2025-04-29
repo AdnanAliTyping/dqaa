@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Search, Globe, Phone, Mail } from "lucide-react";
+import { Menu, X, ChevronDown, Search, Phone, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,52 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-
-const navigation = [
-  { name: "Home", href: "/" },
-  { 
-    name: "About", 
-    href: "/about",
-    submenu: [
-      { name: "Mission & Vision", href: "/about#mission" },
-      { name: "Educational Philosophy", href: "/about#philosophy" },
-      { name: "Core Values", href: "/about#values" },
-      { name: "History", href: "/about#history" },
-      { name: "Leadership", href: "/about#leadership" },
-      { name: "Faculty & Staff", href: "/about#faculty" },
-    ]
-  },
-  { 
-    name: "Admissions", 
-    href: "/admissions",
-    submenu: [
-      { name: "Application Process", href: "/admissions#process" },
-      { name: "Requirements", href: "/admissions#requirements" },
-      { name: "Tuition & Fees", href: "/admissions#tuition" },
-      { name: "Financial Aid", href: "/admissions#aid" },
-      { name: "FAQs", href: "/admissions#faqs" },
-    ]
-  },
-  { 
-    name: "Academic Programs", 
-    href: "/academic-programs",
-    submenu: [
-      { name: "Hifz Program", href: "/academic-programs#hifz" },
-      { name: "Bayanul Quran", href: "/academic-programs#bayanul" },
-      { name: "Islamic Studies", href: "/academic-programs#islamic" },
-      { name: "Academic Subjects", href: "/academic-programs#academic" },
-      { name: "Additional Courses", href: "/academic-programs#additional" },
-    ]
-  },
-  { name: "Student Life", href: "/student-life" },
-  { name: "Campus", href: "/campus" },
-  { name: "News & Events", href: "/news" },
-  { name: "Contact", href: "/contact" },
-];
-
-// Group navigation items for mobile optimization
-const primaryNavItems = navigation.slice(0, 4); // First 4 items for primary nav
-const secondaryNavItems = navigation.slice(4); // Remaining items for secondary nav
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "@/lib/i18n";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +19,54 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
+  const { t } = useTranslation();
+
+  // Define navigation structure with translations
+  const navigation = [
+    { name: t('nav.home'), href: "/" },
+    { 
+      name: t('nav.about'), 
+      href: "/about",
+      submenu: [
+        { name: t('mission'), href: "/about#mission" },
+        { name: "Educational Philosophy", href: "/about#philosophy" },
+        { name: "Core Values", href: "/about#values" },
+        { name: "History", href: "/about#history" },
+        { name: "Leadership", href: "/about#leadership" },
+        { name: "Faculty & Staff", href: "/about#faculty" },
+      ]
+    },
+    { 
+      name: t('nav.admissions'), 
+      href: "/admissions",
+      submenu: [
+        { name: "Application Process", href: "/admissions#process" },
+        { name: "Requirements", href: "/admissions#requirements" },
+        { name: "Tuition & Fees", href: "/admissions#tuition" },
+        { name: "Financial Aid", href: "/admissions#aid" },
+        { name: "FAQs", href: "/admissions#faqs" },
+      ]
+    },
+    { 
+      name: t('nav.academic'), 
+      href: "/academic-programs",
+      submenu: [
+        { name: t('programs.hifz'), href: "/academic-programs#hifz" },
+        { name: t('programs.bayanul'), href: "/academic-programs#bayanul" },
+        { name: t('programs.islamic'), href: "/academic-programs#islamic" },
+        { name: t('programs.academic'), href: "/academic-programs#academic" },
+        { name: "Additional Courses", href: "/academic-programs#additional" },
+      ]
+    },
+    { name: t('nav.studentLife'), href: "/student-life" },
+    { name: t('nav.campus'), href: "/campus" },
+    { name: t('nav.news'), href: "/news" },
+    { name: t('nav.contact'), href: "/contact" },
+  ];
+
+  // Group navigation items for mobile optimization
+  const primaryNavItems = navigation.slice(0, 4); // First 4 items for primary nav
+  const secondaryNavItems = navigation.slice(4); // Remaining items for secondary nav
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,25 +104,31 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4">
-        {/* Top bar with contact info and donate button */}
+        {/* Top bar with contact info, language switcher and donate button */}
         <div className="hidden lg:flex justify-between items-center border-b border-gray-100 pb-2 mb-2">
           <div className="flex items-center text-sm text-gray-600">
             <a href="tel:+919526552211" className="mr-6 hover:text-dqaa-500">
               <Phone className="inline h-4 w-4 mr-1" />
-              +91 95265 52211
+              {t('footer.phone')}
             </a>
             <a href="mailto:darulquranind@gmail.com" className="hover:text-dqaa-500">
               <Mail className="inline h-4 w-4 mr-1" />
-              darulquranind@gmail.com
+              {t('footer.email')}
             </a>
           </div>
           <div className="flex items-center space-x-4">
+            {/* Language Switcher */}
+            <LanguageSwitcher variant="full" size="sm" />
+            
+            {/* Social Media Links */}
             <a href="https://www.facebook.com/darulquranindia/" target="_blank" rel="noopener noreferrer" className="text-dqaa-500 hover:text-dqaa-600" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
             <a href="https://instagram.com/darulquranindia" target="_blank" rel="noopener noreferrer" className="text-dqaa-500 hover:text-dqaa-600" aria-label="Instagram">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </a>
+            
+            {/* Donate Button */}
             <form className="razorpay-container">
               <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QEBC8u1SAAat14" async />
             </form>
@@ -133,8 +143,8 @@ const Navbar = () => {
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
             <span className="font-display text-base md:text-lg lg:text-xl font-bold text-dqaa-500">
-              <span className="hidden sm:inline">Darul Quran Abdulla Academy</span>
-              <span className="inline sm:hidden">DQAA</span>
+              <span className="hidden sm:inline">{t('academy.name')}</span>
+              <span className="inline sm:hidden">{t('academy.shortName')}</span>
             </span>
           </Link>
 
@@ -184,6 +194,7 @@ const Navbar = () => {
           </nav>
 
           <div className="hidden lg:flex items-center space-x-2">
+            {/* Search button */}
             <Button
               variant="ghost"
               size="icon"
@@ -192,10 +203,18 @@ const Navbar = () => {
             >
               <Search className="h-5 w-5" />
             </Button>
+            
+            {/* Language switcher for desktop - icon only variant */}
+            <div className="lg:hidden">
+              <LanguageSwitcher variant="icon" />
+            </div>
           </div>
 
           {/* Mobile Navigation Button */}
           <div className="flex lg:hidden items-center">
+            {/* Language switcher for mobile */}
+            <LanguageSwitcher variant="icon" size="sm" className="mr-2" />
+            
             <Button
               variant="ghost"
               size="icon"
@@ -217,7 +236,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu - Improved for better touch interactions */}
+      {/* Mobile Navigation Menu */}
       {isOpen && (
         <div className="lg:hidden bg-white border-t shadow-lg fixed inset-x-0 top-[57px] bottom-0 z-50 overflow-y-auto">
           <div className="container mx-auto py-4 px-4">
@@ -299,11 +318,11 @@ const Navbar = () => {
                 <div className="text-sm text-gray-600">
                   <a href="tel:+919526552211" className="flex items-center hover:text-dqaa-500 mb-2">
                     <Phone className="h-4 w-4 mr-2" />
-                    +91 95265 52211
+                    {t('footer.phone')}
                   </a>
                   <a href="mailto:darulquranind@gmail.com" className="flex items-center hover:text-dqaa-500">
                     <Mail className="h-4 w-4 mr-2" />
-                    darulquranind@gmail.com
+                    {t('footer.email')}
                   </a>
                 </div>
               </div>

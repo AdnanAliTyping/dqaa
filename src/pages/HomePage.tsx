@@ -9,8 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import RazorpayDonateButton from "@/components/RazorpayDonateButton";
+import { useTranslation } from "@/lib/i18n";
 
 const HomePage = () => {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <HeroSection />
@@ -24,7 +27,7 @@ const HomePage = () => {
                 <div className="h-1 w-20 bg-gold-400 mx-auto"></div>
               </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-dqaa-500 mb-4">
-                Welcome to Darul Quran Abdulla Academy
+                {t('academy.name')}
               </h2>
               <div className="text-xl mb-6 text-dqaa-600 font-arabic text-center">
                 أكاديمية عبد الله لتحفيظ القران
@@ -47,16 +50,15 @@ const HomePage = () => {
               </div>
               <div className="flex flex-col justify-center">
                 <h3 className="text-2xl font-display font-bold text-dqaa-500 mb-4">
-                  Our Mission
+                  {t('mission')}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  To nurture a generation of Muslim scholars and leaders who are deeply rooted in Islamic knowledge, 
-                  academically excellent, and capable of contributing positively to society.
+                  {t('mission.text')}
                 </p>
                 <div>
                   <Link to="/about">
                     <Button className="bg-dqaa-500 hover:bg-dqaa-600 text-white">
-                      Learn More About Us
+                      {t('learnMore')}
                     </Button>
                   </Link>
                 </div>
@@ -144,12 +146,12 @@ const HomePage = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/admissions">
                 <Button size="lg" className="bg-dqaa-500 hover:bg-dqaa-600 text-white w-full">
-                  Apply Now
+                  {t('cta.apply')}
                 </Button>
               </Link>
               <Link to="/campus#tour">
                 <Button size="lg" variant="outline" className="border-dqaa-500 text-dqaa-500 hover:bg-dqaa-50 w-full">
-                  Virtual Campus Tour
+                  {t('cta.tour')}
                 </Button>
               </Link>
               <RazorpayDonateButton className="w-full sm:w-auto" />

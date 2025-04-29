@@ -1,33 +1,64 @@
 
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
-  prefix: "",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     container: {
       center: true,
-      padding: "1rem",
+      padding: "2rem",
       screens: {
-        xs: "480px",
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
-      screens: {
-        'xs': '480px',
+      fontFamily: {
+        sans: ["Noto Sans", "system-ui", "sans-serif"],
+        display: ["Noto Sans", "system-ui", "sans-serif"],
+        arabic: ["Amiri", "Noto Sans Arabic", "serif"],
+        malayalam: ["Noto Sans Malayalam", "system-ui", "sans-serif"],
       },
       colors: {
+        dqaa: {
+          '50': '#f0f9ff',
+          '100': '#e0f2fe',
+          '200': '#bae6fd',
+          '300': '#7dd3fc',
+          '400': '#38bdf8',
+          '500': '#0a3d91',
+          '600': '#0369a1',
+          '700': '#0c4a6e',
+          '800': '#075985',
+          '900': '#0c4a6e',
+          '950': '#082f49',
+        },
+        gold: {
+          '50': '#fefbe8',
+          '100': '#fff8c2',
+          '200': '#ffef89',
+          '300': '#ffe045',
+          '400': '#fece15',
+          '500': '#eaac05',
+          '600': '#ca8301',
+          '700': '#a15e05',
+          '800': '#84490c',
+          '900': '#6e3c0f',
+          '950': '#421e05',
+        },
+        estate: {
+          '50': '#f5f7f9',
+          '100': '#eaeff3',
+          '200': '#d0dbe5',
+          '300': '#a6bacd',
+          '400': '#7595af',
+          '500': '#527895',
+          '600': '#3f5f7a',
+          '700': '#344d64',
+          '800': '#2e4254',
+          '900': '#2b3947',
+          '950': '#1a2430',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -61,42 +92,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        dqaa: {
-          50: "#eef4fb",
-          100: "#d5e3f7",
-          200: "#b4cef1",
-          300: "#86b1e8",
-          400: "#538ddb",
-          500: "#0A3D91", // primary blue from logo
-          600: "#0A3272",
-          700: "#0A285A",
-          800: "#061E42",
-          900: "#051534",
-        },
-        gold: {
-          50: "#fdf9e7",
-          100: "#fbefc4",
-          200: "#f7e08c",
-          300: "#f2ca4b",
-          400: "#D4AC0D", // primary gold
-          500: "#b3900a",
-          600: "#8c7008",
-          700: "#6b5506",
-          800: "#574503",
-          900: "#473802",
-        },
-        navy: {
-          500: "#1A3F76", // accent navy
-        },
-        beige: {
-          100: "#F5F4F8", // accent beige
-        }
-      },
-      fontFamily: {
-        sans: ["Noto Sans", "sans-serif"],
-        display: ["Amiri", "serif"],
-        arabic: ["Noto Sans Arabic", "sans-serif"],
-        malayalam: ["Noto Sans Malayalam", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -112,28 +107,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        pulse: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.5" },
-        },
-        slideIn: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        fadeIn: "fadeIn 0.5s ease-out forwards",
-        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        slideIn: "slideIn 0.3s ease-out forwards",
-      },
-      backgroundImage: {
-        "islamic-pattern": "url('/patterns/islamic-pattern.svg')",
       },
     },
   },

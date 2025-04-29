@@ -95,6 +95,36 @@
     text-wrap: pretty;
   }
   
+  /* Language specific styling */
+  :root[lang="ml"] body {
+    @apply font-malayalam;
+  }
+  
+  :root[lang="en"] body {
+    @apply font-sans;
+  }
+  
+  /* Arabic text styling */
+  .arabic-text {
+    @apply font-arabic text-right;
+    direction: rtl;
+  }
+
+  .hadith-text {
+    @apply font-arabic text-base md:text-lg leading-relaxed my-4 text-right;
+    direction: rtl;
+  }
+  
+  .quran-verse {
+    @apply font-arabic text-base md:text-lg lg:text-xl leading-relaxed my-4 md:my-6 text-right text-dqaa-500;
+    direction: rtl;
+  }
+  
+  /* Malayalam text styling */
+  .malayalam-text {
+    @apply font-malayalam;
+  }
+  
   /* Patterns */
   .islamic-pattern {
     background-color: #ffffff;
@@ -125,22 +155,6 @@
     @apply text-gold-400 absolute -left-4 md:-left-6 opacity-50;
   }
 
-  /* Text direction */
-  .arabic-text {
-    @apply font-arabic text-right;
-    direction: rtl;
-  }
-
-  .hadith-text {
-    @apply font-arabic text-base md:text-lg leading-relaxed my-4 text-right;
-    direction: rtl;
-  }
-  
-  .quran-verse {
-    @apply font-arabic text-base md:text-lg lg:text-xl leading-relaxed my-4 md:my-6 text-right text-dqaa-500;
-    direction: rtl;
-  }
-  
   /* Responsive container classes */
   .container-sm {
     @apply w-full max-w-screen-sm mx-auto px-4;
@@ -284,3 +298,18 @@
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
+
+/* Language switcher animation */
+.language-switcher {
+  @apply relative;
+}
+
+.language-switcher::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-dqaa-500 transition-all duration-300;
+}
+
+.language-switcher:hover::after {
+  @apply w-full;
+}
+

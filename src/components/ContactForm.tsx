@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/lib/email";
+import { useTranslation } from "@/lib/i18n";
 
 interface ContactFormProps {
   className?: string;
@@ -20,6 +21,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -53,8 +55,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
       console.log("Contact form submission successful");
       
       toast({
-        title: "Message Sent",
-        description: "Thank you for contacting us. We will get back to you soon. Please check your email for a confirmation.",
+        title: t('contact.success'),
+        description: t('contact.successMessage'),
         duration: 5000,
       });
       
@@ -69,8 +71,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
     } catch (error) {
       console.error("Error submitting contact form:", error);
       toast({
-        title: "Error",
-        description: "There was an error sending your message. Please try again later.",
+        title: t('contact.error'),
+        description: t('contact.errorMessage'),
         variant: "destructive",
         duration: 5000,
       });
@@ -84,7 +86,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-            Your Name *
+            {t('contact.name')} *
           </label>
           <Input
             id="name"
@@ -96,7 +98,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email Address *
+            {t('contact.email')} *
           </label>
           <Input
             id="email"
@@ -112,7 +114,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-            Phone Number
+            {t('contact.phone')}
           </label>
           <Input
             id="phone"
@@ -123,7 +125,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         </div>
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-            Subject *
+            {t('contact.subject')} *
           </label>
           <Input
             id="subject"
@@ -137,7 +139,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-          Message *
+          {t('contact.message')} *
         </label>
         <Textarea
           id="message"
@@ -154,7 +156,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         className="bg-dqaa-500 hover:bg-dqaa-600 text-white"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting ? t('contact.sending') : t('contact.send')}
       </Button>
     </form>
   );

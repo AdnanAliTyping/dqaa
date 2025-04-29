@@ -4,12 +4,15 @@ import PageHeader from "@/components/PageHeader";
 import { Facebook, Instagram } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import LocationDetails from "@/components/LocationDetails";
+import { useTranslation } from "@/lib/i18n";
 
 const ContactPage = () => {
+  const { t } = useTranslation();
+  
   return (
     <Layout>
       <PageHeader 
-        title="Contact Us" 
+        title={t("nav.contact")} 
         subtitle="Get in touch with Darul Quran Abdulla Academy"
         backgroundImage="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
       />

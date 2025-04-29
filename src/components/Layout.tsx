@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Button } from "./ui/button";
+import { useTranslation } from "@/lib/i18n";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +14,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [showBanner, setShowBanner] = useState(true);
+  const { t } = useTranslation();
   
   // Check localStorage on component mount
   useEffect(() => {
@@ -33,9 +35,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="bg-gold-400 text-dqaa-900 py-2 px-4 text-center relative">
           <div className="container mx-auto flex justify-center items-center flex-wrap">
             <Link to="/admissions/apply" className="flex items-center justify-center w-full">
-              <span className="font-medium mr-2 text-sm md:text-base">Admissions Open for 2025!</span>
+              <span className="font-medium mr-2 text-sm md:text-base">{t('admissions.open')}</span>
               <Button variant="secondary" size="sm" className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700">
-                Apply Now
+                {t('cta.apply')}
               </Button>
             </Link>
           </div>

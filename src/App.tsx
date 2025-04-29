@@ -23,35 +23,51 @@ import DonatePage from "./pages/DonatePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Index from "./pages/Index";
 
+// Language management
+import { useEffect } from "react";
+import { useLanguageStore } from "@/lib/i18n";
+import LanguageRootManager from "./components/LanguageRootManager";
+
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <BrowserRouter>
-        <IntroScreen />
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/index" element={<Index />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/admissions" element={<AdmissionsPage />} />
-          <Route path="/admissions/apply" element={<ApplicationFormPage />} />
-          <Route path="/academic-programs" element={<AcademicProgramsPage />} />
-          <Route path="/student-life" element={<StudentLifePage />} />
-          <Route path="/campus" element={<CampusFacilitiesPage />} />
-          <Route path="/technology" element={<TechnologyPage />} />
-          <Route path="/parents" element={<ParentsCornerPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/news" element={<NewsEventsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/donate" element={<DonatePage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Initialize language from localStorage on app start
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("dqaa-language");
+    if (savedLanguage === "en" || savedLanguage === "ml") {
+      useLanguageStore.getState().setLanguage(savedLanguage);
+    }
+  }, []);
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <BrowserRouter>
+          <LanguageRootManager />
+          <IntroScreen />
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/index" element={<Index />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/admissions" element={<AdmissionsPage />} />
+            <Route path="/admissions/apply" element={<ApplicationFormPage />} />
+            <Route path="/academic-programs" element={<AcademicProgramsPage />} />
+            <Route path="/student-life" element={<StudentLifePage />} />
+            <Route path="/campus" element={<CampusFacilitiesPage />} />
+            <Route path="/technology" element={<TechnologyPage />} />
+            <Route path="/parents" element={<ParentsCornerPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/news" element={<NewsEventsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/donate" element={<DonatePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
