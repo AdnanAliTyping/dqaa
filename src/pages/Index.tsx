@@ -1,3 +1,4 @@
+
 import Hero from "@/components/Hero";
 import PropertyGrid from "@/components/PropertyGrid";
 import AboutUs from "@/components/AboutUs";
@@ -5,8 +6,19 @@ import OurVision from "@/components/OurVision";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+  
+  // Redirect to the main homepage as this is a legacy page
+  useEffect(() => {
+    navigate('/', { replace: true });
+  }, [navigate]);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -23,6 +35,14 @@ const Index = () => {
       <OurVision />
       <Testimonials />
       <Footer />
+      
+      <div className="fixed bottom-6 right-6">
+        <Link to="/">
+          <Button className="bg-dqaa-500 hover:bg-dqaa-600">
+            Go to Main Website
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

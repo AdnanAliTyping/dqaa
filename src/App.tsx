@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import IntroScreen from "./components/IntroScreen";
 
 // Pages
@@ -51,6 +51,7 @@ const App = () => {
           <Sonner />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            {/* Legacy route that now redirects to homepage */}
             <Route path="/index" element={<Index />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/admissions" element={<AdmissionsPage />} />
