@@ -6,18 +6,85 @@ import PageHeader from "@/components/PageHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, BookOpen, GraduationCap, Users, Calendar, FileBadge, CreditCard } from "lucide-react";
+import { Calendar, FileText, BookOpen, GraduationCap, Users, FileBadge, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/lib/i18n";
+import { Helmet } from "react-helmet";
+import FAQSection from "@/components/FAQSection";
 
 const AdmissionsPage = () => {
   const [showMalayalam, setShowMalayalam] = useState(false);
   const navigate = useNavigate();
+  const { currentLanguage } = useTranslation();
+  const isMalayalam = currentLanguage === "ml";
+  
+  // FAQ items specific to admissions
+  const admissionsFaqs = [
+    {
+      question: "What are the eligibility criteria for Thahfeezul Qur'an Program?",
+      questionMl: "തഹ്ഫീളുൽ ഖുർആൻ പ്രോഗ്രാമിനുള്ള യോഗ്യതാ മാനദണ്ഡങ്ങൾ എന്തൊക്കെയാണ്?",
+      answer: "Students must have passed 6th grade, demonstrate basic ability to read the Quran, and possess good character and conduct. Candidates must pass an entrance examination and perform well in a personal interview.",
+      answerMl: "വിദ്യാർത്ഥികൾ 6-ാം ക്ലാസ് പാസായിരിക്കണം, ഖുർആൻ വായിക്കാനുള്ള അടിസ്ഥാന കഴിവ് പ്രദർശിപ്പിക്കണം, നല്ല സ്വഭാവവും പെരുമാറ്റവും ഉണ്ടായിരിക്കണം. ഉദ്യോഗാർത്ഥികൾ ഒരു പ്രവേശന പരീക്ഷ പാസാകുകയും വ്യക്തിഗത അഭിമുഖത്തിൽ നന്നായി പ്രകടിപ്പിക്കുകയും വേണം."
+    },
+    {
+      question: "What is the application process for admission?",
+      questionMl: "പ്രവേശനത്തിനുള്ള അപേക്ഷാ നടപടിക്രമം എന്താണ്?",
+      answer: "The application process includes: 1) Submitting the online application form with required information, 2) Taking the entrance examination on the scheduled date, 3) Attending a personal interview if you pass the entrance exam, 4) Receiving the results announcement, and 5) Confirming admission by paying fees and submitting required documents if selected.",
+      answerMl: "അപേക്ഷാ നടപടിക്രമത്തിൽ ഉൾപ്പെടുന്നത്: 1) ആവശ്യമായ വിവരങ്ങളോടെ ഓൺലൈൻ അപേക്ഷാ ഫോം സമർപ്പിക്കുക, 2) നിശ്ചിത തീയതിയിൽ പ്രവേശന പരീക്ഷ എഴുതുക, 3) പ്രവേശന പരീക്ഷ പാസായാൽ വ്യക്തിഗത അഭിമുഖത്തിൽ പങ്കെടുക്കുക, 4) ഫല പ്രഖ്യാപനം സ്വീകരിക്കുക, 5) തിരഞ്ഞെടുക്കപ്പെട്ടാൽ ഫീസ് അടച്ച് ആവശ്യമായ രേഖകൾ സമർപ്പിച്ച് പ്രവേശനം ഉറപ്പാക്കുക."
+    },
+    {
+      question: "What documents are required for admission?",
+      questionMl: "പ്രവേശനത്തിന് എന്തെല്ലാം രേഖകളാണ് ആവശ്യം?",
+      answer: "Required documents include: Birth Certificate (copy), Transfer Certificate (original), Conduct Certificate, School & Madrassa Mark Lists, Aadhaar copy, Ration Card copy, and four passport-size photos with blue background.",
+      answerMl: "ആവശ്യമായ രേഖകളിൽ ഉൾപ്പെടുന്നവ: ജനന സർട്ടിഫിക്കറ്റ് (പകർപ്പ്), ട്രാൻസ്ഫർ സർട്ടിഫിക്കറ്റ് (അസൽ), പെരുമാറ്റ സർട്ടിഫിക്കറ്റ്, സ്കൂൾ & മദ്രസ മാർക്ക് ലിസ്റ്റുകൾ, ആധാർ പകർപ്പ്, റേഷൻ കാർഡ് പകർപ്പ്, നീല ബാക്ക്ഗ്രൗണ്ടിൽ നാല് പാസ്പോർട്ട് സൈസ് ഫോട്ടോകൾ."
+    }
+  ];
   
   return (
     <Layout>
+      <Helmet>
+        <title>Admissions | Darul Quran Abdulla Academy</title>
+        <meta 
+          name="description" 
+          content="Learn about the admissions process at Darul Quran Abdulla Academy. Discover our Quran memorization & Islamic studies programs. Apply to DQAA today!" 
+        />
+        <meta 
+          name="keywords" 
+          content="DQAA admissions, Darul Quran admission process, Islamic academy enrollment, Hifz program admission, Quran memorization school application" 
+        />
+        <link rel="canonical" href="https://www.darulquranaa.com/admissions" />
+        
+        {/* Educational Organization Schema */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              "name": "Darul Quran Abdulla Academy",
+              "url": "https://www.darulquranaa.com/",
+              "logo": "https://www.darulquranaa.com/path/to/logo.png",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Darul Quran Campus, Kothakurssi",
+                "addressLocality": "Panamanna",
+                "postalCode": "679501",
+                "addressRegion": "Kerala",
+                "addressCountry": "IN"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9526-552211",
+                "contactType": "Admissions"
+              },
+              "description": "Premier residential Academy for Boys in Kothakurssi, Kerala, dedicated to Quranic memorization and academic excellence rooted in Islamic values."
+            }
+          `}
+        </script>
+      </Helmet>
+      
       <PageHeader 
-        title={showMalayalam ? "പ്രവേശനം" : "Admissions"} 
-        subtitle={showMalayalam ? 
+        title={isMalayalam ? "പ്രവേശനം" : "Admissions"} 
+        subtitle={isMalayalam ? 
           "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമിയിലെ വിദ്യാർത്ഥി സമൂഹത്തിൽ ചേരുക" : 
           "Join our community of learners at Darul Quran Abdulla Academy"}
         backgroundImage="https://images.unsplash.com/photo-1531545514256-b1400bc00f31"
@@ -35,7 +102,7 @@ const AdmissionsPage = () => {
         </div>
       </div>
       
-      <section className="py-8 md:py-16">
+      <section className="py-8 md:py-16 animate-fade-in">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6 text-center">
             {showMalayalam ? "പ്രവേശന വിവരങ്ങൾ" : "Admissions Information"}
@@ -49,7 +116,7 @@ const AdmissionsPage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <Link to="/admissions/apply" className="no-underline">
-              <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-dqaa-500 h-full">
+              <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-dqaa-500 h-full transform hover:-translate-y-1 transition-transform duration-300">
                 <CardHeader className="flex flex-row items-start space-x-4">
                   <div className="bg-dqaa-100 p-3 rounded-full">
                     <FileText size={24} className="text-dqaa-500" />
@@ -73,7 +140,7 @@ const AdmissionsPage = () => {
               </Card>
             </Link>
             
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-gold-400 h-full">
+            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-gold-400 h-full transform hover:-translate-y-1 transition-transform duration-300">
               <CardHeader className="flex flex-row items-start space-x-4">
                 <div className="bg-gold-100 p-3 rounded-full">
                   <Calendar size={24} className="text-gold-400" />
@@ -113,7 +180,7 @@ const AdmissionsPage = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-blue-700 h-full">
+            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-blue-700 h-full transform hover:-translate-y-1 transition-transform duration-300">
               <CardHeader className="flex flex-row items-start space-x-4">
                 <div className="bg-blue-100 p-3 rounded-full">
                   <FileBadge size={24} className="text-blue-700" />
@@ -203,7 +270,7 @@ const AdmissionsPage = () => {
                     </div>
                     
                     <div className="pt-2">
-                      <Button onClick={() => navigate('/admissions/apply')} className="bg-dqaa-500 text-white">
+                      <Button onClick={() => navigate('/admissions/apply')} className="bg-dqaa-500 text-white hover:bg-dqaa-600 transition-colors">
                         {showMalayalam ? "ഇപ്പോൾ അപേക്ഷിക്കുക" : "Apply Now"}
                       </Button>
                     </div>
@@ -267,7 +334,7 @@ const AdmissionsPage = () => {
                     </div>
                     
                     <div className="pt-2">
-                      <Button onClick={() => navigate('/admissions/apply')} className="bg-dqaa-500 text-white">
+                      <Button onClick={() => navigate('/admissions/apply')} className="bg-dqaa-500 text-white hover:bg-dqaa-600 transition-colors">
                         {showMalayalam ? "ഇപ്പോൾ അപേക്ഷിക്കുക" : "Apply Now"}
                       </Button>
                     </div>
@@ -401,12 +468,25 @@ const AdmissionsPage = () => {
               </Card>
               
               <div className="text-center mt-8">
-                <Button onClick={() => navigate('/admissions/apply')} size="lg" className="bg-dqaa-500 hover:bg-dqaa-600">
+                <Button onClick={() => navigate('/admissions/apply')} size="lg" className="bg-dqaa-500 hover:bg-dqaa-600 transition-colors">
                   {showMalayalam ? "ഇപ്പോൾ അപേക്ഷിക്കുക" : "Apply Now"}
                 </Button>
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+      </section>
+      
+      {/* FAQ Section for Admissions */}
+      <section className="py-8 md:py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <FAQSection 
+            title="Frequently Asked Admission Questions"
+            titleMl="പതിവായി ചോദിക്കുന്ന പ്രവേശന ചോദ്യങ്ങൾ"
+            subtitle="Find answers to common questions about our admission process"
+            subtitleMl="ഞങ്ങളുടെ പ്രവേശന നടപടിക്രമത്തെക്കുറിച്ചുള്ള സാധാരണ ചോദ്യങ്ങൾക്ക് ഉത്തരങ്ങൾ കണ്ടെത്തുക"
+            faqs={admissionsFaqs}
+          />
         </div>
       </section>
     </Layout>

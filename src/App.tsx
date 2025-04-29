@@ -22,6 +22,8 @@ import ContactPage from "./pages/ContactPage";
 import DonatePage from "./pages/DonatePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Index from "./pages/Index";
+import FAQPage from "./pages/FAQPage";
+import CareersPage from "./pages/CareersPage";
 
 // Language management
 import { useEffect } from "react";
@@ -62,6 +64,8 @@ const App = () => {
             <Route path="/news" element={<NewsEventsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/donate" element={<DonatePage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/careers" element={<CareersPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
