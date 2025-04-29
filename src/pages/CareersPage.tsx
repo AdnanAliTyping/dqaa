@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "@/lib/i18n";
 import { Helmet } from "react-helmet";
-import { briefcase, check, fileText, phone, school, users } from "lucide-react";
+import { Briefcase, Check, FileText, Phone, School, Users } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
@@ -111,7 +111,7 @@ const CareersPage = () => {
                 <CardContent className="p-6">
                   <div className="mb-4">
                     <div className="bg-dqaa-50 p-3 rounded-full w-12 h-12 flex items-center justify-center">
-                      <briefcase className="text-dqaa-500 h-6 w-6" />
+                      <Briefcase className="text-dqaa-500 h-6 w-6" />
                     </div>
                   </div>
                   <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
@@ -129,7 +129,7 @@ const CareersPage = () => {
                 <CardContent className="p-6">
                   <div className="mb-4">
                     <div className="bg-gold-50 p-3 rounded-full w-12 h-12 flex items-center justify-center">
-                      <users className="text-gold-400 h-6 w-6" />
+                      <Users className="text-gold-400 h-6 w-6" />
                     </div>
                   </div>
                   <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
@@ -147,7 +147,7 @@ const CareersPage = () => {
                 <CardContent className="p-6">
                   <div className="mb-4">
                     <div className="bg-dqaa-50 p-3 rounded-full w-12 h-12 flex items-center justify-center">
-                      <school className="text-dqaa-600 h-6 w-6" />
+                      <School className="text-dqaa-600 h-6 w-6" />
                     </div>
                   </div>
                   <h3 className="text-xl font-display font-bold text-dqaa-500 mb-3">
@@ -170,7 +170,7 @@ const CareersPage = () => {
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <div className="bg-dqaa-50 p-2 rounded-full mr-4 mt-1">
-                      <check className="h-4 w-4 text-dqaa-500" />
+                      <Check className="h-4 w-4 text-dqaa-500" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-1">
@@ -186,7 +186,7 @@ const CareersPage = () => {
                   
                   <div className="flex items-start">
                     <div className="bg-dqaa-50 p-2 rounded-full mr-4 mt-1">
-                      <check className="h-4 w-4 text-dqaa-500" />
+                      <Check className="h-4 w-4 text-dqaa-500" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-1">
@@ -202,7 +202,7 @@ const CareersPage = () => {
                   
                   <div className="flex items-start">
                     <div className="bg-dqaa-50 p-2 rounded-full mr-4 mt-1">
-                      <check className="h-4 w-4 text-dqaa-500" />
+                      <Check className="h-4 w-4 text-dqaa-500" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-1">
@@ -405,7 +405,7 @@ const CareersPage = () => {
                     htmlFor="resume"
                     className="flex items-center space-x-2 cursor-pointer bg-white px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50"
                   >
-                    <fileText className="h-5 w-5 text-dqaa-500" />
+                    <FileText className="h-5 w-5 text-dqaa-500" />
                     <span>{isMalayalam ? "റെസ്യൂമെ അപ്‌ലോഡ് ചെയ്യുക" : "Upload Resume"}</span>
                   </label>
                   <span className="ml-2 text-xs text-gray-600">
@@ -438,11 +438,11 @@ const CareersPage = () => {
               </p>
               <div className="flex justify-center space-x-4">
                 <Button variant="outline" className="flex items-center space-x-2">
-                  <phone className="h-4 w-4" />
+                  <Phone className="h-4 w-4" />
                   <span>+91-9526-552211</span>
                 </Button>
                 <Button variant="outline" className="flex items-center space-x-2">
-                  <fileText className="h-4 w-4" />
+                  <FileText className="h-4 w-4" />
                   <span>careers@darulquranaa.com</span>
                 </Button>
               </div>
