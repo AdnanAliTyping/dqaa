@@ -4,10 +4,31 @@ import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
 import RazorpayDonateButton from "../RazorpayDonateButton";
 import { useTranslation } from "@/lib/i18n";
+import { useEffect, useRef } from "react";
 
 const HeroSection = () => {
   const { t, currentLanguage } = useTranslation();
   const isMalayalam = currentLanguage === "ml";
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  // Set up scrolling animation for announcements
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+    
+    const animateScroll = () => {
+      if (!scrollContainer) return;
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollLeft += 1;
+      }
+    };
+    
+    const scrollInterval = setInterval(animateScroll, 30);
+    
+    return () => clearInterval(scrollInterval);
+  }, []);
   
   return (
     <div className="relative min-h-[85vh] flex items-center overflow-hidden bg-dqaa-900">
@@ -75,12 +96,19 @@ const HeroSection = () => {
             <div className="text-dqaa-900 font-semibold mr-3">
               {isMalayalam ? "പ്രധാന അറിയിപ്പ്:" : "Latest Announcement:"}
             </div>
-            <div className="text-dqaa-900 flex-1 truncate">
-              <marquee behavior="scroll" direction="left">
+            <div className="text-dqaa-900 flex-1 overflow-hidden whitespace-nowrap">
+              <div 
+                ref={scrollRef}
+                className="inline-block whitespace-nowrap news-ticker"
+                style={{ minWidth: "100%" }}
+              >
                 <span className="mr-8">🎉 Congratulations to our Hifz & Shari'ah Annual Exam Toppers 2025! </span>
                 <span className="mr-8">🎓 100% SSLC Result Achieved, Alhamdulillah! </span>
                 <span className="mr-8">📢 2025 Admission Orientation Program on May 14, 2025 </span>
-              </marquee>
+                <span className="mr-8">🎉 Congratulations to our Hifz & Shari'ah Annual Exam Toppers 2025! </span>
+                <span className="mr-8">🎓 100% SSLC Result Achieved, Alhamdulillah! </span>
+                <span className="mr-8">📢 2025 Admission Orientation Program on May 14, 2025 </span>
+              </div>
             </div>
             <Button variant="secondary" size="sm" asChild className="hidden sm:flex text-xs bg-dqaa-900 text-white hover:bg-dqaa-700">
               <Link to="/news">{isMalayalam ? "എല്ലാം കാണുക" : "View All"}</Link>
