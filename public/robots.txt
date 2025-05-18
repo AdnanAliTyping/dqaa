@@ -1,14 +1,28 @@
 
+# Darul Quran Abdulla Academy Website Robots.txt
+# Last updated: 2025-05-18
+
 User-agent: *
 Allow: /
 
-# Important pages
+# Important pages - allow crawling
 Allow: /about
 Allow: /admissions
 Allow: /academic-programs
 Allow: /student-life
 Allow: /news
 Allow: /contact
+Allow: /campus
+Allow: /technology
+Allow: /parents
+Allow: /community
+Allow: /donate
+Allow: /faq
+Allow: /careers
 
 # Sitemap location
 Sitemap: https://www.darulquranaa.com/sitemap.xml
+
+# Optimize crawl rate
+Crawl-delay: 1
+

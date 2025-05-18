@@ -65,7 +65,7 @@ const HeroSection = () => {
             أكاديمية عبد الله لتحفيظ القران
           </div>
           
-          <p className="text-lg md:text-xl text-white/80 mb-6 md:mb-8">
+          <p className="text-lg md:text-xl text-white/80 mb-6 md:mb-8 max-w-2xl">
             {isMalayalam ? 
               "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി പരമ്പരാഗത ഇസ്ലാമിക വിജ്ഞാനവും സമകാലീന അക്കാദമിക മികവും ഫോർ ലാംഗ്വേജ് സമീപനവുമായി സമന്വയിപ്പിക്കുന്നു." : 
               "Darul Quran Abdulla Academy offers a unique blend of traditional Islamic knowledge and contemporary academic excellence with a quadrilingual approach."

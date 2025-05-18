@@ -136,3 +136,150 @@
   object-fit: cover;
   aspect-ratio: 4/3;
 }
+
+/* News Ticker Animation */
+.news-ticker {
+  animation: ticker 60s linear infinite;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile Responsive Scroll Cards */
+.mobile-scroll {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  gap: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.mobile-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.mobile-card {
+  scroll-snap-align: start;
+  min-width: 280px;
+  max-width: 90%;
+  flex: 0 0 auto;
+}
+
+/* Card Hover Animations */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-float:hover {
+  background-color: #128c7e;
+}
+
+/* Content Highlight Badges */
+.badge-new {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e53e3e;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.badge-event {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #3182ce;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+/* Scroll-triggered Counters */
+.count-up {
+  visibility: hidden;
+}
+
+.count-up.visible {
+  visibility: visible;
+}
+
+/* Accordion Styling */
+.content-accordion[data-state="open"] {
+  animation: accordionOpen 0.3s ease-out forwards;
+}
+
+.content-accordion[data-state="closed"] {
+  animation: accordionClose 0.3s ease-out forwards;
+}
+
+@keyframes accordionOpen {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--accordion-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordionClose {
+  from {
+    height: var(--accordion-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+/* Card Image Hover Effects */
+.card-image-container {
+  overflow: hidden;
+}
+
+.card-image-zoom {
+  transition: transform 0.5s ease;
+}
+
+.card-image-container:hover .card-image-zoom {
+  transform: scale(1.1);
+}
