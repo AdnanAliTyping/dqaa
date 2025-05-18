@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import FAQSection from "@/components/FAQSection";
@@ -30,7 +29,7 @@ const FAQPage = () => {
           question: "What age groups does DQAA cater to?",
           questionMl: "DQAA ഏതൊക്കെ പ്രായക്കാരെയാണ് ലക്ഷ്യം വയ്ക്കുന്നത്?",
           answer: "Our programs cater to students from ages 10 and above. The Hifz program typically accepts students aged 10-15, while our diploma courses and higher education programs are designed for older students and young adults.",
-          answerMl: "ഞങ്ങളുടെ പ്രോഗ്രാമുകൾ 10 വയസ്സും അതിനു മുകളിലും പ്രായമുള്ള വിദ്യാർത്ഥികളെ ലക്ഷ്യമിടുന്നു. ഹിഫ്സ് പ്രോഗ്രാം സാധാരണയായി 10-15 വയസ്സുള്ള വിദ്യാർത്ഥികളെ സ്വീകരിക്കുന്നു, അതേസമയം ഞങ്ങളുടെ ഡിപ്ലോമ കോഴ്സുകളും ഉന്നത വിദ്യാഭ്യാസ പ്രോഗ്രാമുകളും പ്രായമായ വിദ്യാർത്ഥികൾക്കും യുവാക്കൾക്കും വേണ്ടി രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു."
+          answerMl: "ഞങ്ങളുടെ പ്രോഗ്രാമുകൾ 10 വയസ്സും അതിനു മുകളിലും ���്രായമുള്ള വിദ്യാർത്ഥികളെ ലക്ഷ്യമിടുന്നു. ഹിഫ്സ് പ്രോഗ്രാം സാധാരണയായി 10-15 വയസ്സുള്ള വിദ്യാർത്ഥികളെ സ്വീകരിക്കുന്നു, അതേസമയം ഞങ്ങളുടെ ഡിപ്ലോമ കോഴ്സുകളും ഉന്നത വിദ്യാഭ്യാസ പ്രോഗ്രാമുകളും പ്രായമായ വിദ്യാർത്ഥികൾക്കും യുവാക്കൾക്കും വേണ്ടി രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു."
         }
       ]
     },

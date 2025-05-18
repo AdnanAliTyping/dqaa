@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -9,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, FileText, BookOpen, GraduationCap, Users, FileBadge, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"; // This import was causing issues
 import FAQSection from "@/components/FAQSection";
 
 const AdmissionsPage = () => {
