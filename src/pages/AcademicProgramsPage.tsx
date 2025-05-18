@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Book, BookOpen, GraduationCap, Languages, Award, FileText } from "lucide-react";
+import { Book, BookOpen, GraduationCap, Languages, Award, FileText, Check, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
 
