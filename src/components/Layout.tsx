@@ -22,6 +22,16 @@ const Layout = ({ children }: LayoutProps) => {
     if (bannerClosed === "true") {
       setShowBanner(false);
     }
+    
+    // Load and initialize chatbot
+    const chatbotScript = document.getElementById('jotform-chatbot-script');
+    if (!chatbotScript) {
+      const script = document.createElement('script');
+      script.id = 'jotform-chatbot-script';
+      script.src = 'https://cdn.jotfor.ms/agent/embedjs/0196e3af04ac72f5b01cd236ac7d650598fd/embed.js?skipWelcome=1&maximizable=1';
+      script.async = true;
+      document.body.appendChild(script);
+    }
   }, []);
 
   const closeBanner = () => {

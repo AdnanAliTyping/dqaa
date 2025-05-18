@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -92,23 +91,52 @@ const ApplicationFormPage = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values);
-      setIsSubmitting(false);
-      
-      toast({
-        title: "Application Submitted",
-        description: "Your application has been successfully submitted. We will contact you soon.",
+    // Submit to JotForm
+    const jotformData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      jotformData.append(key, value.toString());
+    });
+    
+    fetch("https://form.jotform.com/250855675394470", {
+      method: "POST",
+      body: jotformData,
+    })
+      .then(response => {
+        if (response.ok) {
+          toast({
+            title: showMalayalam ? "അപേക്ഷ സമർപ്പിച്ചു" : "Application Submitted",
+            description: showMalayalam ? 
+              "നിങ്ങളുടെ അപേക്ഷ വിജയകരമായി സമർപ്പിച്ചു. ഞങ്ങൾ ഉടൻ നിങ്ങളുമായി ബന്ധപ്പെടും." : 
+              "Your application has been successfully submitted. We will contact you soon.",
+          });
+          navigate('/admissions');
+        } else {
+          throw new Error("Form submission failed");
+        }
+      })
+      .catch(error => {
+        console.error("Error submitting form:", error);
+        toast({
+          title: showMalayalam ? "പിശക്" : "Error",
+          description: showMalayalam ? 
+            "അപേക്ഷ സമർപ്പിക്കുന്നതിൽ ഒരു പിശക് ഉണ്ടായി. ദയവായി വീണ്ടും ശ്രമിക്കുക." : 
+            "There was an error submitting your application. Please try again.",
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
-      
-      // Redirect to confirmation page
-      navigate('/admissions');
-    }, 2000);
   }
 
   return (
     <Layout>
+      <head>
+        <title>Apply to Darul Quran Abdulla Academy | Admission Form</title>
+        <meta name="description" content="Apply to study at Darul Quran Abdulla Academy. Fill our online application form to join our Hifz or Bayanul Quran programs." />
+        <meta name="keywords" content="DQAA application, Islamic school admission, Hifz program application, Quran memorization admission, Islamic boarding school application" />
+      </head>
+      
       <PageHeader 
         title={showMalayalam ? "അപേക്ഷാ ഫോം" : "Application Form"} 
         subtitle={showMalayalam ? 
@@ -118,7 +146,18 @@ const ApplicationFormPage = () => {
       />
       
       <div className="container mx-auto px-4 py-6">
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <a 
+              href="https://drive.google.com/file/d/1234567890/view"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-dqaa-500 hover:text-dqaa-700 flex items-center text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path></svg>
+              {showMalayalam ? "പ്രോസ്പെക്ടസ് ഡൗൺലോഡ് ചെയ്യുക" : "Download Prospectus"}
+            </a>
+          </div>
           <Button
             variant="outline"
             onClick={() => setShowMalayalam(!showMalayalam)}
@@ -697,6 +736,25 @@ const ApplicationFormPage = () => {
                     "After online application, you can bring a printout of this form to the Academy."}
                 </li>
               </ul>
+              
+              <div className="w-full mt-6 pt-4 border-t border-gray-200">
+                <div className="flex flex-wrap gap-3">
+                  <a 
+                    href="tel:+919526552211" 
+                    className="text-sm text-dqaa-500 hover:text-dqaa-700 flex items-center"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    {showMalayalam ? "സഹായത്തിന് വിളിക്കുക" : "Call for Assistance"}: +91 9526 552211
+                  </a>
+                  <a 
+                    href="mailto:darulquranind@gmail.com" 
+                    className="text-sm text-dqaa-500 hover:text-dqaa-700 flex items-center"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"></path><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"></path></svg>
+                    {showMalayalam ? "ഇമെയിൽ" : "Email"}: darulquranind@gmail.com
+                  </a>
+                </div>
+              </div>
             </CardFooter>
           </Card>
         </div>

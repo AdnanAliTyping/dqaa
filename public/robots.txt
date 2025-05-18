@@ -2,4 +2,13 @@
 User-agent: *
 Allow: /
 
+# Important pages
+Allow: /about
+Allow: /admissions
+Allow: /academic-programs
+Allow: /student-life
+Allow: /news
+Allow: /contact
+
+# Sitemap location
 Sitemap: https://www.darulquranaa.com/sitemap.xml

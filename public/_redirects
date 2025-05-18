@@ -3,6 +3,8 @@
 
 # Ensure a consistent domain
 https://darulquranaa.netlify.app/* https://www.darulquranaa.com/:splat 301!
+http://darulquranaa.com/* https://www.darulquranaa.com/:splat 301!
+http://www.darulquranaa.com/* https://www.darulquranaa.com/:splat 301!
 
 # SPA redirect for client-side routing
 /*    /index.html   200
@@ -10,3 +12,9 @@ https://darulquranaa.netlify.app/* https://www.darulquranaa.com/:splat 301!
 # Legacy routes
 /index    /    301
 /home     /    301
+
+# Shorter URLs for better sharing
+/programs    /academic-programs    301
+/apply      /admissions/apply     301
+/hifz       /academic-programs#hifz  301
+/bayanul    /academic-programs#bayanul  301
