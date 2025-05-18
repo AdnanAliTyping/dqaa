@@ -1,0 +1,12 @@
+
+# Redirects for Netlify
+
+# Ensure a consistent domain
+https://darulquranaa.netlify.app/* https://www.darulquranaa.com/:splat 301!
+
+# SPA redirect for client-side routing
+/*    /index.html   200
+
+# Legacy routes
+/index    /    301
+/home     /    301

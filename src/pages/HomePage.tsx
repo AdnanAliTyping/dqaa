@@ -5,17 +5,33 @@ import FeaturedNews from "@/components/home/FeaturedNews";
 import QuickLinks from "@/components/home/QuickLinks";
 import Testimonials from "@/components/home/Testimonials";
 import ProgramsOverview from "@/components/home/ProgramsOverview";
+import AcademicAchievements from "@/components/home/AcademicAchievements";
+import PhotoGallery from "@/components/home/PhotoGallery";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import RazorpayDonateButton from "@/components/RazorpayDonateButton";
 import { useTranslation } from "@/lib/i18n";
+import { Helmet } from "react-helmet-async";
 
 const HomePage = () => {
   const { t } = useTranslation();
 
   return (
     <Layout>
+      <Helmet>
+        <title>Darul Quran Abdulla Academy | Islamic Education in Kerala</title>
+        <meta 
+          name="description" 
+          content="Darul Quran Abdulla Academy offers premier Islamic education with Quranic memorization programs and modern academic curriculum in Kerala, India."
+        />
+        <meta 
+          name="keywords" 
+          content="Best Hifz-ul-Quran College in Kerala, Islamic School Ottapalam, Quran College Kerala, Modern Islamic School India, Hifz program for boys Kerala"
+        />
+        <link rel="canonical" href="https://www.darulquranaa.com/" />
+      </Helmet>
+      
       <HeroSection />
       
       {/* Welcome Message */}
@@ -40,8 +56,8 @@ const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
               <div className="rounded-lg overflow-hidden shadow-md">
                 <img 
-                  src="https://lh3.googleusercontent.com/pw/AP1GczPsBVtemiyAIEKEROpFyAw0UoI7rRma98S4YRGe92pXb2DF2IhS4Zt6ZsKuX8ChujOcKcxEoR1c8S7as-LldnBjsI-DB1FPM9Vjgg2IJoYGaKARaKE=w2400" 
-                  alt="DQAA Graduation" 
+                  src="/lovable-uploads/e403ff22-bc8b-4a1c-b68f-b425b9e48168.png" 
+                  alt="DQAA Prospectus" 
                   className="w-full h-64 object-cover"
                 />
               </div>
@@ -124,6 +140,10 @@ const HomePage = () => {
       
       <ProgramsOverview />
       
+      <AcademicAchievements />
+      
+      <PhotoGallery />
+      
       <QuickLinks />
       
       <FeaturedNews />
@@ -157,6 +177,14 @@ const HomePage = () => {
         
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gold-400"></div>
       </section>
+      
+      <div className="fixed bottom-6 right-6 z-20">
+        <a href="https://form.jotform.com/250855675394470" target="_blank" rel="noopener noreferrer">
+          <Button className="bg-dqaa-500 hover:bg-dqaa-600 text-white shadow-lg">
+            {t('cta.apply')}
+          </Button>
+        </a>
+      </div>
     </Layout>
   );
 };

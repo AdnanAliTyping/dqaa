@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import IntroScreen from "./components/IntroScreen";
+import { HelmetProvider } from 'react-helmet-async';
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -42,36 +43,38 @@ const App = () => {
   }, []);
   
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <BrowserRouter>
-          <LanguageRootManager />
-          <IntroScreen />
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            {/* Legacy route that now redirects to homepage */}
-            <Route path="/index" element={<Index />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/admissions" element={<AdmissionsPage />} />
-            <Route path="/admissions/apply" element={<ApplicationFormPage />} />
-            <Route path="/academic-programs" element={<AcademicProgramsPage />} />
-            <Route path="/student-life" element={<StudentLifePage />} />
-            <Route path="/campus" element={<CampusFacilitiesPage />} />
-            <Route path="/technology" element={<TechnologyPage />} />
-            <Route path="/parents" element={<ParentsCornerPage />} />
-            <Route path="/community" element={<CommunityPage />} />
-            <Route path="/news" element={<NewsEventsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/donate" element={<DonatePage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <BrowserRouter>
+            <LanguageRootManager />
+            <IntroScreen />
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              {/* Legacy route that now redirects to homepage */}
+              <Route path="/index" element={<Index />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/admissions" element={<AdmissionsPage />} />
+              <Route path="/admissions/apply" element={<ApplicationFormPage />} />
+              <Route path="/academic-programs" element={<AcademicProgramsPage />} />
+              <Route path="/student-life" element={<StudentLifePage />} />
+              <Route path="/campus" element={<CampusFacilitiesPage />} />
+              <Route path="/technology" element={<TechnologyPage />} />
+              <Route path="/parents" element={<ParentsCornerPage />} />
+              <Route path="/community" element={<CommunityPage />} />
+              <Route path="/news" element={<NewsEventsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/donate" element={<DonatePage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 
