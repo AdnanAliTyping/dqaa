@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
 import { getFeaturedArticles } from "@/lib/newsData";
 import { Badge } from "../ui/badge";
+import OptimizedImage from "../OptimizedImage";
 
 const FeaturedNews = () => {
   const { currentLanguage } = useTranslation();
@@ -39,14 +40,15 @@ const FeaturedNews = () => {
           {featuredArticles.map((article) => (
             <Card key={article.id} className="mobile-card overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
               <div className="h-40 overflow-hidden relative card-image-container">
-                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs">
+                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs z-10">
                   {article.category}
                 </Badge>
-                <img
+                <OptimizedImage
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-500 card-image-zoom"
-                  loading="lazy"
+                  className="w-full h-full transition-transform duration-500 card-image-zoom"
+                  width={300}
+                  height={160}
                 />
               </div>
               <CardContent className="p-4">
@@ -83,14 +85,15 @@ const FeaturedNews = () => {
           {featuredArticles.map((article) => (
             <Card key={article.id} className="overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
               <div className="h-48 overflow-hidden relative card-image-container">
-                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs">
+                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs z-10">
                   {article.category}
                 </Badge>
-                <img
+                <OptimizedImage
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-500 card-image-zoom"
-                  loading="lazy"
+                  className="w-full h-full transition-transform duration-500 card-image-zoom"
+                  width={400}
+                  height={192}
                 />
               </div>
               <CardContent className="p-6">

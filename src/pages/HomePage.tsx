@@ -21,9 +21,11 @@ import Announcements from "@/components/Announcements";
 import CountUpSection from "@/components/home/CountUpSection";
 import SchemaProvider from "@/components/SchemaProvider";
 import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/schema";
+import { usePerformance } from "@/hooks/usePerformance";
 
 const HomePage = () => {
   const { t } = useTranslation();
+  usePerformance('home');
 
   const schemas = [
     generateWebsiteSchema(),

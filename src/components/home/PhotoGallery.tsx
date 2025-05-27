@@ -1,9 +1,10 @@
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
 import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
+import OptimizedImage from "../OptimizedImage";
 
 interface Photo {
   id: number;
@@ -85,10 +86,11 @@ const PhotoGallery = () => {
           <Card className={`overflow-hidden ${isFullScreen ? 'w-full h-full max-w-6xl' : ''}`}>
             <div className="relative">
               <div className={`${isFullScreen ? 'h-[80vh]' : 'h-[50vh] md:h-[60vh]'} overflow-hidden bg-black flex items-center`}>
-                <img 
-                  src={photos[activeIndex].src} 
-                  alt={isMalayalam ? photos[activeIndex].altMl : photos[activeIndex].alt} 
+                <OptimizedImage
+                  src={photos[activeIndex].src}
+                  alt={isMalayalam ? photos[activeIndex].altMl : photos[activeIndex].alt}
                   className="w-full h-full object-contain"
+                  priority={activeIndex === 0}
                 />
                 
                 <button 
@@ -152,10 +154,12 @@ const PhotoGallery = () => {
                   className={`h-16 md:h-24 overflow-hidden rounded-md cursor-pointer border-2 ${activeIndex === index ? 'border-dqaa-500' : 'border-transparent'}`}
                   onClick={() => setActiveIndex(index)}
                 >
-                  <img 
-                    src={photo.src} 
-                    alt={isMalayalam ? photo.altMl : photo.alt} 
+                  <OptimizedImage
+                    src={photo.src}
+                    alt={isMalayalam ? photo.altMl : photo.alt}
                     className="w-full h-full object-cover"
+                    width={96}
+                    height={96}
                   />
                 </div>
               ))}

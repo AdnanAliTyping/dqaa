@@ -3,35 +3,45 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
+import { Suspense, useEffect } from "react";
 
-// Pages
+// Immediate loading components
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import AdmissionsPage from "./pages/AdmissionsPage";
-import ApplicationFormPage from "./pages/ApplicationFormPage";
-import AcademicProgramsPage from "./pages/AcademicProgramsPage";
-import StudentLifePage from "./pages/StudentLifePage";
-import CampusFacilitiesPage from "./pages/CampusFacilitiesPage";
-import TechnologyPage from "./pages/TechnologyPage";
-import ParentsCornerPage from "./pages/ParentsCornerPage";
-import CommunityPage from "./pages/CommunityPage";
-import NewsEventsPage from "./pages/NewsEventsPage";
-import NewsArticlePage from "./pages/NewsArticlePage";
-import ContactPage from "./pages/ContactPage";
-import DonatePage from "./pages/DonatePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import Index from "./pages/Index";
-import FAQPage from "./pages/FAQPage";
-import CareersPage from "./pages/CareersPage";
-
-// Language management
-import { useEffect } from "react";
+import LoadingFallback from "./components/LoadingFallback";
 import { useLanguageStore } from "@/lib/i18n";
 import LanguageRootManager from "./components/LanguageRootManager";
+import { measureWebVitals } from "./hooks/usePerformance";
+import { createLazyComponent, preloadComponent } from "./utils/lazyImports";
 
-const queryClient = new QueryClient();
+// Lazy load non-critical pages
+const AboutPage = createLazyComponent(() => import("./pages/AboutPage"));
+const AdmissionsPage = createLazyComponent(() => import("./pages/AdmissionsPage"));
+const ApplicationFormPage = createLazyComponent(() => import("./pages/ApplicationFormPage"));
+const AcademicProgramsPage = createLazyComponent(() => import("./pages/AcademicProgramsPage"));
+const StudentLifePage = createLazyComponent(() => import("./pages/StudentLifePage"));
+const CampusFacilitiesPage = createLazyComponent(() => import("./pages/CampusFacilitiesPage"));
+const TechnologyPage = createLazyComponent(() => import("./pages/TechnologyPage"));
+const ParentsCornerPage = createLazyComponent(() => import("./pages/ParentsCornerPage"));
+const CommunityPage = createLazyComponent(() => import("./pages/CommunityPage"));
+const NewsEventsPage = createLazyComponent(() => import("./pages/NewsEventsPage"));
+const NewsArticlePage = createLazyComponent(() => import("./pages/NewsArticlePage"));
+const ContactPage = createLazyComponent(() => import("./pages/ContactPage"));
+const DonatePage = createLazyComponent(() => import("./pages/DonatePage"));
+const NotFoundPage = createLazyComponent(() => import("./pages/NotFoundPage"));
+const Index = createLazyComponent(() => import("./pages/Index"));
+const FAQPage = createLazyComponent(() => import("./pages/FAQPage"));
+const CareersPage = createLazyComponent(() => import("./pages/CareersPage"));
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   // Initialize language from localStorage on app start
@@ -40,6 +50,15 @@ const App = () => {
     if (savedLanguage === "en" || savedLanguage === "ml") {
       useLanguageStore.getState().setLanguage(savedLanguage);
     }
+    
+    // Preload critical pages
+    preloadComponent(() => import("./pages/AdmissionsPage"));
+    preloadComponent(() => import("./pages/AboutPage"));
+    
+    // Initialize performance monitoring
+    measureWebVitals((metric) => {
+      console.log('Performance metric:', metric);
+    });
   }, []);
   
   return (
@@ -50,27 +69,28 @@ const App = () => {
             <LanguageRootManager />
             <Toaster />
             <Sonner />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              {/* Legacy route that now redirects to homepage */}
-              <Route path="/index" element={<Index />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/admissions" element={<AdmissionsPage />} />
-              <Route path="/admissions/apply" element={<ApplicationFormPage />} />
-              <Route path="/academic-programs" element={<AcademicProgramsPage />} />
-              <Route path="/student-life" element={<StudentLifePage />} />
-              <Route path="/campus" element={<CampusFacilitiesPage />} />
-              <Route path="/technology" element={<TechnologyPage />} />
-              <Route path="/parents" element={<ParentsCornerPage />} />
-              <Route path="/community" element={<CommunityPage />} />
-              <Route path="/news" element={<NewsEventsPage />} />
-              <Route path="/news/:slug" element={<NewsArticlePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/donate" element={<DonatePage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/careers" element={<CareersPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <Suspense fallback={<LoadingFallback type="page" />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/index" element={<Index />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/admissions" element={<AdmissionsPage />} />
+                <Route path="/admissions/apply" element={<ApplicationFormPage />} />
+                <Route path="/academic-programs" element={<AcademicProgramsPage />} />
+                <Route path="/student-life" element={<StudentLifePage />} />
+                <Route path="/campus" element={<CampusFacilitiesPage />} />
+                <Route path="/technology" element={<TechnologyPage />} />
+                <Route path="/parents" element={<ParentsCornerPage />} />
+                <Route path="/community" element={<CommunityPage />} />
+                <Route path="/news" element={<NewsEventsPage />} />
+                <Route path="/news/:slug" element={<NewsArticlePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/donate" element={<DonatePage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/careers" element={<CareersPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
