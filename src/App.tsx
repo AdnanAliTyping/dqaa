@@ -18,6 +18,7 @@ import TechnologyPage from "./pages/TechnologyPage";
 import ParentsCornerPage from "./pages/ParentsCornerPage";
 import CommunityPage from "./pages/CommunityPage";
 import NewsEventsPage from "./pages/NewsEventsPage";
+import NewsArticlePage from "./pages/NewsArticlePage";
 import ContactPage from "./pages/ContactPage";
 import DonatePage from "./pages/DonatePage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -63,6 +64,7 @@ const App = () => {
               <Route path="/parents" element={<ParentsCornerPage />} />
               <Route path="/community" element={<CommunityPage />} />
               <Route path="/news" element={<NewsEventsPage />} />
+              <Route path="/news/:slug" element={<NewsArticlePage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/donate" element={<DonatePage />} />
               <Route path="/faq" element={<FAQPage />} />

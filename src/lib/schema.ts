@@ -1,4 +1,3 @@
-
 interface WebsiteSchema {
   "@context": string;
   "@type": string;
@@ -69,6 +68,45 @@ interface CourseSchema {
     name: string;
     sameAs: string;
   };
+}
+
+interface EventSchema {
+  "@context": string;
+  "@type": string;
+  name: string;
+  startDate: string;
+  endDate?: string;
+  location: {
+    "@type": string;
+    name: string;
+    address: {
+      "@type": string;
+      streetAddress: string;
+      addressLocality: string;
+      addressRegion: string;
+      postalCode: string;
+      addressCountry: string;
+    };
+  };
+  description: string;
+  organizer: {
+    "@type": string;
+    name: string;
+    url: string;
+  };
+}
+
+interface FAQPageSchema {
+  "@context": string;
+  "@type": string;
+  mainEntity: {
+    "@type": string;
+    name: string;
+    acceptedAnswer: {
+      "@type": string;
+      text: string;
+    };
+  }[];
 }
 
 export const generateWebsiteSchema = (): WebsiteSchema => {
@@ -165,5 +203,53 @@ export const generateCourseSchema = (
       "name": "Darul Quran Abdulla Academy",
       "sameAs": "https://www.darulquranaa.com/"
     }
+  };
+};
+
+export const generateEventSchema = (
+  name: string,
+  startDate: string,
+  description: string,
+  endDate?: string
+): EventSchema => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": name,
+    "startDate": startDate,
+    "endDate": endDate || startDate,
+    "location": {
+      "@type": "Place",
+      "name": "Darul Quran Abdulla Academy",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Darul Quran Campus, Kothakurssi",
+        "addressLocality": "Panamanna",
+        "addressRegion": "Kerala",
+        "postalCode": "679501",
+        "addressCountry": "India"
+      }
+    },
+    "description": description,
+    "organizer": {
+      "@type": "Organization",
+      "name": "Darul Quran Abdulla Academy",
+      "url": "https://www.darulquranaa.com/"
+    }
+  };
+};
+
+export const generateFAQPageSchema = (faqs: Array<{ question: string; answer: string }>): FAQPageSchema => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
   };
 };

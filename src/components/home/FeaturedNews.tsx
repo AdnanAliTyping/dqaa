@@ -4,40 +4,13 @@ import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
-
-const newsItems = [
-  {
-    id: "hifz-shariah-exam-toppers",
-    title: "DQAA Students Win National Quran Competition",
-    date: "May 15, 2025",
-    image: "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d",
-    excerpt: "Our students secured first place in the National Quran Competition held in Delhi last week.",
-    badge: "New",
-    badgeColor: "bg-red-500"
-  },
-  {
-    id: "ai-learning-lab",
-    title: "New AI Learning Lab Opening Ceremony",
-    date: "April 23, 2025",
-    image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a",
-    excerpt: "DQAA partners with AI8TY Technologies to launch a state-of-the-art AI learning laboratory.",
-    badge: "Event",
-    badgeColor: "bg-blue-500"
-  },
-  {
-    id: "islamic-conference-2025",
-    title: "Annual Islamic Conference 2025",
-    date: "June 5, 2025",
-    image: "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d",
-    excerpt: "Join us for our Annual Islamic Conference featuring renowned scholars from around the world.",
-    badge: "Upcoming",
-    badgeColor: "bg-green-500"
-  },
-];
+import { getFeaturedArticles } from "@/lib/newsData";
+import { Badge } from "../ui/badge";
 
 const FeaturedNews = () => {
   const { currentLanguage } = useTranslation();
   const isMalayalam = currentLanguage === "ml";
+  const featuredArticles = getFeaturedArticles();
   
   return (
     <section className="py-12 md:py-16 bg-white">
@@ -63,17 +36,15 @@ const FeaturedNews = () => {
 
         {/* Mobile scroll container for small screens */}
         <div className="md:hidden mobile-scroll">
-          {newsItems.map((item) => (
-            <Card key={item.id} className="mobile-card overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
+          {featuredArticles.map((article) => (
+            <Card key={article.id} className="mobile-card overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
               <div className="h-40 overflow-hidden relative card-image-container">
-                {item.badge && (
-                  <span className={`absolute top-2 right-2 ${item.badgeColor} text-white text-xs px-2 py-1 rounded-full font-medium`}>
-                    {item.badge}
-                  </span>
-                )}
+                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs">
+                  {article.category}
+                </Badge>
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={article.image}
+                  alt={article.title}
                   className="w-full h-full object-cover transition-transform duration-500 card-image-zoom"
                   loading="lazy"
                 />
@@ -81,14 +52,14 @@ const FeaturedNews = () => {
               <CardContent className="p-4">
                 <div className="flex items-center text-sm text-gray-500 mb-2">
                   <CalendarIcon className="h-4 w-4 mr-1" />
-                  <span>{item.date}</span>
+                  <span>{new Date(article.date).toLocaleDateString()}</span>
                 </div>
                 <h3 className="text-lg font-semibold mb-2 text-dqaa-700 line-clamp-2 hover:text-dqaa-500 transition-colors">
-                  <Link to={`/news/${item.id}`}>{item.title}</Link>
+                  <Link to={`/news/${article.slug}`}>{article.title}</Link>
                 </h3>
-                <p className="text-gray-600 mb-3 line-clamp-2 text-sm">{item.excerpt}</p>
+                <p className="text-gray-600 mb-3 line-clamp-2 text-sm">{article.excerpt}</p>
                 <Link 
-                  to={`/news/${item.id}`} 
+                  to={`/news/${article.slug}`} 
                   className="text-dqaa-500 font-medium hover:text-dqaa-600 flex items-center text-sm"
                 >
                   {isMalayalam ? "കൂടുതൽ വായിക്കുക" : "Read More"}
@@ -109,17 +80,15 @@ const FeaturedNews = () => {
 
         {/* Regular grid for larger screens */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsItems.map((item) => (
-            <Card key={item.id} className="overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
+          {featuredArticles.map((article) => (
+            <Card key={article.id} className="overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow card-hover">
               <div className="h-48 overflow-hidden relative card-image-container">
-                {item.badge && (
-                  <span className={`absolute top-2 right-2 ${item.badgeColor} text-white text-xs px-2 py-1 rounded-full font-medium`}>
-                    {item.badge}
-                  </span>
-                )}
+                <Badge className="absolute top-2 right-2 bg-dqaa-500 text-white text-xs">
+                  {article.category}
+                </Badge>
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={article.image}
+                  alt={article.title}
                   className="w-full h-full object-cover transition-transform duration-500 card-image-zoom"
                   loading="lazy"
                 />
@@ -127,14 +96,14 @@ const FeaturedNews = () => {
               <CardContent className="p-6">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
                   <CalendarIcon className="h-4 w-4 mr-1" />
-                  <span>{item.date}</span>
+                  <span>{new Date(article.date).toLocaleDateString()}</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-dqaa-700 line-clamp-2 hover:text-dqaa-500 transition-colors">
-                  <Link to={`/news/${item.id}`}>{item.title}</Link>
+                  <Link to={`/news/${article.slug}`}>{article.title}</Link>
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">{item.excerpt}</p>
+                <p className="text-gray-600 mb-4 line-clamp-2">{article.excerpt}</p>
                 <Link 
-                  to={`/news/${item.id}`} 
+                  to={`/news/${article.slug}`} 
                   className="text-dqaa-500 font-medium hover:text-dqaa-600 flex items-center"
                 >
                   {isMalayalam ? "കൂടുതൽ വായിക്കുക" : "Read More"}
