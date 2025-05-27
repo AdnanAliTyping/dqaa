@@ -8,16 +8,18 @@ interface SchemaProviderProps {
 
 const SchemaProvider = ({ schemas, children }: SchemaProviderProps) => {
   return (
-    <Helmet>
-      {schemas.map((schema, index) => (
-        <script 
-          key={index} 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
+    <>
+      <Helmet>
+        {schemas.map((schema, index) => (
+          <script 
+            key={index} 
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
+      </Helmet>
       {children}
-    </Helmet>
+    </>
   );
 };
 
