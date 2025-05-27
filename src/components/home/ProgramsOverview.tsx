@@ -1,50 +1,40 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Book, BookOpen, Laptop, Globe, GraduationCap } from "lucide-react";
-
-const programs = [
-  {
-    title: "Hifz Program",
-    icon: Book,
-    color: "bg-green-50 text-dqaa-500",
-    description: "Memorize the Quran while pursuing academic excellence in a structured environment.",
-    link: "/academic-programs#hifz"
-  },
-  {
-    title: "Bayanul Quran",
-    icon: BookOpen,
-    color: "bg-amber-50 text-amber-600",
-    description: "An in-depth diploma course focused on Quranic interpretation with English medium instruction.",
-    link: "/academic-programs#bayanul"
-  },
-  {
-    title: "Technology & AI",
-    icon: Laptop,
-    color: "bg-blue-50 text-blue-600",
-    description: "State-of-the-art technology education including programming, AI, and robotics.",
-    link: "/technology"
-  },
-  {
-    title: "Quadrilingual Education",
-    icon: Globe,
-    color: "bg-purple-50 text-purple-600",
-    description: "Become proficient in Arabic, English, Urdu/Hindi, and Malayalam through our integrated curriculum.",
-    link: "/academic-programs#languages"
-  },
-  {
-    title: "Islamic Studies",
-    icon: GraduationCap,
-    color: "bg-rose-50 text-rose-600",
-    description: "Comprehensive Islamic education covering Fiqh, Aqeedah, Seerah, and more.",
-    link: "/academic-programs#islamic"
-  },
-];
-
+const programs = [{
+  title: "Hifz Program",
+  icon: Book,
+  color: "bg-green-50 text-dqaa-500",
+  description: "Memorize the Quran while pursuing academic excellence in a structured environment.",
+  link: "/academic-programs#hifz"
+}, {
+  title: "Bayanul Quran",
+  icon: BookOpen,
+  color: "bg-amber-50 text-amber-600",
+  description: "An in-depth diploma course focused on Quranic interpretation with English medium instruction.",
+  link: "/academic-programs#bayanul"
+}, {
+  title: "Technology & AI",
+  icon: Laptop,
+  color: "bg-blue-50 text-blue-600",
+  description: "State-of-the-art technology education including programming, AI, and robotics.",
+  link: "/technology"
+}, {
+  title: "Quadrilingual Education",
+  icon: Globe,
+  color: "bg-purple-50 text-purple-600",
+  description: "Become proficient in Arabic, English, Urdu/Hindi, and Malayalam through our integrated curriculum.",
+  link: "/academic-programs#languages"
+}, {
+  title: "Islamic Studies",
+  icon: GraduationCap,
+  color: "bg-rose-50 text-rose-600",
+  description: "Comprehensive Islamic education covering Fiqh, Aqeedah, Seerah, and more.",
+  link: "/academic-programs#islamic"
+}];
 const ProgramsOverview = () => {
-  return (
-    <section className="py-12 md:py-20">
+  return <section className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
@@ -60,8 +50,7 @@ const ProgramsOverview = () => {
             </p>
             
             <div className="space-y-3 md:space-y-4">
-              {programs.map((program, index) => (
-                <div key={index} className="flex items-start">
+              {programs.map((program, index) => <div key={index} className="flex items-start">
                   <div className={`p-2 rounded-full ${program.color} mr-3 md:mr-4 flex-shrink-0 mt-0.5`}>
                     <program.icon className="h-4 w-4 md:h-5 md:w-5" />
                   </div>
@@ -69,8 +58,7 @@ const ProgramsOverview = () => {
                     <h3 className="font-semibold text-sm md:text-base">{program.title}</h3>
                     <p className="text-gray-600 text-xs md:text-sm">{program.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
             
             <div className="mt-6 md:mt-8">
@@ -84,11 +72,7 @@ const ProgramsOverview = () => {
           
           <div className="relative mt-8 lg:mt-0">
             <div className="rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1577896851231-70ef18881754" 
-                alt="DQAA Students" 
-                className="w-full h-[300px] md:h-[500px] object-cover"
-              />
+              <img alt="DQAA Students" className="w-full h-[300px] md:h-[500px] object-cover" src="/lovable-uploads/8516eeb3-5968-4213-9183-8e950d96ba0e.jpg" />
             </div>
             
             {/* Floating Card */}
@@ -109,8 +93,6 @@ const ProgramsOverview = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ProgramsOverview;
