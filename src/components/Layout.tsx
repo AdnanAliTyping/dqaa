@@ -42,7 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       {showBanner && (
-        <div className="bg-gold-400 text-dqaa-900 py-2 px-4 text-center relative">
+        <div className="bg-gold-400 text-dqaa-900 py-2 px-4 text-center relative z-50">
           <div className="container mx-auto flex justify-center items-center flex-wrap">
             <Link to="/admissions/apply" className="flex items-center justify-center w-full">
               <span className="font-medium mr-2 text-sm md:text-base">{t('admissions.open')}</span>
@@ -60,8 +60,10 @@ const Layout = ({ children }: LayoutProps) => {
           </button>
         </div>
       )}
-      <Navbar />
-      <main className="flex-grow pt-16 md:pt-20">{children}</main>
+      <div className="sticky top-0 z-40">
+        <Navbar />
+      </div>
+      <main className="flex-grow">{children}</main>
       <Footer />
     </div>
   );

@@ -1,14 +1,65 @@
 
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Youtube, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Youtube, Phone, Mail, ChevronUp, ChevronDown } from "lucide-react";
 import LocationDetails from "./LocationDetails";
+import { Button } from "./ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
 
 const Footer = () => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const footerSections = [
+    {
+      title: "Quick Links",
+      links: [
+        { name: "About Us", href: "/about" },
+        { name: "Admissions", href: "/admissions" },
+        { name: "Academic Programs", href: "/academic-programs" },
+        { name: "Campus & Facilities", href: "/campus" },
+        { name: "News & Events", href: "/news" },
+        { name: "Contact Us", href: "/contact" }
+      ]
+    },
+    {
+      title: "For Parents",
+      links: [
+        { name: "Parent Resources", href: "/parents#resources" },
+        { name: "Academic Calendar", href: "/parents#calendar" },
+        { name: "Parent Portal", href: "/parents#portal" },
+        { name: "Student Handbook", href: "/parents#handbook" },
+        { name: "FAQs", href: "/parents#faq" }
+      ]
+    }
+  ];
+
   return (
-    <footer className="bg-gray-100 pt-12 pb-8">
+    <footer className="bg-gray-100 pt-12 pb-8 relative">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-8">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-y-6 gap-x-8">
+          {/* Academy Info */}
+          <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
               <img 
                 src="/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png" 
@@ -25,73 +76,73 @@ const Footer = () => {
             <LocationDetails />
           </div>
           
-          <div>
+          {/* Collapsible sections for mobile */}
+          <div className="lg:hidden space-y-4">
+            {footerSections.map((section) => (
+              <Collapsible 
+                key={section.title}
+                open={openSections[section.title]} 
+                onOpenChange={() => toggleSection(section.title)}
+              >
+                <CollapsibleTrigger className="flex items-center justify-between w-full py-2 text-left">
+                  <h3 className="font-semibold text-lg text-dqaa-500">{section.title}</h3>
+                  {openSections[section.title] ? 
+                    <ChevronUp className="h-4 w-4" /> : 
+                    <ChevronDown className="h-4 w-4" />
+                  }
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ul className="space-y-2 pl-4">
+                    {section.links.map((link) => (
+                      <li key={link.name}>
+                        <Link 
+                          to={link.href} 
+                          className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1"
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </CollapsibleContent>
+              </Collapsible>
+            ))}
+          </div>
+          
+          {/* Desktop sections */}
+          <div className="hidden lg:block">
             <h3 className="font-semibold text-lg mb-4 text-dqaa-500">Quick Links</h3>
-            <ul className="grid grid-cols-2 sm:grid-cols-1 gap-y-2 gap-x-4">
-              <li>
-                <Link to="/about" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/admissions" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Admissions
-                </Link>
-              </li>
-              <li>
-                <Link to="/academic-programs" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Academic Programs
-                </Link>
-              </li>
-              <li>
-                <Link to="/campus" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Campus & Facilities
-                </Link>
-              </li>
-              <li>
-                <Link to="/news" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  News & Events
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Contact Us
-                </Link>
-              </li>
+            <ul className="space-y-2">
+              {footerSections[0].links.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    to={link.href} 
+                    className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           
-          <div>
+          <div className="hidden lg:block">
             <h3 className="font-semibold text-lg mb-4 text-dqaa-500">For Parents</h3>
-            <ul className="grid grid-cols-2 sm:grid-cols-1 gap-y-2 gap-x-4">
-              <li>
-                <Link to="/parents#resources" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Parent Resources
-                </Link>
-              </li>
-              <li>
-                <Link to="/parents#calendar" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Academic Calendar
-                </Link>
-              </li>
-              <li>
-                <Link to="/parents#portal" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Parent Portal
-                </Link>
-              </li>
-              <li>
-                <Link to="/parents#handbook" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  Student Handbook
-                </Link>
-              </li>
-              <li>
-                <Link to="/parents#faq" className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1">
-                  FAQs
-                </Link>
-              </li>
+            <ul className="space-y-2">
+              {footerSections[1].links.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    to={link.href} 
+                    className="text-gray-600 hover:text-dqaa-500 transition-colors block py-1"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           
+          {/* Connect section */}
           <div>
             <h3 className="font-semibold text-lg mb-4 text-dqaa-500">Connect With Us</h3>
             <div className="flex space-x-4 mb-6">
@@ -135,6 +186,18 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <Button
+          onClick={scrollToTop}
+          className="fixed bottom-20 left-6 z-40 bg-dqaa-500 hover:bg-dqaa-600 text-white rounded-full w-12 h-12 shadow-lg"
+          size="icon"
+          aria-label="Back to top"
+        >
+          <ChevronUp className="h-5 w-5" />
+        </Button>
+      )}
     </footer>
   );
 };
