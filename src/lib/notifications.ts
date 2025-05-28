@@ -52,7 +52,6 @@ export class NotificationService {
     const defaultOptions: NotificationOptions = {
       icon: '/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png',
       badge: '/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png',
-      vibrate: [100, 50, 100],
       ...options
     };
 
