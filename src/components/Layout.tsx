@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import SkipNavigation from "./accessibility/SkipNavigation";
 import { Button } from "./ui/button";
 import { useTranslation } from "@/lib/i18n";
 import { useAccessibility } from "@/hooks/useAccessibility";
+import PWAManager from "./pwa/PWAManager";
 
 interface LayoutProps {
   children: ReactNode;
@@ -45,6 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <SkipNavigation />
+      <PWAManager />
       
       {/* Screen reader announcements */}
       <div

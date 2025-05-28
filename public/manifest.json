@@ -1,0 +1,62 @@
+
+{
+  "name": "Darul Quran Abdulla Academy",
+  "short_name": "DQAA",
+  "description": "Premier Islamic residential academy in Kerala blending traditional Quranic education with modern academics",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "categories": ["education", "religious"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/lovable-uploads/3a16d676-dbec-4cd6-9670-290772f455cc.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Apply for Admission",
+      "short_name": "Apply",
+      "description": "Quick access to admission application",
+      "url": "/admissions/apply",
+      "icons": [
+        {
+          "src": "/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with DQAA",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
