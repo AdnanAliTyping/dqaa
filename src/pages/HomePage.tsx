@@ -48,15 +48,49 @@ const HomePage = () => {
           <meta name="twitter:image" content="https://www.darulquranaa.com/lovable-uploads/1255e92e-f987-4871-9c80-72cd4c3bf3be.png" />
         </Helmet>
 
-        <HeroSection />
-        <CountUpSection />
-        <ProgramsOverview />
-        <AcademicAchievements />
-        <FeaturedNews />
-        <PhotoGallery />
-        <VideoGallery />
-        <Testimonials />
-        <QuickLinks />
+        <header role="banner">
+          <HeroSection />
+        </header>
+
+        <section aria-labelledby="stats-heading">
+          <h2 id="stats-heading" className="sr-only">Academy Statistics</h2>
+          <CountUpSection />
+        </section>
+
+        <section aria-labelledby="programs-heading">
+          <h2 id="programs-heading" className="sr-only">Academic Programs Overview</h2>
+          <ProgramsOverview />
+        </section>
+
+        <section aria-labelledby="achievements-heading">
+          <h2 id="achievements-heading" className="sr-only">Academic Achievements</h2>
+          <AcademicAchievements />
+        </section>
+
+        <section aria-labelledby="news-heading">
+          <h2 id="news-heading" className="sr-only">Featured News and Events</h2>
+          <FeaturedNews />
+        </section>
+
+        <section aria-labelledby="gallery-heading">
+          <h2 id="gallery-heading" className="sr-only">Photo Gallery</h2>
+          <PhotoGallery />
+        </section>
+
+        <section aria-labelledby="videos-heading">
+          <h2 id="videos-heading" className="sr-only">Video Gallery</h2>
+          <VideoGallery />
+        </section>
+
+        <section aria-labelledby="testimonials-heading">
+          <h2 id="testimonials-heading" className="sr-only">Student and Parent Testimonials</h2>
+          <Testimonials />
+        </section>
+
+        <section aria-labelledby="quick-links-heading">
+          <h2 id="quick-links-heading" className="sr-only">Quick Links</h2>
+          <QuickLinks />
+        </section>
       </Layout>
     </SchemaProvider>
   );
