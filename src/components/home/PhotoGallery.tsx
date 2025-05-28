@@ -43,6 +43,30 @@ const photos: Photo[] = [
     src: "/lovable-uploads/1cb02af0-56d3-4ba3-943b-c66d712fd241.png",
     alt: "Group Study Session",
     altMl: "ഗ്രൂപ്പ് പഠന സെഷൻ"
+  },
+  {
+    id: 6,
+    src: "/lovable-uploads/bc411243-163d-496a-a8c0-9941b27e5b3c.png",
+    alt: "AEA MOU Signing Ceremony",
+    altMl: "എഇഎ എംഒയു ഒപ്പിടൽ ചടങ്ങ്"
+  },
+  {
+    id: 7,
+    src: "/lovable-uploads/9ed5727b-3c43-4ce7-b3a8-4bf31a9107ae.png",
+    alt: "Academic Conference",
+    altMl: "അക്കാദമിക് കോൺഫറൻസ്"
+  },
+  {
+    id: 8,
+    src: "/lovable-uploads/060b19d4-39de-4867-bc5d-d188a979a6e1.png",
+    alt: "Educational Seminar",
+    altMl: "വിദ്യാഭ്യാസ സെമിനാർ"
+  },
+  {
+    id: 9,
+    src: "/lovable-uploads/1285e786-c670-4348-a72a-0e2fd0e32e81.png",
+    alt: "Special Recognition Ceremony",
+    altMl: "പ്രത്യേക അംഗീകാര ചടങ്ങ്"
   }
 ];
 
@@ -147,7 +171,7 @@ const PhotoGallery = () => {
         
         {!isFullScreen && (
           <div className="mt-8 max-w-5xl mx-auto">
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-2">
               {photos.map((photo, index) => (
                 <div 
                   key={photo.id} 
