@@ -1,34 +1,46 @@
 
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
+import CommunityEngagement from "@/components/CommunityEngagement";
+import SEOHead from "@/components/seo/SEOHead";
+import { useTranslation } from "@/lib/i18n";
 
 const CommunityPage = () => {
+  const { currentLanguage } = useTranslation();
+  const isMalayalam = currentLanguage === "ml";
+
+  const breadcrumbs = [
+    { name: isMalayalam ? "ഹോം" : "Home", url: "https://www.darulquranaa.com/" },
+    { name: isMalayalam ? "കമ്മ്യൂണിറ്റി" : "Community", url: "https://www.darulquranaa.com/community" }
+  ];
+
   return (
     <Layout>
-      <PageHeader 
-        title="Community Engagement" 
-        subtitle="Discover how DQAA gives back to the community and makes a positive impact"
-        backgroundImage="https://images.unsplash.com/photo-1559027615-cd4628902d4a"
+      <SEOHead
+        title={isMalayalam ? 
+          "കമ്മ്യൂണിറ്റി - ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി" :
+          "Community - Darul Quran Abdulla Academy"
+        }
+        description={isMalayalam ?
+          "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി കമ്മ്യൂണിറ്റിയിൽ ചേരുക. വിദ്യാർത്ഥികൾ, രക്ഷിതാക്കൾ, പൂർവ്വ വിദ്യാർത്ഥികളിൽ നിന്നുള്ള അനുഭവങ്ങൾ കേൾക്കുക." :
+          "Join the Darul Quran Abdulla Academy community. Hear experiences from students, parents, and alumni."
+        }
+        keywords="DQAA community, Islamic academy testimonials, student experiences, parent reviews, alumni stories"
+        url="https://www.darulquranaa.com/community"
+        breadcrumbs={breadcrumbs}
+        locale={isMalayalam ? "ml_IN" : "en_US"}
       />
-      
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6 text-center">
-            Our Community Initiatives
-          </h2>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            This page will include information about charitable trust initiatives, outreach programs, 
-            sustainable development goals, and alumni success stories.
-          </p>
-          
-          <div className="bg-dqaa-50 p-8 rounded-lg max-w-3xl mx-auto">
-            <p className="text-center text-dqaa-600">
-              Community engagement content is being developed and will be available soon.
-              Please check back later for information about our community initiatives.
-            </p>
-          </div>
-        </div>
-      </section>
+
+      <PageHeader
+        title={isMalayalam ? "കമ്മ്യൂണിറ്റി" : "Community"}
+        subtitle={isMalayalam ? 
+          "ഞങ്ങളുടെ കമ്മ്യൂണിറ്റിയുമായി ബന്ധപ്പെടുകയും അനുഭവങ്ങൾ പങ്കിടുകയും ചെയ്യുക" :
+          "Connect with our community and share experiences"
+        }
+        backgroundImage="/lovable-uploads/d9397387-67b8-47f6-856b-b0559a89e20a.png"
+      />
+
+      <CommunityEngagement />
     </Layout>
   );
 };
