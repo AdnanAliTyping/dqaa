@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,6 +32,7 @@ const NotFoundPage = createLazyComponent(() => import("./pages/NotFoundPage"));
 const Index = createLazyComponent(() => import("./pages/Index"));
 const FAQPage = createLazyComponent(() => import("./pages/FAQPage"));
 const CareersPage = createLazyComponent(() => import("./pages/CareersPage"));
+const FacultyPage = createLazyComponent(() => import("./pages/FacultyPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,6 +88,7 @@ const App = () => {
                 <Route path="/donate" element={<DonatePage />} />
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/careers" element={<CareersPage />} />
+                <Route path="/faculty" element={<FacultyPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
