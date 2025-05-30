@@ -9,6 +9,12 @@ export interface SearchResult {
   type: 'page' | 'news' | 'program';
 }
 
+interface SearchFilters {
+  contentType: string[];
+  language: string[];
+  dateRange: string;
+}
+
 const searchablePages = [
   {
     title: "About Darul Quran Abdulla Academy",
@@ -100,12 +106,17 @@ const searchablePages = [
   }
 ];
 
-export const searchContent = async (query: string): Promise<SearchResult[]> => {
+export const searchContent = async (query: string, filters?: SearchFilters): Promise<SearchResult[]> => {
   const searchTerm = query.toLowerCase().trim();
   const results: SearchResult[] = [];
 
   // Search in pages
   searchablePages.forEach(page => {
+    // Apply content type filter
+    if (filters?.contentType.length && !filters.contentType.includes(page.type)) {
+      return;
+    }
+
     const titleMatch = page.title.toLowerCase().includes(searchTerm) || 
                       page.titleMl.toLowerCase().includes(searchTerm);
     const excerptMatch = page.excerpt.toLowerCase().includes(searchTerm) || 
@@ -127,6 +138,11 @@ export const searchContent = async (query: string): Promise<SearchResult[]> => {
 
   // Search in news articles
   newsArticles.forEach(article => {
+    // Apply content type filter
+    if (filters?.contentType.length && !filters.contentType.includes('news')) {
+      return;
+    }
+
     const titleMatch = article.title.toLowerCase().includes(searchTerm);
     const excerptMatch = article.excerpt.toLowerCase().includes(searchTerm);
     const contentMatch = article.content.toLowerCase().includes(searchTerm);
