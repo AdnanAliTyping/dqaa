@@ -1,9 +1,15 @@
-
 import { type Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+
+  safelist: [
+    {
+      pattern: /bg-dqaa-(50|100|200|300|400|500|600|700|800|900|950)/,
+    },
+  ],
+
   theme: {
     container: {
       center: true,
@@ -12,13 +18,15 @@ export default {
         "2xl": "1400px",
       },
     },
+
     extend: {
       fontFamily: {
         sans: ["Noto Sans", "system-ui", "sans-serif"],
         display: ["Noto Sans", "system-ui", "sans-serif"],
-        arabic: ["Amiri", "Noto Sans Arabic", "serif"],
-        malayalam: ["Noto Sans Malayalam", "system-ui", "sans-serif"],
+        arabic: ["'Noto Naskh Arabic'", "Amiri", "'Noto Sans Arabic'", "serif"],
+        malayalam: ["'Noto Sans Malayalam'", "'Manjari'", "'Hind Madurai'", "sans-serif"],
       },
+
       colors: {
         dqaa: {
           '50': '#f0f9ff',
@@ -30,7 +38,7 @@ export default {
           '600': '#0369a1',
           '700': '#0c4a6e',
           '800': '#075985',
-          '900': '#0c4a6e',
+          '900': '#083b6c', // Updated to avoid duplication with 700
           '950': '#082f49',
         },
         gold: {
@@ -93,11 +101,13 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -108,11 +118,13 @@ export default {
           to: { height: "0" },
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
+
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
