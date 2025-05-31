@@ -1,11 +1,11 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Send, BookOpen, Lightbulb, User, Bot } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { MessageCircle, Send, BookOpen, Lightbulb, User, Bot, Info, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 interface Message {
@@ -139,6 +139,31 @@ const IslamicStudyAssistant = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
+        {/* Experimental Feature Disclaimer */}
+        <Alert className="mb-6 border-blue-200 bg-blue-50">
+          <Info className="h-4 w-4" />
+          <AlertDescription className="flex items-center justify-between">
+            <div>
+              <span className="font-medium">
+                {isMalayalam ? "പരീക്ഷണാത്മക AI ഫീച്ചർ" : "Experimental AI Feature"}
+              </span>
+              {" - "}
+              {isMalayalam ? 
+                "AI8TY.com വികസിപ്പിച്ച ഡെമോ ഫീച്ചർ. പൂർണ്ണ വേർഷൻ ഉടൻ ലഭ്യമാകും." :
+                "Demo feature developed by AI8TY.com. Full version coming soon."
+              }
+            </div>
+            <a 
+              href="https://ai8ty.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 ml-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </AlertDescription>
+        </Alert>
+
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <MessageCircle className="h-8 w-8 text-dqaa-500 mr-3" />

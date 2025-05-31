@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Play, Pause, RotateCcw, BookOpen, Bookmark, Volume2, Languages } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Play, Pause, RotateCcw, BookOpen, Bookmark, Volume2, Languages, Info, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 interface QuranVerse {
@@ -144,6 +144,31 @@ const QuranLearningHub = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
+        {/* Experimental Feature Disclaimer */}
+        <Alert className="mb-6 border-purple-200 bg-purple-50">
+          <Info className="h-4 w-4" />
+          <AlertDescription className="flex items-center justify-between">
+            <div>
+              <span className="font-medium">
+                {isMalayalam ? "പരീക്ഷണാത്മക AI ഫീച്ചർ" : "Experimental AI Feature"}
+              </span>
+              {" - "}
+              {isMalayalam ? 
+                "AI8TY.com വികസിപ്പിച്ച ഡെമോ. സാമ്പിൾ ആയത്തുകളും ഓഡിയോയും മാത്രം." :
+                "Demo by AI8TY.com. Sample verses and audio only."
+              }
+            </div>
+            <a 
+              href="https://ai8ty.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-purple-600 hover:text-purple-800 ml-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </AlertDescription>
+        </Alert>
+
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <BookOpen className="h-8 w-8 text-dqaa-500 mr-3" />

@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Compass, Clock, MapPin, Bell, RefreshCw } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Compass, Clock, MapPin, Bell, RefreshCw, Info, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 interface PrayerTimes {
@@ -226,6 +226,31 @@ const PrayerTimesQibla = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
+        {/* Experimental Feature Disclaimer */}
+        <Alert className="mb-6 border-green-200 bg-green-50">
+          <Info className="h-4 w-4" />
+          <AlertDescription className="flex items-center justify-between">
+            <div>
+              <span className="font-medium">
+                {isMalayalam ? "പരീക്ഷണാത്മക AI ഫീച്ചർ" : "Experimental AI Feature"}
+              </span>
+              {" - "}
+              {isMalayalam ? 
+                "AI8TY.com വികസിപ്പിച്ച ഡെമോ ഫീച്ചർ. ഡിഫോൾട്ട് ലൊക്കേഷൻ പാണമന്ന, കേരള." :
+                "Demo feature by AI8TY.com. Default location: Panamanna, Kerala."
+              }
+            </div>
+            <a 
+              href="https://ai8ty.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-600 hover:text-green-800 ml-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </AlertDescription>
+        </Alert>
+
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <Clock className="h-8 w-8 text-dqaa-500 mr-3" />
