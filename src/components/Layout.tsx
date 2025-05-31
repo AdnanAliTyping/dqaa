@@ -27,13 +27,15 @@ const Layout = ({ children }: LayoutProps) => {
       setShowBanner(false);
     }
     
-    // Load and initialize chatbot
+    // Load and initialize chatbot with optimized settings
     const chatbotScript = document.getElementById('jotform-chatbot-script');
     if (!chatbotScript) {
       const script = document.createElement('script');
       script.id = 'jotform-chatbot-script';
       script.src = 'https://cdn.jotfor.ms/agent/embedjs/0196e3af04ac72f5b01cd236ac7d650598fd/embed.js?skipWelcome=1&maximizable=1';
       script.async = true;
+      script.defer = true;
+      script.loading = 'lazy';
       document.body.appendChild(script);
     }
   }, []);
@@ -58,7 +60,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       {showBanner && (
         <div 
-          className="bg-gold-400 text-dqaa-900 py-2 px-4 text-center relative z-50"
+          className="bg-gradient-to-r from-gold-400 to-yellow-400 text-dqaa-900 py-2 px-4 text-center relative z-50"
           role="banner"
           aria-label="Admissions announcement"
         >
@@ -68,11 +70,13 @@ const Layout = ({ children }: LayoutProps) => {
               className="flex items-center justify-center w-full"
               aria-label="Apply for admissions - banner link"
             >
-              <span className="font-medium mr-2 text-sm md:text-base">{t('admissions.open')}</span>
+              <span className="font-medium mr-2 text-sm md:text-base animate-pulse">
+                🎓 {t('admissions.open')} 2025-26
+              </span>
               <Button 
                 variant="secondary" 
                 size="sm" 
-                className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700"
+                className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700 shadow-md"
                 aria-label="Apply now button"
               >
                 {t('cta.apply')}
@@ -81,7 +85,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
           <button 
             onClick={closeBanner}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-dqaa-900 hover:text-dqaa-700 touch-target focus:ring-2 focus:ring-dqaa-700 focus:outline-none rounded"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-dqaa-900 hover:text-dqaa-700 touch-target focus:ring-2 focus:ring-dqaa-700 focus:outline-none rounded p-1"
             aria-label="Close admissions banner"
           >
             <X size={18} />

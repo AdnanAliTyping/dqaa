@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
 import RazorpayDonateButton from "../RazorpayDonateButton";
+import OptimizedMobileHero from "../mobile/OptimizedMobileHero";
 import { useTranslation } from "@/lib/i18n";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const HeroSection = () => {
   const { t, currentLanguage } = useTranslation();
   const isMalayalam = currentLanguage === "ml";
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   
+  // Check if mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Set up scrolling animation for announcements
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -30,6 +43,11 @@ const HeroSection = () => {
     return () => clearInterval(scrollInterval);
   }, []);
   
+  // Use mobile optimized hero for small screens
+  if (isMobile) {
+    return <OptimizedMobileHero />;
+  }
+  
   return (
     <div className="relative min-h-[85vh] flex items-center overflow-hidden bg-dqaa-900">
       {/* Background */}
@@ -39,6 +57,7 @@ const HeroSection = () => {
           alt="DQAA Students" 
           className="w-full h-full object-cover opacity-20"
           loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dqaa-900/90 to-dqaa-900/70" />
       </div>
@@ -88,34 +107,6 @@ const HeroSection = () => {
       
       {/* Bottom decoration */}
       <div className="absolute bottom-0 left-0 w-full h-8 md:h-12 bg-gradient-to-t from-white to-transparent"></div>
-      
-      {/* News Announcements Banner */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gold-400/90 py-3 px-4 transform translate-y-0">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="text-dqaa-900 font-semibold mr-3">
-              {isMalayalam ? "പ്രധാന അറിയിപ്പ്:" : "Latest Announcement:"}
-            </div>
-            <div className="text-dqaa-900 flex-1 overflow-hidden whitespace-nowrap">
-              <div 
-                ref={scrollRef}
-                className="inline-block whitespace-nowrap news-ticker"
-                style={{ minWidth: "100%" }}
-              >
-                <span className="mr-8">🎉 Congratulations to our Hifz & Shari'ah Annual Exam Toppers 2025! </span>
-                <span className="mr-8">🎓 100% SSLC Result Achieved, Alhamdulillah! </span>
-                <span className="mr-8">📢 2025 Admission Orientation Program on May 14, 2025 </span>
-                <span className="mr-8">🎉 Congratulations to our Hifz & Shari'ah Annual Exam Toppers 2025! </span>
-                <span className="mr-8">🎓 100% SSLC Result Achieved, Alhamdulillah! </span>
-                <span className="mr-8">📢 2025 Admission Orientation Program on May 14, 2025 </span>
-              </div>
-            </div>
-            <Button variant="secondary" size="sm" asChild className="hidden sm:flex text-xs bg-dqaa-900 text-white hover:bg-dqaa-700">
-              <Link to="/news">{isMalayalam ? "എല്ലാം കാണുക" : "View All"}</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

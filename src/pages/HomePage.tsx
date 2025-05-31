@@ -10,9 +10,12 @@ import VideoGallery from "@/components/VideoGallery";
 import Testimonials from "@/components/home/Testimonials";
 import QuickLinks from "@/components/home/QuickLinks";
 import IslamicStudyAssistant from "@/components/innovations/IslamicStudyAssistant";
-import PrayerTimesQibla from "@/components/innovations/PrayerTimesQibla";
+import EnhancedPrayerTimes from "@/components/innovations/EnhancedPrayerTimes";
 import QuranLearningHub from "@/components/innovations/QuranLearningHub";
-import SEOHead from "@/components/seo/SEOHead";
+import IslamicNewsTicker from "@/components/news/IslamicNewsTicker";
+import IslamicEventCountdown from "@/components/events/IslamicEventCountdown";
+import StickyActionButtons from "@/components/mobile/StickyActionButtons";
+import EnhancedSEOHead from "@/components/seo/EnhancedSEOHead";
 import { useTranslation } from "@/lib/i18n";
 
 const HomePage = () => {
@@ -25,24 +28,44 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <SEOHead
+      <EnhancedSEOHead
         title={isMalayalam ? 
-          "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി - കേരളത്തിലെ പ്രമുഖ ഇസ്ലാമിക് വിദ്യാഭ്യാസ സ്ഥാപനം" :
-          "Darul Quran Abdulla Academy - Premier Islamic Education in Kerala"
+          "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി - കേരളത്തിലെ #1 ഇസ്ലാമിക് വിദ്യാഭ്യാസ സ്ഥാപനം | 2025-26 പ്രവേശനം" :
+          "Darul Quran Abdulla Academy - Kerala's #1 Islamic Education Institution | Admissions 2025-26"
         }
         description={isMalayalam ?
-          "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി ഹിഫ്സ്, ശരീഅത്, ഡിപ്ലോമ പ്രോഗ്രാമുകളോടുകൂടിയ സമഗ്രമായ ഇസ്ലാമിക് വിദ്യാഭ്യാസം നൽകുന്നു. പാണമന്ന, കേരളത്തിൽ സ്ഥിതി ചെയ്യുന്നു. 2025-26 പ്രവേശനം തുറന്നിരിക്കുന്നു." :
-          "Darul Quran Abdulla Academy offers comprehensive Islamic education with Hifz, Shari'ah, and diploma programs. Located in Panamanna, Kerala. Admissions open for 2025-26."
+          "കേരളത്തിലെ മുൻനിര ഇസ്ലാമിക് വിദ്യാഭ്യാസ സ്ഥാപനം - ഹിഫ്സ്, ശരീഅത്, ഡിപ്ലോമ പ്രോഗ്രാമുകൾ. AI അധിഷ്ഠിത ആധുനിക പഠനം, നമാസ് സമയം, ഖുർആൻ പഠനം. ഓട്ടപ്പാലം, കേരള. 100% വിജയനിരക്ക്. ഇപ്പോൾ അപേക്ഷിക്കുക!" :
+          "Kerala's premier Islamic education institution offering Hifz, Shari'ah & diploma programs. AI-powered learning, prayer times, Quran study hub. Located in Ottapalam, Kerala. 100% success rate. Apply now for 2025-26!"
         }
-        keywords="Darul Quran, Islamic education Kerala, Hifz program, Shari'ah studies, Islamic academy Panamanna, Quran memorization, Islamic boarding school, Kerala madrasah, Islamic university Kerala"
+        keywords="Darul Quran Abdulla Academy, Kerala Islamic education, Hifz program Kerala, Islamic boarding school, Quran memorization, prayer times Kerala, Islamic studies Ottapalam, AI Islamic education, ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി, കേരള ഇസ്ലാമിക് വിദ്യാഭ്യാസം, ഹിഫ്സ് പ്രോഗ്രാം, നമാസ് സമയം കേരള"
         url="https://www.darulquranaa.com/"
         breadcrumbs={breadcrumbs}
         locale={isMalayalam ? "ml_IN" : "en_US"}
+        type="website"
       />
+
+      {/* Islamic News Ticker */}
+      <IslamicNewsTicker />
 
       <header role="banner">
         <HeroSection />
       </header>
+
+      {/* Enhanced Prayer Times - Prominent Position */}
+      <section aria-labelledby="prayer-times-heading">
+        <h2 id="prayer-times-heading" className="sr-only">
+          {isMalayalam ? "നമാസ് സമയം" : "Prayer Times"}
+        </h2>
+        <EnhancedPrayerTimes />
+      </section>
+
+      {/* Islamic Event Countdown */}
+      <section aria-labelledby="islamic-events-heading">
+        <h2 id="islamic-events-heading" className="sr-only">
+          {isMalayalam ? "ഇസ്ലാമിക് ഇവന്റുകൾ" : "Islamic Events"}
+        </h2>
+        <IslamicEventCountdown />
+      </section>
 
       <section aria-labelledby="stats-heading">
         <h2 id="stats-heading" className="sr-only">Academy Statistics</h2>
@@ -62,11 +85,6 @@ const HomePage = () => {
       <section aria-labelledby="islamic-assistant-heading" className="bg-gray-50">
         <h2 id="islamic-assistant-heading" className="sr-only">AI Islamic Study Assistant</h2>
         <IslamicStudyAssistant />
-      </section>
-
-      <section aria-labelledby="prayer-times-heading">
-        <h2 id="prayer-times-heading" className="sr-only">Prayer Times and Qibla Direction</h2>
-        <PrayerTimesQibla />
       </section>
 
       <section aria-labelledby="quran-learning-heading" className="bg-gray-50">
@@ -98,6 +116,9 @@ const HomePage = () => {
         <h2 id="quick-links-heading" className="sr-only">Quick Links</h2>
         <QuickLinks />
       </section>
+
+      {/* Mobile Sticky Action Buttons */}
+      <StickyActionButtons />
     </Layout>
   );
 };
