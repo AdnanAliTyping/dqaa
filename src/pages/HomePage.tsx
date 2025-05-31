@@ -9,6 +9,9 @@ import PhotoGallery from "@/components/home/PhotoGallery";
 import VideoGallery from "@/components/VideoGallery";
 import Testimonials from "@/components/home/Testimonials";
 import QuickLinks from "@/components/home/QuickLinks";
+import IslamicStudyAssistant from "@/components/innovations/IslamicStudyAssistant";
+import PrayerTimesQibla from "@/components/innovations/PrayerTimesQibla";
+import QuranLearningHub from "@/components/innovations/QuranLearningHub";
 import SEOHead from "@/components/seo/SEOHead";
 import { useTranslation } from "@/lib/i18n";
 
@@ -54,6 +57,21 @@ const HomePage = () => {
       <section aria-labelledby="achievements-heading">
         <h2 id="achievements-heading" className="sr-only">Academic Achievements</h2>
         <AcademicAchievements />
+      </section>
+
+      <section aria-labelledby="islamic-assistant-heading" className="bg-gray-50">
+        <h2 id="islamic-assistant-heading" className="sr-only">AI Islamic Study Assistant</h2>
+        <IslamicStudyAssistant />
+      </section>
+
+      <section aria-labelledby="prayer-times-heading">
+        <h2 id="prayer-times-heading" className="sr-only">Prayer Times and Qibla Direction</h2>
+        <PrayerTimesQibla />
+      </section>
+
+      <section aria-labelledby="quran-learning-heading" className="bg-gray-50">
+        <h2 id="quran-learning-heading" className="sr-only">Interactive Quran Learning Hub</h2>
+        <QuranLearningHub />
       </section>
 
       <section aria-labelledby="news-heading">

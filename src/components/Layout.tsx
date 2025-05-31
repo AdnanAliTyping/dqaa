@@ -6,7 +6,6 @@ import { X } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SkipNavigation from "./accessibility/SkipNavigation";
-import PerformanceOptimizer from "./PerformanceOptimizer";
 import { Button } from "./ui/button";
 import { useTranslation } from "@/lib/i18n";
 import { useAccessibility } from "@/hooks/useAccessibility";
@@ -48,7 +47,6 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <SkipNavigation />
       <PWAManager />
-      <PerformanceOptimizer />
       
       {/* Screen reader announcements */}
       <div

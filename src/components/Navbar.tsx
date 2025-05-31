@@ -59,7 +59,7 @@ const Navbar = () => {
     },
     { 
       href: "/parents", 
-      label: isMalayalam ? "രക্ഷിതാക്കൾ" : "Parents" 
+      label: isMalayalam ? "രക്ഷിതാക്കൾ" : "Parents" 
     },
     { 
       href: "/news", 
