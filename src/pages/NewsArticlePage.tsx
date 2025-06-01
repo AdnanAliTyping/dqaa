@@ -1,7 +1,7 @@
 
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,21 +12,68 @@ import { generateNewsArticleSchema } from "@/lib/schema";
 import { Card, CardContent } from "@/components/ui/card";
 
 const NewsArticlePage = () => {
-  const navigate = useNavigate();
-  const params = useParams<{ slug: string }>();
-  const slug = params?.slug;
+  const [routerReady, setRouterReady] = useState(false);
+  const [slug, setSlug] = useState<string | undefined>();
+  
+  // Safe router hooks with error handling
+  let navigate: any;
+  let params: any;
+  
+  try {
+    navigate = useNavigate();
+    params = useParams<{ slug: string }>();
+    
+    // Mark router as ready if we successfully get the hooks
+    if (!routerReady) {
+      setRouterReady(true);
+    }
+  } catch (error) {
+    console.error("Router context error:", error);
+    // Fallback: extract slug from URL manually
+    const pathname = window.location.pathname;
+    const slugMatch = pathname.match(/\/news\/(.+)$/);
+    const fallbackSlug = slugMatch ? slugMatch[1] : undefined;
+    
+    if (slug !== fallbackSlug) {
+      setSlug(fallbackSlug);
+    }
+  }
 
-  console.log("NewsArticlePage: params =", params, "slug =", slug);
+  // Update slug when params change
+  useEffect(() => {
+    if (routerReady && params?.slug && params.slug !== slug) {
+      setSlug(params.slug);
+    }
+  }, [routerReady, params?.slug, slug]);
+
+  console.log("NewsArticlePage: routerReady =", routerReady, "params =", params, "slug =", slug);
 
   const article = slug ? getArticleBySlug(slug) : undefined;
 
   // Redirect to news page if no article found
   useEffect(() => {
-    if (!article && slug) {
+    if (!article && slug && routerReady && navigate) {
       console.warn(`Article not found for slug: ${slug}`);
       navigate("/news", { replace: true });
+    } else if (!article && slug && !routerReady) {
+      // Fallback redirect if router isn't ready
+      setTimeout(() => {
+        window.location.href = "/news";
+      }, 1000);
     }
-  }, [article, slug, navigate]);
+  }, [article, slug, routerReady, navigate]);
+
+  // Show loading state while router initializes
+  if (!routerReady && !slug) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+          <p className="text-gray-600">Please wait while we load the article.</p>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!article) {
     return (
