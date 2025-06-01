@@ -1,6 +1,7 @@
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,8 +12,36 @@ import { generateNewsArticleSchema } from "@/lib/schema";
 import { Card, CardContent } from "@/components/ui/card";
 
 const NewsArticlePage = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  
+  // Safely get params with error handling
+  let slug: string | undefined;
+  try {
+    const params = useParams<{ slug: string }>();
+    slug = params.slug;
+  } catch (error) {
+    console.error("Error getting route params:", error);
+    // Fallback to current pathname if useParams fails
+    const pathname = window.location.pathname;
+    const slugMatch = pathname.match(/\/news\/(.+)$/);
+    slug = slugMatch ? slugMatch[1] : undefined;
+  }
+
   const article = slug ? getArticleBySlug(slug) : undefined;
+
+  // Redirect to news page if no article found and we have navigation
+  useEffect(() => {
+    if (!article && slug) {
+      console.warn(`Article not found for slug: ${slug}`);
+      try {
+        navigate("/news", { replace: true });
+      } catch (error) {
+        console.error("Navigation error:", error);
+        // Fallback to manual redirect
+        window.location.href = "/news";
+      }
+    }
+  }, [article, slug, navigate]);
 
   if (!article) {
     return (

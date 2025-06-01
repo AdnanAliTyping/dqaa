@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +10,7 @@ import { Suspense, useEffect } from "react";
 // Immediate loading components
 import HomePage from "./pages/HomePage";
 import LoadingFallback from "./components/LoadingFallback";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { useLanguageStore } from "@/lib/i18n";
 import LanguageRootManager from "./components/LanguageRootManager";
 import { measureWebVitals } from "./hooks/usePerformance";
@@ -62,40 +64,42 @@ const App = () => {
   }, []);
   
   return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <BrowserRouter>
-            <LanguageRootManager />
-            <Toaster />
-            <Sonner />
-            <Suspense fallback={<LoadingFallback type="page" />}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/index" element={<Index />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/admissions" element={<AdmissionsPage />} />
-                <Route path="/admissions/apply" element={<ApplicationFormPage />} />
-                <Route path="/academic-programs" element={<AcademicProgramsPage />} />
-                <Route path="/student-life" element={<StudentLifePage />} />
-                <Route path="/campus" element={<CampusFacilitiesPage />} />
-                <Route path="/technology" element={<TechnologyPage />} />
-                <Route path="/parents" element={<ParentsCornerPage />} />
-                <Route path="/community" element={<CommunityPage />} />
-                <Route path="/news" element={<NewsEventsPage />} />
-                <Route path="/news/:slug" element={<NewsArticlePage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/donate" element={<DonatePage />} />
-                <Route path="/faq" element={<FAQPage />} />
-                <Route path="/careers" element={<CareersPage />} />
-                <Route path="/faculty" element={<FacultyPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </HelmetProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <BrowserRouter>
+              <LanguageRootManager />
+              <Toaster />
+              <Sonner />
+              <Suspense fallback={<LoadingFallback type="page" />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/index" element={<Index />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/admissions" element={<AdmissionsPage />} />
+                  <Route path="/admissions/apply" element={<ApplicationFormPage />} />
+                  <Route path="/academic-programs" element={<AcademicProgramsPage />} />
+                  <Route path="/student-life" element={<StudentLifePage />} />
+                  <Route path="/campus" element={<CampusFacilitiesPage />} />
+                  <Route path="/technology" element={<TechnologyPage />} />
+                  <Route path="/parents" element={<ParentsCornerPage />} />
+                  <Route path="/community" element={<CommunityPage />} />
+                  <Route path="/news" element={<NewsEventsPage />} />
+                  <Route path="/news/:slug" element={<NewsArticlePage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/donate" element={<DonatePage />} />
+                  <Route path="/faq" element={<FAQPage />} />
+                  <Route path="/careers" element={<CareersPage />} />
+                  <Route path="/faculty" element={<FacultyPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 };
 
