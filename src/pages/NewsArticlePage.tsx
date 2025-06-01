@@ -13,33 +13,18 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const NewsArticlePage = () => {
   const navigate = useNavigate();
-  
-  // Safely get params with error handling
-  let slug: string | undefined;
-  try {
-    const params = useParams<{ slug: string }>();
-    slug = params.slug;
-  } catch (error) {
-    console.error("Error getting route params:", error);
-    // Fallback to current pathname if useParams fails
-    const pathname = window.location.pathname;
-    const slugMatch = pathname.match(/\/news\/(.+)$/);
-    slug = slugMatch ? slugMatch[1] : undefined;
-  }
+  const params = useParams<{ slug: string }>();
+  const slug = params?.slug;
+
+  console.log("NewsArticlePage: params =", params, "slug =", slug);
 
   const article = slug ? getArticleBySlug(slug) : undefined;
 
-  // Redirect to news page if no article found and we have navigation
+  // Redirect to news page if no article found
   useEffect(() => {
     if (!article && slug) {
       console.warn(`Article not found for slug: ${slug}`);
-      try {
-        navigate("/news", { replace: true });
-      } catch (error) {
-        console.error("Navigation error:", error);
-        // Fallback to manual redirect
-        window.location.href = "/news";
-      }
+      navigate("/news", { replace: true });
     }
   }, [article, slug, navigate]);
 
@@ -78,7 +63,6 @@ const NewsArticlePage = () => {
       });
     } else {
       navigator.clipboard.writeText(articleUrl);
-      // You could add a toast notification here
     }
   };
 
