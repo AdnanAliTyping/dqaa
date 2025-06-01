@@ -35,7 +35,6 @@ const Layout = ({ children }: LayoutProps) => {
       script.src = 'https://cdn.jotfor.ms/agent/embedjs/0196e3af04ac72f5b01cd236ac7d650598fd/embed.js?skipWelcome=1&maximizable=1';
       script.async = true;
       script.defer = true;
-      script.setAttribute('loading', 'lazy');
       document.body.appendChild(script);
     }
   }, []);

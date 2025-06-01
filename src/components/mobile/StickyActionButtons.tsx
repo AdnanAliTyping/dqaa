@@ -15,15 +15,7 @@ const StickyActionButtons = () => {
     {
       icon: Heart,
       label: isMalayalam ? "സംഭാവന" : "Donate",
-    component: (
-  <Button
-    size="sm"
-    className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px]"
-    asChild
-  >
-    <RazorpayDonateButton />
-  </Button>
-)
+      component: <RazorpayDonateButton className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px] px-4 py-2 rounded text-sm" />
     },
     {
       icon: UserPlus,
