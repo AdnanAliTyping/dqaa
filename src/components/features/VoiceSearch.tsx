@@ -5,13 +5,6 @@ import { Mic, MicOff, Search } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 
 // Declare the Web Speech API types
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
-}
-
 interface SpeechRecognitionEvent extends Event {
   resultIndex: number;
   results: SpeechRecognitionResultList;
@@ -33,6 +26,10 @@ interface SpeechRecognitionAlternative {
   confidence: number;
 }
 
+interface SpeechRecognitionConstructor {
+  new(): SpeechRecognition;
+}
+
 interface SpeechRecognition extends EventTarget {
   continuous: boolean;
   interimResults: boolean;
@@ -43,6 +40,13 @@ interface SpeechRecognition extends EventTarget {
   onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
   start(): void;
   stop(): void;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition: SpeechRecognitionConstructor;
+    webkitSpeechRecognition: SpeechRecognitionConstructor;
+  }
 }
 
 interface VoiceSearchProps {
