@@ -1,5 +1,5 @@
 
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
@@ -12,59 +12,38 @@ import { generateNewsArticleSchema } from "@/lib/schema";
 import { Card, CardContent } from "@/components/ui/card";
 
 const NewsArticlePage = () => {
-  const [routerReady, setRouterReady] = useState(false);
-  const [slug, setSlug] = useState<string | undefined>();
+  const navigate = useNavigate();
+  const params = useParams<{ slug: string }>();
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
   
-  // Safe router hooks with error handling
-  let navigate: any;
-  let params: any;
-  
-  try {
-    navigate = useNavigate();
-    params = useParams<{ slug: string }>();
-    
-    // Mark router as ready if we successfully get the hooks
-    if (!routerReady) {
-      setRouterReady(true);
-    }
-  } catch (error) {
-    console.error("Router context error:", error);
-    // Fallback: extract slug from URL manually
-    const pathname = window.location.pathname;
-    const slugMatch = pathname.match(/\/news\/(.+)$/);
-    const fallbackSlug = slugMatch ? slugMatch[1] : undefined;
-    
-    if (slug !== fallbackSlug) {
-      setSlug(fallbackSlug);
-    }
-  }
+  // Get slug from params or fallback to URL parsing
+  const slug = params?.slug || (() => {
+    const pathname = location.pathname || window.location.pathname;
+    const match = pathname.match(/\/news\/(.+)$/);
+    return match ? match[1] : undefined;
+  })();
 
-  // Update slug when params change
-  useEffect(() => {
-    if (routerReady && params?.slug && params.slug !== slug) {
-      setSlug(params.slug);
-    }
-  }, [routerReady, params?.slug, slug]);
-
-  console.log("NewsArticlePage: routerReady =", routerReady, "params =", params, "slug =", slug);
+  console.log("NewsArticlePage: location =", location, "params =", params, "slug =", slug);
 
   const article = slug ? getArticleBySlug(slug) : undefined;
 
-  // Redirect to news page if no article found
+  // Handle loading state and redirects
   useEffect(() => {
-    if (!article && slug && routerReady && navigate) {
-      console.warn(`Article not found for slug: ${slug}`);
-      navigate("/news", { replace: true });
-    } else if (!article && slug && !routerReady) {
-      // Fallback redirect if router isn't ready
-      setTimeout(() => {
-        window.location.href = "/news";
-      }, 1000);
-    }
-  }, [article, slug, routerReady, navigate]);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      
+      if (!article && slug) {
+        console.warn(`Article not found for slug: ${slug}`);
+        navigate("/news", { replace: true });
+      }
+    }, 100); // Small delay to ensure router is ready
 
-  // Show loading state while router initializes
-  if (!routerReady && !slug) {
+    return () => clearTimeout(timer);
+  }, [article, slug, navigate]);
+
+  // Show loading state briefly
+  if (isLoading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-16 text-center">
