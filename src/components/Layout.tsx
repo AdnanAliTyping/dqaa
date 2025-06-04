@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SkipNavigation from "./accessibility/SkipNavigation";
+import MobileBottomNavigation from "./mobile/MobileBottomNavigation";
 import { Button } from "./ui/button";
 import { useTranslation } from "@/lib/i18n";
 import { useAccessibility } from "@/hooks/useAccessibility";
@@ -75,7 +76,7 @@ const Layout = ({ children }: LayoutProps) => {
               <Button 
                 variant="secondary" 
                 size="sm" 
-                className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700 shadow-md"
+                className="text-xs sm:text-sm my-1 bg-dqaa-900 text-white hover:bg-dqaa-700 shadow-md touch-target"
                 aria-label="Apply now button"
               >
                 {t('cta.apply')}
@@ -98,13 +99,16 @@ const Layout = ({ children }: LayoutProps) => {
       
       <main 
         id="main-content"
-        className="flex-grow"
+        className="flex-grow pb-16 md:pb-0"
         role="main"
         tabIndex={-1}
         aria-label="Main content"
       >
         {children}
       </main>
+      
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNavigation />
       
       <Footer />
     </div>

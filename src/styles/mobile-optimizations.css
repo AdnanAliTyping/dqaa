@@ -1,0 +1,183 @@
+
+/* Apple iOS Mobile Optimization Styles */
+
+/* Touch Target Optimizations */
+.touch-target-lg {
+  min-height: 48px;
+  min-width: 48px;
+  touch-action: manipulation;
+}
+
+.touch-target-xl {
+  min-height: 56px;
+  min-width: 56px;
+  touch-action: manipulation;
+}
+
+/* Apple's recommended minimum touch target */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Typography Optimizations for Mobile */
+@media (max-width: 768px) {
+  /* Base font size increase for better readability */
+  html {
+    font-size: 17px; /* Apple's recommended base size */
+  }
+  
+  /* Heading optimizations */
+  h1 {
+    font-size: 1.75rem; /* 28px */
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  
+  h3 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  
+  /* Body text optimizations */
+  p, span, div {
+    font-size: 1rem; /* 17px */
+    line-height: 1.47; /* Apple's recommended line height */
+  }
+  
+  /* Button text optimizations */
+  button {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  
+  /* Form input optimizations */
+  input, textarea, select {
+    font-size: 1rem; /* Prevents zoom on iOS */
+    padding: 12px 16px;
+  }
+}
+
+/* Malayalam Typography Enhancements */
+.lang-ml {
+  /* Increased line height for Malayalam text */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4;
+  }
+  
+  p, span, div {
+    line-height: 1.6;
+  }
+}
+
+/* Safe Area Support for iPhone X+ */
+.safe-area-pt {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-pl {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-pr {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Enhanced Card Layouts for Mobile */
+@media (max-width: 768px) {
+  .mobile-card {
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-card-compact {
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+}
+
+/* Animation Optimizations (Apple guideline: 0.3s max) */
+.mobile-transition {
+  transition: all 0.2s ease-out;
+}
+
+.mobile-transition-fast {
+  transition: all 0.15s ease-out;
+}
+
+/* Improved Focus States for Accessibility */
+@media (max-width: 768px) {
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #0a3d91;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Gesture Support */
+.swipe-indicator {
+  position: relative;
+}
+
+.swipe-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+
+/* Loading States for Mobile */
+.mobile-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(10, 61, 145, 0.3);
+  border-radius: 50%;
+  border-top-color: #0a3d91;
+  animation: spin 0.8s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced Scroll Behavior */
+@media (max-width: 768px) {
+  .mobile-scroll {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .mobile-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}

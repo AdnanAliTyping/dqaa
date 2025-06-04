@@ -1,8 +1,9 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Heart, UserPlus, MessageCircle, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import EnhancedMobileButton from "./EnhancedMobileButton";
 import RazorpayDonateButton from "@/components/RazorpayDonateButton";
 import { useTranslation } from "@/lib/i18n";
 
@@ -15,7 +16,7 @@ const StickyActionButtons = () => {
     {
       icon: Heart,
       label: isMalayalam ? "സംഭാവന" : "Donate",
-      component: <RazorpayDonateButton className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px] px-4 py-2 rounded text-sm" />
+      component: <RazorpayDonateButton className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px] px-4 py-3 rounded text-base font-medium touch-target" />
     },
     {
       icon: UserPlus,
@@ -41,32 +42,37 @@ const StickyActionButtons = () => {
   ];
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 md:hidden">
-      <div className={`flex flex-col space-y-2 transition-all duration-300 ${isExpanded ? 'mb-2' : ''}`}>
+    <div className="fixed bottom-20 right-4 z-40 md:hidden">
+      <div className={cn(
+        "flex flex-col space-y-3 transition-all duration-300 ease-out",
+        isExpanded ? 'mb-3' : ''
+      )}>
         {isExpanded && actions.slice(1).map((action, index) => (
           <div key={index} className="flex justify-end">
             {action.component ? (
               action.component
             ) : action.link ? (
-              <Button
+              <EnhancedMobileButton
                 asChild
-                size="sm"
-                className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px]"
+                size="default"
+                className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px] font-medium"
+                hapticFeedback
               >
                 <Link to={action.link} className="flex items-center">
                   <action.icon className="h-4 w-4 mr-2" />
                   {action.label}
                 </Link>
-              </Button>
+              </EnhancedMobileButton>
             ) : (
-              <Button
-                size="sm"
+              <EnhancedMobileButton
+                size="default"
                 onClick={action.onClick}
-                className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px]"
+                className="bg-dqaa-600 hover:bg-dqaa-700 text-white shadow-lg min-w-[100px] font-medium"
+                hapticFeedback
               >
                 <action.icon className="h-4 w-4 mr-2" />
                 {action.label}
-              </Button>
+              </EnhancedMobileButton>
             )}
           </div>
         ))}
@@ -74,19 +80,25 @@ const StickyActionButtons = () => {
 
       {/* Main Action Button */}
       <div className="flex justify-end">
-        <Button
+        <EnhancedMobileButton
           onClick={() => setIsExpanded(!isExpanded)}
-          className="bg-gradient-to-r from-dqaa-500 to-dqaa-600 hover:from-dqaa-600 hover:to-dqaa-700 text-white rounded-full w-14 h-14 shadow-lg border-2 border-white"
+          className={cn(
+            "bg-gradient-to-r from-dqaa-500 to-dqaa-600 hover:from-dqaa-600 hover:to-dqaa-700",
+            "text-white rounded-full w-14 h-14 shadow-lg border-2 border-white",
+            "transition-transform duration-200 ease-out"
+          )}
           size="icon"
+          hapticFeedback
+          touchOptimized
         >
           {isExpanded ? (
-            <div className="transform rotate-45">
+            <div className="transform rotate-45 transition-transform duration-150">
               <UserPlus className="h-6 w-6" />
             </div>
           ) : (
             <Heart className="h-6 w-6" />
           )}
-        </Button>
+        </EnhancedMobileButton>
       </div>
     </div>
   );
