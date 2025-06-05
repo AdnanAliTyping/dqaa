@@ -1,6 +1,5 @@
 
-import { useState, useEffect } from "react";
-import { ReactNode } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Navbar from "./Navbar";
