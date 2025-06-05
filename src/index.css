@@ -6,6 +6,15 @@
 /* Import mobile optimizations */
 @import './styles/mobile-optimizations.css';
 
+/* Apple-inspired typography system */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('-apple-system'), local('BlinkMacSystemFont');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Font for Arabic text */
 @font-face {
   font-family: 'Amiri';
@@ -36,24 +45,50 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --font-body: system-ui, sans-serif;
-  --font-display: 'Merriweather', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
   --font-arabic: 'Amiri', serif;
   --font-malayalam: 'Manjari', sans-serif;
+  
+  /* Apple-inspired design tokens */
+  --apple-blur: 20px;
+  --apple-border-radius: 12px;
+  --apple-border-radius-lg: 16px;
+  --apple-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --apple-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --apple-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
   
   /* Mobile-first viewport handling */
   --vh: 1vh;
 }
 
-/* Base styles with mobile-first approach */
+/* Base styles with Apple-inspired typography */
 body {
   color: rgb(var(--foreground-rgb));
   font-family: var(--font-body);
   line-height: 1.6;
-  /* Improved mobile text rendering */
+  /* Apple's text rendering optimizations */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Apple-inspired smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: prefer-reduced-motion) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Mobile viewport fix for iOS */
@@ -71,11 +106,44 @@ body {
   .font-arabic {
     font-family: var(--font-arabic);
   }
+
+  /* Apple-inspired button styles */
+  .apple-button {
+    @apply font-medium rounded-apple px-6 py-3 transition-all duration-200 ease-apple;
+    @apply shadow-apple hover:shadow-apple-lg;
+    @apply active:scale-[0.98];
+  }
+
+  .apple-button-primary {
+    @apply apple-button bg-white text-gray-900 hover:bg-gray-50;
+  }
+
+  .apple-button-secondary {
+    @apply apple-button bg-white/10 text-white border border-white/20;
+    @apply hover:bg-white/20 hover:border-white/40 backdrop-blur-apple;
+  }
+
+  /* Apple-inspired card hover effects */
+  .apple-card-hover {
+    @apply transition-all duration-300 ease-apple;
+    @apply hover:shadow-apple-lg hover:scale-[1.02];
+    @apply hover:-translate-y-1;
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-white/5 backdrop-blur-apple border border-white/10;
+  }
+
+  .glass-hover {
+    @apply glass transition-all duration-300 ease-apple;
+    @apply hover:bg-white/10 hover:border-white/20;
+  }
 }
 
 /* Malayalam specific styles */
 html.lang-ml {
-  --font-body: 'Manjari', sans-serif;
+  --font-body: 'Manjari', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .lang-ml h1, 
@@ -111,16 +179,16 @@ html.lang-ml {
   }
 }
 
-/* Page transition animations (Apple-compliant timing) */
+/* Apple-inspired page transitions */
 .page-transition-enter {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
 }
 
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  transition: opacity 0.4s var(--apple-transition), transform 0.4s var(--apple-transition);
 }
 
 .page-transition-exit {
@@ -130,12 +198,12 @@ html.lang-ml {
 
 .page-transition-exit-active {
   opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  transform: translateY(-8px);
+  transition: opacity 0.3s var(--apple-transition), transform 0.3s var(--apple-transition);
 }
 
-/* Optimized animations with Apple-compliant timing */
-@keyframes fadeIn {
+/* Apple-inspired keyframe animations */
+@keyframes apple-fade-in {
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -146,7 +214,7 @@ html.lang-ml {
   }
 }
 
-@keyframes scaleIn {
+@keyframes apple-scale-in {
   from {
     transform: scale(0.98);
     opacity: 0;
@@ -157,62 +225,91 @@ html.lang-ml {
   }
 }
 
-@keyframes slideInRight {
+@keyframes apple-slide-up {
   from {
-    transform: translateX(16px);
+    transform: translateY(16px);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
-/* Animation utility classes with optimized timing */
-.animate-fade-in {
-  animation: fadeIn 0.2s ease-out forwards;
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
-.animate-scale-in {
-  animation: scaleIn 0.15s ease-out forwards;
+/* Animation utility classes with Apple timing */
+.animate-apple-fade-in {
+  animation: apple-fade-in 0.4s var(--apple-transition) forwards;
 }
 
-.animate-slide-in-right {
-  animation: slideInRight 0.2s ease-out forwards;
+.animate-apple-scale-in {
+  animation: apple-scale-in 0.3s var(--apple-transition) forwards;
 }
 
-/* Enhanced mobile hover effects */
+.animate-apple-slide-up {
+  animation: apple-slide-up 0.5s var(--apple-transition) forwards;
+}
+
+.animate-gentle-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+/* Apple-inspired hover effects */
 @media (hover: hover) {
-  .hover-lift {
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  .apple-hover-lift {
+    transition: transform 0.2s var(--apple-transition), box-shadow 0.2s var(--apple-transition);
   }
 
-  .hover-lift:hover {
+  .apple-hover-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--apple-shadow-lg);
   }
 }
 
 /* Mobile-specific touch feedback */
 @media (hover: none) {
-  .hover-lift:active {
+  .apple-hover-lift:active {
     transform: scale(0.98);
     transition: transform 0.1s ease-out;
   }
 }
 
-/* Improved button animations for mobile */
-.button-mobile {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.15s ease-out;
+/* Apple-inspired focus states */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 2px;
+  border-radius: var(--apple-border-radius);
 }
 
-.button-mobile:active {
-  transform: scale(0.98);
+/* Apple-inspired loading states */
+.apple-skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
 }
 
-/* Utility classes for mobile optimization */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Utility classes */
 .text-balance {
   text-wrap: balance;
 }
@@ -229,17 +326,6 @@ html.lang-ml {
   }
 }
 
-/* Enhanced focus states for accessibility */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid #4299e1;
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
 /* Mobile-optimized scrollbar */
 @media (max-width: 768px) {
   .scrollbar-hide {
@@ -251,3 +337,11 @@ select:focus-visible {
     display: none;
   }
 }
+
+/* Animation delays for staggered effects */
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-1000 { animation-delay: 1000ms; }

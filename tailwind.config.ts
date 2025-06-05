@@ -21,8 +21,8 @@ export default {
 
     extend: {
       fontFamily: {
-        sans: ["Noto Sans", "system-ui", "sans-serif"],
-        display: ["Noto Sans", "system-ui", "sans-serif"],
+        sans: ["-apple-system", "BlinkMacSystemFont", "SF Pro Display", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+        display: ["-apple-system", "BlinkMacSystemFont", "SF Pro Display", "Segoe UI", "system-ui", "sans-serif"],
         arabic: ["'Noto Naskh Arabic'", "Amiri", "'Noto Sans Arabic'", "serif"],
         malayalam: ["'Noto Sans Malayalam'", "'Manjari'", "'Hind Madurai'", "sans-serif"],
       },
@@ -34,38 +34,41 @@ export default {
           '200': '#bae6fd',
           '300': '#7dd3fc',
           '400': '#38bdf8',
-          '500': '#0a3d91',
-          '600': '#0369a1',
-          '700': '#0c4a6e',
-          '800': '#075985',
-          '900': '#083b6c', // Updated to avoid duplication with 700
-          '950': '#082f49',
+          '500': '#1d4ed8', // Apple-refined blue
+          '600': '#1e40af',
+          '700': '#1e3a8a',
+          '800': '#1e3a8a',
+          '900': '#1e293b',
+          '950': '#0f172a',
         },
         gold: {
-          '50': '#fefbe8',
-          '100': '#fff8c2',
-          '200': '#ffef89',
-          '300': '#ffe045',
-          '400': '#fece15',
-          '500': '#eaac05',
-          '600': '#ca8301',
-          '700': '#a15e05',
-          '800': '#84490c',
-          '900': '#6e3c0f',
-          '950': '#421e05',
+          '50': '#fffbeb',
+          '100': '#fef3c7',
+          '200': '#fde68a',
+          '300': '#fcd34d',
+          '400': '#f59e0b', // Sophisticated champagne
+          '500': '#d97706',
+          '600': '#b45309',
+          '700': '#92400e',
+          '800': '#78350f',
+          '900': '#451a03',
+          '950': '#1c0701',
         },
-        estate: {
-          '50': '#f5f7f9',
-          '100': '#eaeff3',
-          '200': '#d0dbe5',
-          '300': '#a6bacd',
-          '400': '#7595af',
-          '500': '#527895',
-          '600': '#3f5f7a',
-          '700': '#344d64',
-          '800': '#2e4254',
-          '900': '#2b3947',
-          '950': '#1a2430',
+        apple: {
+          'gray-50': '#f8fafc',
+          'gray-100': '#f1f5f9',
+          'gray-200': '#e2e8f0',
+          'gray-300': '#cbd5e1',
+          'gray-400': '#94a3b8',
+          'gray-500': '#64748b',
+          'gray-600': '#475569',
+          'gray-700': '#334155',
+          'gray-800': '#1e293b',
+          'gray-900': '#0f172a',
+        },
+        emerald: {
+          '500': '#10b981',
+          '600': '#059669',
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -102,10 +105,43 @@ export default {
         },
       },
 
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
+        '144': '36rem',
+      },
+
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.025em' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.016em' }],
+        'base': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.009em' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '0.007em' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0.005em' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0.002em' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.002em' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.009em' }],
+        '5xl': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.014em' }],
+        '6xl': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.017em' }],
+        '7xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.020em' }],
+        '8xl': ['6rem', { lineHeight: '1', letterSpacing: '-0.025em' }],
+        '9xl': ['8rem', { lineHeight: '1', letterSpacing: '-0.025em' }],
+      },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        'apple': '12px',
+        'apple-lg': '16px',
+        'apple-xl': '20px',
+      },
+
+      boxShadow: {
+        'apple': '0 4px 16px rgba(0, 0, 0, 0.12)',
+        'apple-lg': '0 8px 32px rgba(0, 0, 0, 0.16)',
+        'apple-xl': '0 16px 64px rgba(0, 0, 0, 0.20)',
+        'apple-inner': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
       },
 
       keyframes: {
@@ -117,11 +153,62 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "apple-fade-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(8px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          }
+        },
+        "apple-scale-in": {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.98)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)",
+          }
+        },
+        "apple-slide-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(16px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          }
+        },
+        "pulse-soft": {
+          "0%, 100%": {
+            opacity: "1",
+          },
+          "50%": {
+            opacity: "0.8",
+          }
+        }
       },
 
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "apple-fade-in": "apple-fade-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "apple-scale-in": "apple-scale-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "apple-slide-up": "apple-slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "pulse-soft": "pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+
+      backdropBlur: {
+        'apple': '20px',
+      },
+
+      transitionTimingFunction: {
+        'apple': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'apple-spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       },
     },
   },
