@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X, Heart, Star } from "lucide-react";
+import { X, Heart, Star, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { shouldShowEidGreeting, markEidGreetingShown } from "@/utils/islamicDates";
 import { Link } from "react-router-dom";
@@ -89,6 +89,17 @@ const EidAlAdhaGreeting = () => {
                 <Link to="/academic-programs" className="flex items-center justify-center">
                   <Heart className="w-4 h-4 mr-2" />
                   {isMalayalam ? "ഞങ്ങളുടെ പ്രോഗ്രാമുകൾ" : "Our Programs"}
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                className="bg-gold-500 hover:bg-gold-600 text-emerald-900 font-semibold rounded-apple shadow-apple transition-all duration-200 ease-apple hover:scale-[1.02]"
+                onClick={handleClose}
+              >
+                <Link to={`/eid-greeting?lang=${isMalayalam ? 'ml' : 'en'}`} className="flex items-center justify-center" target="_blank">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  {isMalayalam ? "ഗ്രീറ്റിംഗ് കാർഡ്" : "View Card"}
                 </Link>
               </Button>
               
