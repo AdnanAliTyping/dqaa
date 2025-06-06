@@ -34,7 +34,7 @@ const EidAlAdhaGreeting = () => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogOverlay className="bg-black/60 backdrop-blur-sm" />
       <DialogContent className="max-w-md mx-auto border-0 bg-transparent p-0 shadow-none">
-        <div className="relative overflow-hidden rounded-apple-xl bg-gradient-to-br from-emerald-500/95 via-emerald-600/95 to-emerald-700/95 backdrop-blur-apple border border-white/20 shadow-apple-xl">
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-emerald-500/95 via-emerald-600/95 to-emerald-700/95 backdrop-blur-sm border border-white/20 shadow-2xl">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.3)_0%,transparent_50%)]" />
@@ -44,7 +44,7 @@ const EidAlAdhaGreeting = () => {
           {/* Close Button */}
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-200 ease-apple"
+            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-200"
             aria-label="Close Eid greeting"
           >
             <X size={16} />
@@ -55,14 +55,14 @@ const EidAlAdhaGreeting = () => {
             {/* Islamic Decorative Elements */}
             <div className="flex justify-center items-center mb-6">
               <div className="flex items-center space-x-2">
-                <Star className="w-6 h-6 text-gold-400 animate-pulse-soft" />
+                <Star className="w-6 h-6 text-yellow-400 animate-pulse" />
                 <div className="text-3xl">🌙</div>
-                <Star className="w-6 h-6 text-gold-400 animate-pulse-soft animation-delay-500" />
+                <Star className="w-6 h-6 text-yellow-400 animate-pulse" />
               </div>
             </div>
 
             {/* Arabic Calligraphy */}
-            <div className="text-4xl font-arabic mb-4 text-gold-400 font-bold tracking-wider">
+            <div className="text-4xl mb-4 text-yellow-400 font-bold tracking-wider">
               عيد مبارك
             </div>
 
@@ -83,10 +83,9 @@ const EidAlAdhaGreeting = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 asChild
-                className="bg-white text-emerald-700 hover:bg-white/90 font-semibold rounded-apple shadow-apple transition-all duration-200 ease-apple hover:scale-[1.02]"
-                onClick={handleClose}
+                className="bg-white text-emerald-700 hover:bg-white/90 font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105"
               >
-                <Link to="/academic-programs" className="flex items-center justify-center">
+                <Link to="/academic-programs" className="flex items-center justify-center" onClick={handleClose}>
                   <Heart className="w-4 h-4 mr-2" />
                   {isMalayalam ? "ഞങ്ങളുടെ പ്രോഗ്രാമുകൾ" : "Our Programs"}
                 </Link>
@@ -94,10 +93,9 @@ const EidAlAdhaGreeting = () => {
 
               <Button
                 asChild
-                className="bg-gold-500 hover:bg-gold-600 text-emerald-900 font-semibold rounded-apple shadow-apple transition-all duration-200 ease-apple hover:scale-[1.02]"
-                onClick={handleClose}
+                className="bg-yellow-500 hover:bg-yellow-600 text-emerald-900 font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105"
               >
-                <Link to={`/eid-greeting?lang=${isMalayalam ? 'ml' : 'en'}`} className="flex items-center justify-center" target="_blank">
+                <Link to={`/eid-greeting?lang=${isMalayalam ? 'ml' : 'en'}`} className="flex items-center justify-center" target="_blank" onClick={handleClose}>
                   <ExternalLink className="w-4 h-4 mr-2" />
                   {isMalayalam ? "ഗ്രീറ്റിംഗ് കാർഡ്" : "View Card"}
                 </Link>
@@ -106,7 +104,7 @@ const EidAlAdhaGreeting = () => {
               <Button
                 variant="outline"
                 onClick={handleClose}
-                className="border-2 border-white/30 text-white hover:bg-white/10 font-medium rounded-apple backdrop-blur-sm transition-all duration-200 ease-apple"
+                className="border-2 border-white/30 text-white hover:bg-white/10 font-medium rounded-lg backdrop-blur-sm transition-all duration-200"
               >
                 {isMalayalam ? "നന്ദി" : "Thank You"}
               </Button>

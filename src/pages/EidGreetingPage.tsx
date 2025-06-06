@@ -130,14 +130,14 @@ const EidGreetingPage = () => {
           {/* Islamic Decorative Elements */}
           <div className="flex justify-center items-center mb-8">
             <div className="flex items-center space-x-4">
-              <Star className="w-8 h-8 text-gold-400 animate-pulse-soft" />
+              <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
               <div className="text-6xl">🌙</div>
-              <Star className="w-8 h-8 text-gold-400 animate-pulse-soft animation-delay-500" />
+              <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
             </div>
           </div>
 
           {/* Arabic Calligraphy */}
-          <div className="text-6xl md:text-8xl font-arabic mb-8 text-gold-400 font-bold tracking-wider">
+          <div className="text-6xl md:text-8xl mb-8 text-yellow-400 font-bold tracking-wider">
             عيد مبارك
           </div>
 
@@ -172,7 +172,7 @@ const EidGreetingPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={handleWhatsAppShare}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-apple shadow-apple transition-all duration-200 ease-apple hover:scale-[1.02] px-6 py-3"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 px-6 py-3"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
               {isMalayalam ? "WhatsApp ൽ പങ്കിടുക" : "Share on WhatsApp"}
@@ -180,7 +180,7 @@ const EidGreetingPage = () => {
             
             <Button
               onClick={handleShare}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-apple shadow-apple transition-all duration-200 ease-apple hover:scale-[1.02] px-6 py-3"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 px-6 py-3"
             >
               <Share2 className="w-5 h-5 mr-2" />
               {isMalayalam ? "പങ്കിടുക" : "Share"}
@@ -189,7 +189,7 @@ const EidGreetingPage = () => {
             <Button
               onClick={handleDownload}
               variant="outline"
-              className="border-2 border-white/30 text-white hover:bg-white/10 font-medium rounded-apple backdrop-blur-sm transition-all duration-200 ease-apple px-6 py-3"
+              className="border-2 border-white/30 text-white hover:bg-white/10 font-medium rounded-lg backdrop-blur-sm transition-all duration-200 px-6 py-3"
             >
               <Download className="w-5 h-5 mr-2" />
               {isMalayalam ? "ഡൗൺലോഡ്" : "Download"}
@@ -213,9 +213,9 @@ const EidGreetingPage = () => {
 
           {/* Decorative Hearts */}
           <div className="flex justify-center mt-8 space-x-2">
-            <Heart className="w-4 h-4 text-gold-400 animate-pulse-soft" />
-            <Heart className="w-4 h-4 text-gold-400 animate-pulse-soft animation-delay-300" />
-            <Heart className="w-4 h-4 text-gold-400 animate-pulse-soft animation-delay-600" />
+            <Heart className="w-4 h-4 text-yellow-400 animate-pulse" />
+            <Heart className="w-4 h-4 text-yellow-400 animate-pulse" />
+            <Heart className="w-4 h-4 text-yellow-400 animate-pulse" />
           </div>
         </div>
       </div>

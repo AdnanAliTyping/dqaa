@@ -10,7 +10,7 @@ export interface IslamicEvent {
 const EID_AL_ADHA_DATES = {
   2024: new Date('2024-06-16'),
   2025: new Date('2025-06-06'),
-  2026: new Date('2025-05-27'),
+  2026: new Date('2026-05-27'),
 };
 
 export const getEidAlAdhaDate = (year: number): Date | null => {
@@ -35,13 +35,18 @@ export const isEidAlAdhaPeriod = (): boolean => {
 };
 
 export const shouldShowEidGreeting = (): boolean => {
-  if (!isEidAlAdhaPeriod()) return false;
+  // For testing purposes, always return true
+  // Remove this and uncomment the actual logic when done testing
+  return true;
   
-  const lastShown = localStorage.getItem('eid-adha-greeting-shown');
-  const currentYear = new Date().getFullYear();
-  
-  // Show once per Eid period (year)
-  return lastShown !== currentYear.toString();
+  // Actual logic:
+  // if (!isEidAlAdhaPeriod()) return false;
+  // 
+  // const lastShown = localStorage.getItem('eid-adha-greeting-shown');
+  // const currentYear = new Date().getFullYear();
+  // 
+  // // Show once per Eid period (year)
+  // return lastShown !== currentYear.toString();
 };
 
 export const markEidGreetingShown = (): void => {
