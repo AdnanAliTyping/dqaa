@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppleInspiredPageHeader from "@/components/admissions/AppleInspiredPageHeader";
 import AppleInspiredAdmissionCard from "@/components/admissions/AppleInspiredAdmissionCard";
