@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "@/components/Layout";
-import PageHeader from "@/components/PageHeader";
+import AppleInspiredPageHeader from "@/components/admissions/AppleInspiredPageHeader";
+import AppleInspiredAdmissionCard from "@/components/admissions/AppleInspiredAdmissionCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, FileText, BookOpen, GraduationCap, Users, FileBadge, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
-import { Helmet } from "react-helmet"; // This import was causing issues
+import { Helmet } from "react-helmet-async";
 import FAQSection from "@/components/FAQSection";
 
 const AdmissionsPage = () => {
@@ -40,7 +40,7 @@ const AdmissionsPage = () => {
   ];
   
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Admissions | Darul Quran Abdulla Academy</title>
         <meta 
@@ -52,41 +52,15 @@ const AdmissionsPage = () => {
           content="DQAA admissions, Darul Quran admission process, Islamic academy enrollment, Hifz program admission, Quran memorization school application" 
         />
         <link rel="canonical" href="https://www.darulquranaa.com/admissions" />
-        
-        {/* Educational Organization Schema */}
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "EducationalOrganization",
-              "name": "Darul Quran Abdulla Academy",
-              "url": "https://www.darulquranaa.com/",
-              "logo": "https://www.darulquranaa.com/path/to/logo.png",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Darul Quran Campus, Kothakurssi",
-                "addressLocality": "Panamanna",
-                "postalCode": "679501",
-                "addressRegion": "Kerala",
-                "addressCountry": "IN"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9526-552211",
-                "contactType": "Admissions"
-              },
-              "description": "Premier residential Academy for Boys in Kothakurssi, Kerala, dedicated to Quranic memorization and academic excellence rooted in Islamic values."
-            }
-          `}
-        </script>
       </Helmet>
       
-      <PageHeader 
+      <AppleInspiredPageHeader 
         title={isMalayalam ? "പ്രവേശനം" : "Admissions"} 
         subtitle={isMalayalam ? 
           "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമിയിലെ വിദ്യാർത്ഥി സമൂഹത്തിൽ ചേരുക" : 
           "Join our community of learners at Darul Quran Abdulla Academy"}
         backgroundImage="https://images.unsplash.com/photo-1531545514256-b1400bc00f31"
+        showApplyButton={true}
       />
       
       <div className="container mx-auto px-4 py-6">
@@ -94,117 +68,67 @@ const AdmissionsPage = () => {
           <Button
             variant="outline"
             onClick={() => setShowMalayalam(!showMalayalam)}
-            className="text-sm"
+            className="apple-button-secondary text-sm"
           >
             {showMalayalam ? "Switch to English" : "മലയാളത്തിലേക്ക് മാറുക"}
           </Button>
         </div>
       </div>
       
-      <section className="py-8 md:py-16 animate-fade-in">
+      <section className="py-8 md:py-16 animate-apple-fade-in">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6 text-center">
+          <h2 className="text-3xl font-display font-bold text-dqaa-500 mb-6 text-center animate-apple-slide-up">
             {showMalayalam ? "പ്രവേശന വിവരങ്ങൾ" : "Admissions Information"}
           </h2>
           
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12 animate-apple-slide-up animation-delay-200">
             {showMalayalam ? 
               "2025 അധ്യയന വർഷത്തിലേക്കുള്ള പ്രവേശനം ഇപ്പോൾ തുറന്നിരിക്കുന്നു. താഴെയുള്ള വിവരങ്ങൾ പരിശോധിച്ച് എത്രയും പെട്ടെന്ന് അപേക്ഷിക്കുക." : 
               "Admissions for the 2025 academic year are now open. Review the information below and apply as soon as possible to secure your spot."}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <Link to="/admissions/apply" className="no-underline">
-              <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-dqaa-500 h-full transform hover:-translate-y-1 transition-transform duration-300">
-                <CardHeader className="flex flex-row items-start space-x-4">
-                  <div className="bg-dqaa-100 p-3 rounded-full">
-                    <FileText size={24} className="text-dqaa-500" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">
-                      {showMalayalam ? "ഇപ്പോൾ അപേക്ഷിക്കുക" : "Apply Now"}
-                    </CardTitle>
-                    <CardDescription>
-                      {showMalayalam ? "ഓൺലൈൻ അപ്ലിക്കേഷൻ പൂരിപ്പിക്കുക" : "Complete our online application"}
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-sm">
-                    {showMalayalam ? 
-                      "ഞങ്ങളുടെ സുരക്ഷിത ഓൺലൈൻ അപ്ലിക്കേഷനിലൂടെ 2025 അധ്യയന വർഷത്തിലേക്ക് അപേക്ഷിക്കുക." : 
-                      "Apply for the 2025 academic year through our secure online application."}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
+            <div className="animate-apple-slide-up animation-delay-300">
+              <AppleInspiredAdmissionCard
+                icon={FileText}
+                title={showMalayalam ? "ഇപ്പോൾ അപേക്ഷിക്കുക" : "Apply Now"}
+                description={showMalayalam ? "ഓൺലൈൻ അപ്ലിക്കേഷൻ പൂരിപ്പിക്കുക" : "Complete our online application"}
+                content={showMalayalam ? 
+                  "ഞങ്ങളുടെ സുരക്ഷിത ഓൺലൈൻ അപ്ലിക്കേഷനിലൂടെ 2025 അധ്യയന വർഷത്തിലേക്ക് അപേക്ഷിക്കുക." : 
+                  "Apply for the 2025 academic year through our secure online application."}
+                buttonText={showMalayalam ? "അപേക്ഷിക്കുക" : "Apply Now"}
+                iconColor="text-dqaa-500"
+                borderColor="border-t-4 border-t-dqaa-500"
+                isInteractive={true}
+                onClick={() => navigate('/admissions/apply')}
+              />
+            </div>
             
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-gold-400 h-full transform hover:-translate-y-1 transition-transform duration-300">
-              <CardHeader className="flex flex-row items-start space-x-4">
-                <div className="bg-gold-100 p-3 rounded-full">
-                  <Calendar size={24} className="text-gold-400" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">
-                    {showMalayalam ? "പ്രവേശന കലണ്ടർ" : "Admission Calendar"}
-                  </CardTitle>
-                  <CardDescription>
-                    {showMalayalam ? "പ്രധാനപ്പെട്ട തീയതികൾ" : "Important dates to remember"}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-gray-600 text-sm">
-                  <li className="flex justify-between">
-                    <span>{showMalayalam ? "അപേക്ഷ തുടക്കം" : "Application Opens"}</span>
-                    <span className="font-medium">Jan 15, 2025</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>{showMalayalam ? "അവസാന തീയതി" : "Application Deadline"}</span>
-                    <span className="font-medium">Mar 30, 2025</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>{showMalayalam ? "പ്രവേശന പരീക്ഷ" : "Entrance Exam"}</span>
-                    <span className="font-medium">Apr 15, 2025</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>{showMalayalam ? "ഫലം പ്രഖ്യാപനം" : "Results Announced"}</span>
-                    <span className="font-medium">Apr 30, 2025</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>{showMalayalam ? "ക്ലാസ് ആരംഭിക്കുന്ന തീയതി" : "Classes Begin"}</span>
-                    <span className="font-medium">Jun 1, 2025</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+            <div className="animate-apple-slide-up animation-delay-500">
+              <AppleInspiredAdmissionCard
+                icon={Calendar}
+                title={showMalayalam ? "പ്രവേശന കലണ്ടർ" : "Admission Calendar"}
+                description={showMalayalam ? "പ്രധാനപ്പെട്ട തീയതികൾ" : "Important dates to remember"}
+                content="Application Opens: Jan 15, 2025 | Deadline: Mar 30, 2025 | Entrance Exam: Apr 15, 2025 | Results: Apr 30, 2025 | Classes Begin: Jun 1, 2025"
+                buttonText=""
+                iconColor="text-gold-400"
+                borderColor="border-t-4 border-t-gold-400"
+              />
+            </div>
             
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-t-4 border-t-blue-700 h-full transform hover:-translate-y-1 transition-transform duration-300">
-              <CardHeader className="flex flex-row items-start space-x-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <FileBadge size={24} className="text-blue-700" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">
-                    {showMalayalam ? "ആവശ്യമായ രേഖകൾ" : "Required Documents"}
-                  </CardTitle>
-                  <CardDescription>
-                    {showMalayalam ? "തയ്യാറാക്കി വയ്ക്കേണ്ട രേഖകൾ" : "Documents to prepare"}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-1 text-gray-600 text-sm">
-                  <li>{showMalayalam ? "ജനന സർട്ടിഫിക്കറ്റ് (പകർപ്പ്)" : "Birth Certificate (Copy)"}</li>
-                  <li>{showMalayalam ? "ട്രാൻസ്ഫർ സർട്ടിഫിക്കറ്റ് (അസൽ)" : "Transfer Certificate (Original)"}</li>
-                  <li>{showMalayalam ? "പെരുമാറ്റ സർട്ടിഫിക്കറ്റ്" : "Conduct Certificate"}</li>
-                  <li>{showMalayalam ? "സ്കൂൾ & മദ്രസ മാർക്ക് ലിസ്റ്റ്" : "School & Madrassa Mark List"}</li>
-                  <li>{showMalayalam ? "ആധാർ പകർപ്പ്" : "Aadhaar Copy"}</li>
-                  <li>{showMalayalam ? "റേഷൻ കാർഡ് പകർപ്പ്" : "Ration Card Copy"}</li>
-                  <li>{showMalayalam ? "നീല ബാക്ക്ഗ്രൗണ്ടിൽ 4 പാസ്പോർട്ട് ഫോട്ടോകൾ" : "Four passport-size photos with blue background"}</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <div className="animate-apple-slide-up animation-delay-700">
+              <AppleInspiredAdmissionCard
+                icon={FileBadge}
+                title={showMalayalam ? "ആവശ്യമായ രേഖകൾ" : "Required Documents"}
+                description={showMalayalam ? "തയ്യാറാക്കി വയ്ക്കേണ്ട രേഖകൾ" : "Documents to prepare"}
+                content={showMalayalam ? 
+                  "ജനന സർട്ടിഫിക്കറ്റ്, ട്രാൻസ്ഫർ സർട്ടിഫിക്കറ്റ്, പെരുമാറ്റ സർട്ടിഫിക്കറ്റ്, മാർക്ക് ലിസ്റ്റുകൾ, ആധാർ, റേഷൻ കാർഡ്, ഫോട്ടോകൾ" :
+                  "Birth Certificate, Transfer Certificate, Conduct Certificate, Mark Lists, Aadhaar, Ration Card, Photos"}
+                buttonText=""
+                iconColor="text-blue-700"
+                borderColor="border-t-4 border-t-blue-700"
+              />
+            </div>
           </div>
           
           <Tabs defaultValue="programs" className="max-w-4xl mx-auto">
@@ -262,7 +186,7 @@ const AdmissionsPage = () => {
                         </li>
                         <li>
                           {showMalayalam ? 
-                            "വിദേശ ഖാരിഉകളുടെ കീഴിൽ ഖുർആൻ പാരായണ ശൈലി പഠനം" : 
+                            "വിശ്യാത കീഴിൽ ഖുർആൻ പാരായണ ശൈലി പഠനം" : 
                             "Qur'an recitation style training under foreign Qaris"}
                         </li>
                       </ul>
@@ -477,7 +401,7 @@ const AdmissionsPage = () => {
       </section>
       
       {/* FAQ Section for Admissions */}
-      <section className="py-8 md:py-16 bg-gray-50">
+      <section className="py-8 md:py-16 bg-gray-50/80 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <FAQSection 
             title="Frequently Asked Admission Questions"
@@ -488,7 +412,7 @@ const AdmissionsPage = () => {
           />
         </div>
       </section>
-    </Layout>
+    </>
   );
 };
 

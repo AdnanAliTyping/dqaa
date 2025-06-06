@@ -43,6 +43,15 @@ const queryClient = new QueryClient({
   },
 });
 
+// Create a wrapper component for pages with Layout
+const LayoutWrapper = ({ children }: { children: React.ReactNode }) => (
+  <Layout>
+    <Suspense fallback={<LoadingFallback />}>
+      {children}
+    </Suspense>
+  </Layout>
+);
+
 function App() {
   return (
     <ErrorBoundary>
@@ -65,139 +74,25 @@ function App() {
                     />
                     
                     {/* Routes with Layout */}
-                    <Route path="/" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <Index />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/home" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <HomePage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/about" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <AboutPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/admissions" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <AdmissionsPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/admissions/apply" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <ApplicationFormPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/academic-programs" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <AcademicProgramsPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/student-life" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <StudentLifePage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/campus" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <CampusFacilitiesPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/technology" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <TechnologyPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/parents" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <ParentsCornerPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/community" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <CommunityPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/news" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <NewsEventsPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/news/:slug" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <NewsArticlePage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/contact" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <ContactPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/donate" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <DonatePage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/faq" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <FAQPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/faculty" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <FacultyPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="/careers" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <CareersPage />
-                        </Suspense>
-                      </Layout>
-                    } />
-                    <Route path="*" element={
-                      <Layout>
-                        <Suspense fallback={<LoadingFallback />}>
-                          <NotFoundPage />
-                        </Suspense>
-                      </Layout>
-                    } />
+                    <Route path="/" element={<LayoutWrapper><Index /></LayoutWrapper>} />
+                    <Route path="/home" element={<LayoutWrapper><HomePage /></LayoutWrapper>} />
+                    <Route path="/about" element={<LayoutWrapper><AboutPage /></LayoutWrapper>} />
+                    <Route path="/admissions" element={<LayoutWrapper><AdmissionsPage /></LayoutWrapper>} />
+                    <Route path="/admissions/apply" element={<LayoutWrapper><ApplicationFormPage /></LayoutWrapper>} />
+                    <Route path="/academic-programs" element={<LayoutWrapper><AcademicProgramsPage /></LayoutWrapper>} />
+                    <Route path="/student-life" element={<LayoutWrapper><StudentLifePage /></LayoutWrapper>} />
+                    <Route path="/campus" element={<LayoutWrapper><CampusFacilitiesPage /></LayoutWrapper>} />
+                    <Route path="/technology" element={<LayoutWrapper><TechnologyPage /></LayoutWrapper>} />
+                    <Route path="/parents" element={<LayoutWrapper><ParentsCornerPage /></LayoutWrapper>} />
+                    <Route path="/community" element={<LayoutWrapper><CommunityPage /></LayoutWrapper>} />
+                    <Route path="/news" element={<LayoutWrapper><NewsEventsPage /></LayoutWrapper>} />
+                    <Route path="/news/:slug" element={<LayoutWrapper><NewsArticlePage /></LayoutWrapper>} />
+                    <Route path="/contact" element={<LayoutWrapper><ContactPage /></LayoutWrapper>} />
+                    <Route path="/donate" element={<LayoutWrapper><DonatePage /></LayoutWrapper>} />
+                    <Route path="/faq" element={<LayoutWrapper><FAQPage /></LayoutWrapper>} />
+                    <Route path="/faculty" element={<LayoutWrapper><FacultyPage /></LayoutWrapper>} />
+                    <Route path="/careers" element={<LayoutWrapper><CareersPage /></LayoutWrapper>} />
+                    <Route path="*" element={<LayoutWrapper><NotFoundPage /></LayoutWrapper>} />
                   </Routes>
                 </SchemaProvider>
               </PerformanceOptimizer>
