@@ -1,3 +1,4 @@
+
 import schemas from "./schemas";
 import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/sonner";
@@ -51,7 +52,7 @@ function App() {
           <BrowserRouter>
             <LanguageRootManager>
               <PerformanceOptimizer>
-                <SchemaProvider>
+                <SchemaProvider schemas={schemas}>
                   <Routes>
                     {/* Special routes without Layout */}
                     <Route 
