@@ -60,38 +60,35 @@ const PrayerTimesQibla = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Calculate Qibla direction
+  // Calculate Qibla direction based on lat/lng
   const calculateQiblaDirection = (lat: number, lng: number): number => {
     const kaabaLat = 21.4225; // Kaaba latitude
     const kaabaLng = 39.8262; // Kaaba longitude
-    
+
     const dLng = (kaabaLng - lng) * Math.PI / 180;
     const lat1 = lat * Math.PI / 180;
     const lat2 = kaabaLat * Math.PI / 180;
-    
+
     const y = Math.sin(dLng) * Math.cos(lat2);
     const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
-    
+
     let bearing = Math.atan2(y, x) * 180 / Math.PI;
     bearing = (bearing + 360) % 360;
-    
+
     return Math.round(bearing);
   };
 
-  // Calculate prayer times (simplified calculation)
- const calculatePrayerTimes = (lat: number, lng: number, date: Date): PrayerTimes => {
-  return {
-    fajr: '05:00',
-    sunrise: '06:02',
-    dhuhr: '12:20',
-    asr: '16:00',
-    maghrib: '18:35',
-    isha: '19:45'
-  };
-};
+  // Fixed prayer times for demo
+  const calculatePrayerTimes = (): PrayerTimes => ({
+    fajr: '04:44',
+    sunrise: '06:01',
+    dhuhr: '12:22',
+    asr: '15:49',
+    maghrib: '18:43',
+    isha: '20:01',
+  });
 
-
-  // Find next prayer
+  // Find next prayer and countdown
   const findNextPrayer = (prayers: PrayerTimes, currentTime: Date): { name: string; time: string; countdown: string } => {
     const now = currentTime.getHours() * 60 + currentTime.getMinutes();
     const prayerList = [
@@ -105,13 +102,13 @@ const PrayerTimesQibla = () => {
     for (const prayer of prayerList) {
       const [hours, minutes] = prayer.time.split(':').map(Number);
       const prayerMinutes = hours * 60 + minutes;
-      
+
       if (prayerMinutes > now) {
         const diff = prayerMinutes - now;
         const hoursLeft = Math.floor(diff / 60);
         const minutesLeft = diff % 60;
         const countdown = `${hoursLeft}h ${minutesLeft}m`;
-        
+
         return {
           name: prayer.name,
           time: prayer.time,
@@ -119,12 +116,12 @@ const PrayerTimesQibla = () => {
         };
       }
     }
-    
-    // If no prayer found for today, return Fajr of next day
-    const diff = (24 * 60) - now + (5 * 60 + 30); // Next Fajr
+
+    // If no prayer left today, countdown to next day's fajr
+    const diff = (24 * 60) - now + (4 * 60 + 44); // Next fajr time in minutes: 4:44 AM
     const hoursLeft = Math.floor(diff / 60);
     const minutesLeft = diff % 60;
-    
+
     return {
       name: 'fajr',
       time: prayers.fajr,
@@ -132,57 +129,58 @@ const PrayerTimesQibla = () => {
     };
   };
 
+  // Request user location or fallback default
   const requestLocation = async () => {
     setLoading(true);
     try {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          async (position) => {
+          (position) => {
             const { latitude, longitude } = position.coords;
-            
-            // Set default location (you can integrate with a geocoding service)
+
             const locationData: LocationData = {
               city: 'Panamanna',
               country: 'India',
               latitude,
               longitude
             };
-            
+
             setLocation(locationData);
             setQiblaDirection(calculateQiblaDirection(latitude, longitude));
-            
-            const prayers = calculatePrayerTimes(latitude, longitude, new Date());
+
+            const prayers = calculatePrayerTimes();
             setPrayerTimes(prayers);
-            
-            const next = findNextPrayer(prayers, currentTime);
+
+            const next = findNextPrayer(prayers, new Date());
             setNextPrayer(next.name);
             setTimeToNextPrayer(next.countdown);
-            
+
             setLoading(false);
           },
-          (error) => {
-            console.error('Location error:', error);
-            // Use default location (DQAA location)
+          () => {
+            // fallback location if permission denied or error
             const defaultLocation: LocationData = {
               city: 'Panamanna',
               country: 'India',
               latitude: 11.2588,
               longitude: 75.7804
             };
-            
+
             setLocation(defaultLocation);
             setQiblaDirection(calculateQiblaDirection(defaultLocation.latitude, defaultLocation.longitude));
-            
-            const prayers = calculatePrayerTimes(defaultLocation.latitude, defaultLocation.longitude, new Date());
+
+            const prayers = calculatePrayerTimes();
             setPrayerTimes(prayers);
-            
-            const next = findNextPrayer(prayers, currentTime);
+
+            const next = findNextPrayer(prayers, new Date());
             setNextPrayer(next.name);
             setTimeToNextPrayer(next.countdown);
-            
+
             setLoading(false);
           }
         );
+      } else {
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error getting location:', error);
@@ -190,10 +188,12 @@ const PrayerTimesQibla = () => {
     }
   };
 
+  // On mount, request location once
   useEffect(() => {
     requestLocation();
   }, []);
 
+  // Update next prayer countdown when time or prayers update
   useEffect(() => {
     if (prayerTimes) {
       const next = findNextPrayer(prayerTimes, currentTime);
@@ -202,6 +202,7 @@ const PrayerTimesQibla = () => {
     }
   }, [currentTime, prayerTimes]);
 
+  // Format current time display
   const formatTime = (time: Date) => {
     return time.toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -211,6 +212,7 @@ const PrayerTimesQibla = () => {
     });
   };
 
+  // Format current date display
   const formatDate = (date: Date) => {
     return date.toLocaleDateString(isMalayalam ? 'ml-IN' : 'en-US', {
       weekday: 'long',
@@ -223,7 +225,6 @@ const PrayerTimesQibla = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
-        {/* Experimental Feature Disclaimer */}
         <Alert className="mb-6 border-green-200 bg-green-50">
           <Info className="h-4 w-4" />
           <AlertDescription className="flex items-center justify-between">
@@ -232,14 +233,14 @@ const PrayerTimesQibla = () => {
                 {isMalayalam ? "പരീക്ഷണാത്മക AI ഫീച്ചർ" : "Experimental AI Feature"}
               </span>
               {" - "}
-              {isMalayalam ? 
+              {isMalayalam ?
                 "AI8TY.com വികസിപ്പിച്ച ഡെമോ ഫീച്ചർ. ഡിഫോൾട്ട് ലൊക്കേഷൻ പാണമന്ന, കേരള." :
                 "Demo feature by AI8TY.com. Default location: Panamanna, Kerala."
               }
             </div>
-            <a 
-              href="https://ai8ty.com" 
-              target="_blank" 
+            <a
+              href="https://ai8ty.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-green-600 hover:text-green-800 ml-2"
             >
@@ -252,12 +253,12 @@ const PrayerTimesQibla = () => {
           <div className="flex items-center justify-center mb-4">
             <Clock className="h-8 w-8 text-dqaa-500 mr-3" />
             <h2 className="text-3xl font-bold text-dqaa-900">
-              {isMalayalam ? "നമാസ് സമയം & ഖിബ്ല ദിശ" : "Prayer Times & Qibla Direction"}
+              {isMalayalam ? "നിസ്കാര സമയം & ഖിബ്ല ദിശ" : "Prayer Times & Qibla Direction"}
             </h2>
           </div>
           <p className="text-gray-600">
-            {isMalayalam ? 
-              "നിങ്ങളുടെ സ്ഥാനത്തിനനുസരിച്ചുള്ള കൃത്യമായ നമാസ് സമയവും ഖിബ്ല ദിശയും" :
+            {isMalayalam ?
+              "നിങ്ങളുടെ സ്ഥാനത്തിനനുസരിച്ചുള്ള കൃത്യമായ നിസ്കാര സമയവും ഖിബ്ല ദിശയും" :
               "Accurate prayer times and Qibla direction for your location"
             }
           </p>
@@ -289,57 +290,21 @@ const PrayerTimesQibla = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Clock className="h-5 w-5 mr-2 text-dqaa-500" />
-                {isMalayalam ? "ഇന്നത്തെ നമാസ് സമയം" : "Today's Prayer Times"}
+                {isMalayalam ? "ഇന്നത്തെ നിസ്കാര സമയം" : "Today's Prayer Times"}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              {loading ? (
-                <div className="flex items-center justify-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin text-dqaa-500" />
-                  <span className="ml-2">
-                    {isMalayalam ? "ലോഡിംഗ്..." : "Loading..."}
-                  </span>
+            <CardContent className="grid grid-cols-3 gap-4">
+              {prayerTimes && Object.entries(prayerTimes).map(([key, time]) => (
+                <div key={key} className="flex flex-col items-center">
+                  <Badge
+                    variant={nextPrayer === key ? "destructive" : "outline"}
+                    className="mb-1 w-full text-center"
+                  >
+                    {prayerNames[isMalayalam ? 'ml' : 'en'][key as keyof PrayerTimes]}
+                  </Badge>
+                  <div className="text-xl font-semibold">{time}</div>
                 </div>
-              ) : prayerTimes ? (
-                <div className="space-y-3">
-                  {Object.entries(prayerTimes).map(([prayer, time]) => (
-                    prayer !== 'sunrise' && (
-                      <div
-                        key={prayer}
-                        className={`flex justify-between items-center p-3 rounded-lg border ${
-                          nextPrayer === prayer ? 'bg-dqaa-50 border-dqaa-200' : 'bg-gray-50'
-                        }`}
-                      >
-                        <div className="flex items-center">
-                          <span className="font-medium text-gray-900">
-                            {prayerNames[currentLanguage as keyof typeof prayerNames][prayer as keyof typeof prayerNames.en]}
-                          </span>
-                          {nextPrayer === prayer && (
-                            <Badge className="ml-2 bg-dqaa-500">
-                              {isMalayalam ? "അടുത്തത്" : "Next"}
-                            </Badge>
-                          )}
-                        </div>
-                        <div className="text-right">
-                          <div className="font-bold text-dqaa-900">{time}</div>
-                          {nextPrayer === prayer && (
-                            <div className="text-xs text-dqaa-600">
-                              {isMalayalam ? `${timeToNextPrayer} ബാക്കി` : `in ${timeToNextPrayer}`}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <Button onClick={requestLocation}>
-                    <MapPin className="h-4 w-4 mr-2" />
-                    {isMalayalam ? "സ്ഥാനം അനുവദിക്കുക" : "Enable Location"}
-                  </Button>
-                </div>
-              )}
+              ))}
             </CardContent>
           </Card>
 
@@ -351,59 +316,48 @@ const PrayerTimesQibla = () => {
                 {isMalayalam ? "ഖിബ്ല ദിശ" : "Qibla Direction"}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-center">
-                <div className="relative w-32 h-32 mx-auto mb-4">
-                  <div className="absolute inset-0 rounded-full border-4 border-gray-200">
-                    <div
-                      className="absolute top-0 left-1/2 w-1 h-16 bg-dqaa-500 transform -translate-x-1/2 origin-bottom"
-                      style={{ transform: `translateX(-50%) rotate(${qiblaDirection}deg)` }}
-                    >
-                      <div className="w-3 h-3 bg-dqaa-500 rounded-full absolute -top-1 left-1/2 transform -translate-x-1/2"></div>
-                    </div>
-                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs font-bold">N</div>
-                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs">S</div>
-                    <div className="absolute left-2 top-1/2 transform -translate-y-1/2 text-xs">W</div>
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs">E</div>
-                  </div>
-                </div>
-                <div className="text-2xl font-bold text-dqaa-900 mb-2">
-                  {qiblaDirection}°
-                </div>
-                <div className="text-sm text-gray-600">
-                  {isMalayalam ? "മക্কയിലേക്കുള്ള ദിശ" : "Direction to Mecca"}
-                </div>
+            <CardContent className="flex flex-col items-center justify-center py-10">
+              <div
+                style={{ transform: `rotate(${qiblaDirection}deg)` }}
+                className="text-dqaa-600"
+                aria-label="Qibla Direction Arrow"
+                title={`Qibla: ${qiblaDirection}°`}
+              >
+                <Compass className="h-20 w-20" />
+              </div>
+              <div className="mt-4 text-lg font-semibold">
+                {qiblaDirection}°
+              </div>
+              <div className="text-sm text-gray-600">
+                {isMalayalam ? "നിങ്ങളുടെ സ്ഥിതിചെയ്യുന്ന സ്ഥാനത്തുനിന്നുള്ള ഖിബ്ല ദിശ" : "Direction from your location"}
               </div>
             </CardContent>
           </Card>
-
-          {/* Next Prayer Alert */}
-          {nextPrayer && prayerTimes && (
-            <Card className="lg:col-span-3 bg-dqaa-50 border-dqaa-200">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Bell className="h-6 w-6 text-dqaa-500 mr-3" />
-                    <div>
-                      <div className="font-bold text-dqaa-900">
-                        {isMalayalam ? "അടുത്ത നമാസ്" : "Next Prayer"}
-                      </div>
-                      <div className="text-dqaa-700">
-                        {prayerNames[currentLanguage as keyof typeof prayerNames][nextPrayer as keyof typeof prayerNames.en]} - {prayerTimes[nextPrayer as keyof PrayerTimes]}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-dqaa-900">{timeToNextPrayer}</div>
-                    <div className="text-sm text-dqaa-600">
-                      {isMalayalam ? "ബാക്കി" : "remaining"}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
         </div>
+
+        {/* Next Prayer Countdown */}
+        <div className="mt-8 text-center">
+          <Alert className="inline-flex items-center justify-center w-auto mx-auto border-dqaa-300 bg-dqaa-50 text-dqaa-900 max-w-md">
+            <Bell className="mr-2 h-5 w-5" />
+            {isMalayalam ? "അടുത്ത നിസ്കാരം" : "Next Prayer"}:{" "}
+            <strong className="ml-1 mr-2">
+              {prayerNames[isMalayalam ? 'ml' : 'en'][nextPrayer as keyof PrayerTimes]}
+            </strong>
+            <span>
+              {isMalayalam ? "ശേഷിക്കുന്ന സമയം" : "in"} {timeToNextPrayer}
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              className="ml-4"
+              onClick={requestLocation}
+              aria-label={isMalayalam ? "സ്ഥാനം പുതുക്കുക" : "Refresh Location"}
+            >
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </Alert>
+        </div>
+
       </div>
     </div>
   );
