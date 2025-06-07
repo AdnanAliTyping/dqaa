@@ -7,6 +7,10 @@ import AppleInspiredAdmissionCard from "@/components/admissions/AppleInspiredAdm
 import SuperiorityShowcase from "@/components/competitive/SuperiorityShowcase";
 import AlumniSuccessTracker from "@/components/competitive/AlumniSuccessTracker";
 import ProgramComparisonTool from "@/components/competitive/ProgramComparisonTool";
+import FacultyExcellenceShowcase from "@/components/competitive/FacultyExcellenceShowcase";
+import VirtualCampusTour from "@/components/competitive/VirtualCampusTour";
+import AIInnovationHub from "@/components/competitive/AIInnovationHub";
+import SocialProofDomination from "@/components/competitive/SocialProofDomination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -66,10 +70,22 @@ const AdmissionsPage = () => {
         showApplyButton={true}
       />
 
-      {/* Competitive Advantage Sections */}
+      {/* Competitive Advantage Sections - Phase 1 & 2 */}
       <SuperiorityShowcase />
       <AlumniSuccessTracker />
       <ProgramComparisonTool />
+      
+      {/* Phase 2: Faculty Excellence */}
+      <FacultyExcellenceShowcase />
+      
+      {/* Phase 3: Advanced Interactive Features */}
+      <VirtualCampusTour />
+      
+      {/* Phase 4: AI Innovation */}
+      <AIInnovationHub />
+      
+      {/* Phase 5: Social Proof Domination */}
+      <SocialProofDomination />
       
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-end mb-4">
