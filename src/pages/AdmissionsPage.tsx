@@ -1,15 +1,17 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import AppleInspiredPageHeader from "@/components/admissions/AppleInspiredPageHeader";
 import AppleInspiredAdmissionCard from "@/components/admissions/AppleInspiredAdmissionCard";
+import SuperiorityShowcase from "@/components/competitive/SuperiorityShowcase";
+import AlumniSuccessTracker from "@/components/competitive/AlumniSuccessTracker";
+import ProgramComparisonTool from "@/components/competitive/ProgramComparisonTool";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, FileText, BookOpen, GraduationCap, Users, FileBadge, CreditCard } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "@/lib/i18n";
-import { Helmet } from "react-helmet-async";
 import FAQSection from "@/components/FAQSection";
 
 const AdmissionsPage = () => {
@@ -63,6 +65,11 @@ const AdmissionsPage = () => {
         backgroundImage="https://images.unsplash.com/photo-1531545514256-b1400bc00f31"
         showApplyButton={true}
       />
+
+      {/* Competitive Advantage Sections */}
+      <SuperiorityShowcase />
+      <AlumniSuccessTracker />
+      <ProgramComparisonTool />
       
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-end mb-4">

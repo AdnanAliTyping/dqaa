@@ -64,7 +64,7 @@ function App() {
                       } 
                     />
                     
-                    {/* Routes with Layout - each wrapped individually */}
+                    {/* Routes with Layout */}
                     <Route 
                       path="/" 
                       element={
