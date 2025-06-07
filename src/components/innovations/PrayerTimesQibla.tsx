@@ -79,20 +79,17 @@ const PrayerTimesQibla = () => {
   };
 
   // Calculate prayer times (simplified calculation)
-  const calculatePrayerTimes = (lat: number, lng: number, date: Date): PrayerTimes => {
-    // This is a simplified calculation. In production, use a proper Islamic prayer times library
-    const sunrise = 6; // 6:00 AM
-    const sunset = 18; // 6:00 PM
-    
-    return {
-      fajr: '05:30',
-      sunrise: '06:15',
-      dhuhr: '12:30',
-      asr: '15:45',
-      maghrib: '18:15',
-      isha: '19:30'
-    };
+ const calculatePrayerTimes = (lat: number, lng: number, date: Date): PrayerTimes => {
+  return {
+    fajr: '05:00',
+    sunrise: '06:02',
+    dhuhr: '12:20',
+    asr: '16:00',
+    maghrib: '18:35',
+    isha: '19:45'
   };
+};
+
 
   // Find next prayer
   const findNextPrayer = (prayers: PrayerTimes, currentTime: Date): { name: string; time: string; countdown: string } => {
