@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { useTranslation } from "@/lib/i18n";
-import schemas from "../schemas";
+import SchemaProvider from "./SchemaProvider";
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
 
 /**
  * Unified provider component that handles all app-level providers
- * including React Query, Tooltips, Language management, and Performance optimization
+ * including React Query, Tooltips, Language management, and Schema injection
  */
 const AppProviders = ({ children }: AppProvidersProps) => {
   const { currentLanguage } = useTranslation();
@@ -37,16 +37,13 @@ const AppProviders = ({ children }: AppProvidersProps) => {
     }
   }, [currentLanguage]);
 
-  // Schema injection for SEO
-  useEffect(() => {
-    console.log('Schemas loaded:', schemas);
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        {children}
+        <SchemaProvider>
+          <Toaster />
+          {children}
+        </SchemaProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
