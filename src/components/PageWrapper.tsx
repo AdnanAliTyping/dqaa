@@ -9,17 +9,16 @@ interface PageWrapperProps {
   withLayout?: boolean;
 }
 
-import { ReactNode } from "react";
-
-type PageWrapperProps = {
-  children: ReactNode;
-  withLayout?: boolean;
-};
-
 const PageWrapper = ({ children, withLayout = true }: PageWrapperProps) => {
-  // ...
-};
-
+  if (!withLayout) {
+    return (
+      <ErrorBoundary>
+        <Suspense fallback={<LoadingFallback />}>
+          {children}
+        </Suspense>
+      </ErrorBoundary>
+    );
+  }
 
   return (
     <ErrorBoundary>

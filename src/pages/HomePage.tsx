@@ -1,5 +1,4 @@
 
-import Layout from "@/components/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import CountUpSection from "@/components/home/CountUpSection";
 import ProgramsOverview from "@/components/home/ProgramsOverview";
@@ -55,7 +54,7 @@ const HomePage = () => {
   };
 
   return (
-    <Layout>
+    <>
       <AdvancedSEOHead
         title={isMalayalam ? 
           "ദാറുൽ ഖുർആൻ അബ്ദുല്ല അക്കാദമി - കേരളത്തിലെ #1 ഇസ്ലാമിക് വിദ്യാഭ്യാസ സ്ഥാപനം | 2025-26 പ്രവേശനം" :
@@ -157,7 +156,7 @@ const HomePage = () => {
       {/* Mobile Features */}
       <StickyActionButtons />
       <InteractiveChatBot />
-    </Layout>
+    </>
   );
 };
 
