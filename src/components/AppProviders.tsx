@@ -20,10 +20,9 @@ const queryClient = new QueryClient({
 });
 
 /**
- * Unified provider component that handles all app-level providers
- * including React Query, Tooltips, Language management, and Schema injection
+ * Inner component that uses hooks - must be inside providers
  */
-const AppProviders = ({ children }: AppProvidersProps) => {
+const AppProvidersInner = ({ children }: AppProvidersProps) => {
   const { currentLanguage } = useTranslation();
   
   // Language management - sets HTML lang attribute
@@ -37,12 +36,22 @@ const AppProviders = ({ children }: AppProvidersProps) => {
     }
   }, [currentLanguage]);
 
+  return <>{children}</>;
+};
+
+/**
+ * Unified provider component that handles all app-level providers
+ * including React Query, Tooltips, Language management, and Schema injection
+ */
+const AppProviders = ({ children }: AppProvidersProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <SchemaProvider>
-          <Toaster />
-          {children}
+          <AppProvidersInner>
+            <Toaster />
+            {children}
+          </AppProvidersInner>
         </SchemaProvider>
       </TooltipProvider>
     </QueryClientProvider>

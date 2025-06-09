@@ -1,5 +1,5 @@
 
-import { lazy } from "react";
+import React, { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppProviders from "./components/AppProviders";
 import PageWrapper from "./components/PageWrapper";
