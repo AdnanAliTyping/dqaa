@@ -4,17 +4,21 @@ import schemas from '../schemas';
 
 interface SchemaProviderProps {
   children: ReactNode;
+  schemas?: any[];
 }
 
 /**
  * Simple Schema Provider that injects structured data for SEO
  */
-const SchemaProvider = ({ children }: SchemaProviderProps) => {
+const SchemaProvider = ({ children, schemas: customSchemas }: SchemaProviderProps) => {
   useEffect(() => {
+    // Use custom schemas if provided, otherwise use default schemas
+    const schemasToInject = customSchemas || schemas;
+    
     // Inject schemas into document head
     const schemaScript = document.createElement('script');
     schemaScript.type = 'application/ld+json';
-    schemaScript.textContent = JSON.stringify(schemas);
+    schemaScript.textContent = JSON.stringify(schemasToInject);
     document.head.appendChild(schemaScript);
 
     return () => {
@@ -24,7 +28,7 @@ const SchemaProvider = ({ children }: SchemaProviderProps) => {
         document.head.removeChild(existingScript);
       }
     };
-  }, []);
+  }, [customSchemas]);
 
   return <>{children}</>;
 };
