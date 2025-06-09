@@ -18,6 +18,8 @@ import AdvancedSEOHead from "@/components/seo/AdvancedSEOHead";
 import PullToRefresh from "@/components/features/PullToRefresh";
 import InteractiveChatBot from "@/components/features/InteractiveChatBot";
 import VirtualTourEnhanced from "@/components/features/VirtualTourEnhanced";
+import SuperiorityShowcase from "@/components/competitive/SuperiorityShowcase";
+import AlumniSuccessTracker from "@/components/competitive/AlumniSuccessTracker";
 import { useTranslation } from "@/lib/i18n";
 
 const HomePage = () => {
@@ -73,14 +75,15 @@ const HomePage = () => {
       />
 
       <PullToRefresh onRefresh={handleRefresh}>
-        {/* Islamic News Ticker */}
         <IslamicNewsTicker />
 
         <header role="banner">
           <HeroSection />
         </header>
 
-        {/* Enhanced Prayer Times - Prominent Position */}
+        {/* Competitive Advantage Sections */}
+        <SuperiorityShowcase />
+
         <section aria-labelledby="prayer-times-heading">
           <h2 id="prayer-times-heading" className="sr-only">
             {isMalayalam ? "നമാസ് സമയം" : "Prayer Times"}
@@ -88,7 +91,6 @@ const HomePage = () => {
           <EnhancedPrayerTimes />
         </section>
 
-        {/* Islamic Event Countdown */}
         <section aria-labelledby="islamic-events-heading">
           <h2 id="islamic-events-heading" className="sr-only">
             {isMalayalam ? "ഇസ്ലാമിക് ഇവന്റുകൾ" : "Islamic Events"}
@@ -111,6 +113,9 @@ const HomePage = () => {
           <AcademicAchievements />
         </section>
 
+        {/* Alumni Success Stories */}
+        <AlumniSuccessTracker />
+
         <section aria-labelledby="islamic-assistant-heading" className="bg-gray-50">
           <h2 id="islamic-assistant-heading" className="sr-only">AI Islamic Study Assistant</h2>
           <IslamicStudyAssistant />
@@ -121,7 +126,6 @@ const HomePage = () => {
           <QuranLearningHub />
         </section>
 
-        {/* Virtual Campus Tour */}
         <section aria-labelledby="virtual-tour-heading">
           <h2 id="virtual-tour-heading" className="sr-only">Virtual Campus Tour</h2>
           <VirtualTourEnhanced scenes={virtualTourScenes} />
@@ -153,7 +157,6 @@ const HomePage = () => {
         </section>
       </PullToRefresh>
 
-      {/* Mobile Features */}
       <StickyActionButtons />
       <InteractiveChatBot />
     </>
