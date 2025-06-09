@@ -5,7 +5,6 @@ import AppProviders from "./components/AppProviders";
 import PageWrapper from "./components/PageWrapper";
 
 // Lazy load components for better performance
-const Index = lazy(() => import("./pages/Index"));
 const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const AdmissionsPage = lazy(() => import("./pages/AdmissionsPage"));
@@ -41,15 +40,17 @@ function App() {
             } 
           />
           
-          {/* Routes with Layout */}
+          {/* Main route - HomePage instead of Index */}
           <Route 
             path="/" 
             element={
               <PageWrapper>
-                <Index />
+                <HomePage />
               </PageWrapper>
             } 
           />
+          
+          {/* Routes with Layout */}
           <Route 
             path="/home" 
             element={
