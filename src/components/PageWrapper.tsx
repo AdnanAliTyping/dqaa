@@ -2,7 +2,7 @@
 import React, { Suspense, ReactNode } from "react";
 import Layout from "./Layout";
 import LoadingFallback from "./LoadingFallback";
-import ErrorBoundary from "./ErrorBoundary";
+import SafeErrorBoundary from "./SafeErrorBoundary";
 
 interface PageWrapperProps {
   children: ReactNode;
@@ -12,22 +12,22 @@ interface PageWrapperProps {
 const PageWrapper = ({ children, withLayout = true }: PageWrapperProps) => {
   if (!withLayout) {
     return (
-      <ErrorBoundary>
+      <SafeErrorBoundary>
         <Suspense fallback={<LoadingFallback />}>
           {children}
         </Suspense>
-      </ErrorBoundary>
+      </SafeErrorBoundary>
     );
   }
 
   return (
-    <ErrorBoundary>
+    <SafeErrorBoundary>
       <Layout>
         <Suspense fallback={<LoadingFallback />}>
           {children}
         </Suspense>
       </Layout>
-    </ErrorBoundary>
+    </SafeErrorBoundary>
   );
 };
 

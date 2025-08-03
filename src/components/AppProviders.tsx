@@ -20,19 +20,25 @@ const queryClient = new QueryClient({
 });
 
 /**
- * Inner component that uses hooks - must be inside providers
+ * Language management component - must be inside providers
  */
-const AppProvidersInner = ({ children }: AppProvidersProps) => {
+const LanguageManager = ({ children }: AppProvidersProps) => {
   const { currentLanguage } = useTranslation();
   
   // Language management - sets HTML lang attribute
   useEffect(() => {
-    document.documentElement.lang = currentLanguage;
-    
-    if (currentLanguage === 'ml') {
-      document.documentElement.classList.add('lang-ml');
-    } else {
-      document.documentElement.classList.remove('lang-ml');
+    try {
+      if (document?.documentElement) {
+        document.documentElement.lang = currentLanguage;
+        
+        if (currentLanguage === 'ml') {
+          document.documentElement.classList.add('lang-ml');
+        } else {
+          document.documentElement.classList.remove('lang-ml');
+        }
+      }
+    } catch (error) {
+      console.warn('Language setting failed:', error);
     }
   }, [currentLanguage]);
 
@@ -48,10 +54,10 @@ const AppProviders = ({ children }: AppProvidersProps) => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <SchemaProvider>
-          <AppProvidersInner>
-            <Toaster />
+          <LanguageManager>
             {children}
-          </AppProvidersInner>
+            <Toaster />
+          </LanguageManager>
         </SchemaProvider>
       </TooltipProvider>
     </QueryClientProvider>
