@@ -1,10 +1,8 @@
 
 import React, { ReactNode, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
-import { useTranslation } from "@/lib/i18n";
-import SchemaProvider from "./SchemaProvider";
+import SafeErrorBoundary from "./SafeErrorBoundary";
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -20,18 +18,17 @@ const queryClient = new QueryClient({
 });
 
 /**
- * Language management component - must be inside providers
+ * Language management component - simplified without useTranslation hook
  */
 const LanguageManager = ({ children }: AppProvidersProps) => {
-  const { currentLanguage } = useTranslation();
-  
-  // Language management - sets HTML lang attribute
   useEffect(() => {
     try {
+      // Simple language detection without hooks
+      const storedLang = localStorage.getItem('dqaa-language') || 'en';
       if (document?.documentElement) {
-        document.documentElement.lang = currentLanguage;
+        document.documentElement.lang = storedLang;
         
-        if (currentLanguage === 'ml') {
+        if (storedLang === 'ml') {
           document.documentElement.classList.add('lang-ml');
         } else {
           document.documentElement.classList.remove('lang-ml');
@@ -40,27 +37,24 @@ const LanguageManager = ({ children }: AppProvidersProps) => {
     } catch (error) {
       console.warn('Language setting failed:', error);
     }
-  }, [currentLanguage]);
+  }, []);
 
   return <>{children}</>;
 };
 
 /**
- * Unified provider component that handles all app-level providers
- * including React Query, Tooltips, Language management, and Schema injection
+ * Simplified provider component - removing problematic TooltipProvider and SchemaProvider
  */
 const AppProviders = ({ children }: AppProvidersProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <SchemaProvider>
-          <LanguageManager>
-            {children}
-            <Toaster />
-          </LanguageManager>
-        </SchemaProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <SafeErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <LanguageManager>
+          {children}
+          <Toaster />
+        </LanguageManager>
+      </QueryClientProvider>
+    </SafeErrorBoundary>
   );
 };
 
