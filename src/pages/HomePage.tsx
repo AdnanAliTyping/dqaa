@@ -1,8 +1,8 @@
 
-import OptimizedHomePage from "@/components/home/OptimizedHomePage";
+import MinimalHomePage from "@/components/home/MinimalHomePage";
 
 const HomePage = () => {
-  return <OptimizedHomePage />;
+  return <MinimalHomePage />;
 };
 
 export default HomePage;
