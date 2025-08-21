@@ -6,10 +6,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "@/lib/i18n";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Briefcase, Check, FileText, Phone, School, Users } from "lucide-react";
 import { useRef, useState } from "react";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 const CareersPage = () => {
   const { t, currentLanguage } = useTranslation();

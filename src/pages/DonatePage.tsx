@@ -7,7 +7,7 @@ import { Check, Heart } from "lucide-react";
 import LocationDetails from "@/components/LocationDetails";
 import RazorpayDonateButton from "@/components/RazorpayDonateButton";
 import { useTranslation } from "@/lib/i18n";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 
 const DonatePage = () => {
