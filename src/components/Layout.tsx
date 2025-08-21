@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SkipNavigation from "./accessibility/SkipNavigation";
 import MobileBottomNavigation from "./mobile/MobileBottomNavigation";
-import EidAlAdhaGreeting from "./islamic/EidAlAdhaGreeting";
+
 import { Button } from "./ui/button";
 import { useTranslation } from "@/lib/i18n";
 import { useAccessibility } from "@/hooks/useAccessibility";
@@ -49,8 +49,6 @@ const Layout = ({ children }: LayoutProps) => {
       <SkipNavigation />
       <PWAManager />
       
-      {/* Eid Al-Adha Greeting Popup */}
-      <EidAlAdhaGreeting />
       
       {/* Screen reader announcements */}
       <div

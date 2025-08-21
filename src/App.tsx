@@ -23,22 +23,13 @@ const FAQPage = lazy(() => import("./pages/FAQPage"));
 const FacultyPage = lazy(() => import("./pages/FacultyPage"));
 const CareersPage = lazy(() => import("./pages/CareersPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
-const EidGreetingPage = lazy(() => import("./pages/EidGreetingPage"));
+
 
 function App() {
   return (
     <AppProviders>
       <BrowserRouter>
         <Routes>
-          {/* Special routes without Layout */}
-          <Route 
-            path="/eid-greeting" 
-            element={
-              <PageWrapper withLayout={false}>
-                <EidGreetingPage />
-              </PageWrapper>
-            } 
-          />
           
           {/* Main route - HomePage instead of Index */}
           <Route 

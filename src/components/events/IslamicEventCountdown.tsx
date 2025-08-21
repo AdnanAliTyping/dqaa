@@ -8,7 +8,7 @@ interface IslamicEvent {
   name: string;
   nameML: string;
   date: Date;
-  type: 'eid' | 'hajj' | 'ramadan' | 'muharram';
+  type: 'hajj' | 'ramadan' | 'muharram' | 'general';
   description: string;
   descriptionML: string;
 }
@@ -20,28 +20,28 @@ const IslamicEventCountdown = () => {
 
   const upcomingEvents: IslamicEvent[] = [
     {
-      name: "Eid al-Adha",
-      nameML: "ബക്രീദ്",
-      date: new Date('2025-06-07'),
-      type: 'eid',
-      description: "Festival of Sacrifice",
-      descriptionML: "ത്യാഗത്തിന്റെ ഉത്സവം"
-    },
-    {
-      name: "Arafah Day",
-      nameML: "അറഫാ ദിനം", 
-      date: new Date('2025-06-06'),
-      type: 'hajj',
-      description: "Day of Hajj",
-      descriptionML: "ഹജ്ജിന്റെ ദിനം"
-    },
-    {
       name: "Ramadan 2026",
       nameML: "റമദാൻ 2026",
       date: new Date('2026-03-01'),
       type: 'ramadan', 
       description: "Holy month of fasting",
       descriptionML: "നോമ്പിന്റെ പവിത്രമാസം"
+    },
+    {
+      name: "New Academic Year",
+      nameML: "പുതിയ അധ്യയന വർഷം",
+      date: new Date('2025-06-01'),
+      type: 'general',
+      description: "2025-26 Academic Session",
+      descriptionML: "2025-26 അധ്യയന സെഷൻ"
+    },
+    {
+      name: "Muharram 1447",
+      nameML: "മുഹറം 1447",
+      date: new Date('2025-07-07'),
+      type: 'muharram',
+      description: "Islamic New Year",
+      descriptionML: "ഇസ്ലാമിക് പുതുവത്സരം"
     }
   ];
 
@@ -72,10 +72,10 @@ const IslamicEventCountdown = () => {
 
   const getEventColor = (type: string) => {
     switch (type) {
-      case 'eid': return 'from-green-500 to-emerald-600';
       case 'hajj': return 'from-blue-500 to-indigo-600';
       case 'ramadan': return 'from-purple-500 to-violet-600';
       case 'muharram': return 'from-gray-600 to-slate-700';
+      case 'general': return 'from-green-500 to-emerald-600';
       default: return 'from-gray-500 to-gray-600';
     }
   };
